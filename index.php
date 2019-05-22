@@ -1,3 +1,4 @@
 <?php
-echo "Hi idan!"
+$s1="Hi idan!";
+return $s1;
 ?>

@@ -1,4 +1,4 @@
 <?php
 $s1="Hi idan!";
-return $s1;
+echo $s1;
 ?>

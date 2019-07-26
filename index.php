@@ -12,6 +12,7 @@ include_once 'includes/connection.php';
 <form action="index.php" method='post'>
 <button type="submit" value="Off" name="Off">Off</button>
 <button type="submit" value="On" name="On">On</button>
+<button type="submit" value="temp" name="Temp">On</button>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -25,7 +26,7 @@ if(isset($_POST['Off']))
         else
             echo ("boiler turn off");
 }
-if(isset($_POST['On']))
+else if(isset($_POST['On']))
 {
     $sql = "INSERT INTO tasks(task) VALUES ('on');";
         $result=mysqli_query($conn,$sql);
@@ -34,7 +35,15 @@ if(isset($_POST['On']))
         else
             echo ("boiler turn on");
 }
-
+else if(isset($_POST['Temp']))
+{
+    $sql = "INSERT INTO tasks(task) VALUES ('temp');";
+        $result=mysqli_query($conn,$sql);
+		if(!$result)
+			die("query faild");
+        else
+            echo ("boiler check temp");
+}
 ?>
 </center>
 </body>

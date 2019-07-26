@@ -6,13 +6,14 @@
 
 <body>
 <?php
+//this script is a simple user interface for the system.
 include_once 'includes/connection.php';
 ?>
 <center>
 <form action="index.php" method='post'>
 <button type="submit" value="Off" name="Off">Off</button>
 <button type="submit" value="On" name="On">On</button>
-<button type="submit" value="temp" name="Temp">On</button>
+<button type="submit" value="temp" name="Temp">temp</button>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 

@@ -1,0 +1,5 @@
+version4:
+-script that take care of the requests from the user interface(Android).
+
+version5:
+-finish the temp script.

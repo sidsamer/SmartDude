@@ -1,4 +1,5 @@
 <?php
+//this script handle the microconroller http requests.
 include_once 'includes/connection.php';
 
     $sql='SELECT * FROM tasks ORDER BY id asc LIMIT 1;';

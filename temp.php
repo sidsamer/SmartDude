@@ -11,7 +11,9 @@ include_once 'includes/connection.php';
             $BoilerTemp=htmlspecialchars($_GET["temp"]);
             $hour=date('Y-m-d H:i:s');
 
-            echo"hour:".$hour." out:".$tempOut;
+               $hour = date("Y-m-d H:i:s",strtotime("+3 hours",strtotime($hour)));
+
+               
     $sql = "INSERT INTO measurements(hour,boilerTemp,outsideTemp)
     VALUES ('$hour','$BoilerTemp','$tempOut');";
         $result=mysqli_query($conn,$sql);

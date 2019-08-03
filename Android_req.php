@@ -1,6 +1,6 @@
 <?php
 //this script handle the user/android http requests.
-include_once 'includes/connection.php';
+//include_once 'includes/connection.php';
 
 $str=htmlspecialchars($_GET["order"]);
 //turn on boiler

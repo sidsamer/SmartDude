@@ -86,7 +86,7 @@ else if($str == "login"){
 	     $resultCheck=mysqli_num_rows($result); 
           if($resultCheck>0)
        {
-           $row=mysqli_fetch_assoc($result)
+           $row=mysqli_fetch_assoc($result);
            echo $row['id']; //yet to be tested,returns id.
        }
 }

@@ -14,6 +14,7 @@ include_once 'includes/connection.php';
 <button type="submit" value="Off" name="Off">Off</button>
 <button type="submit" value="On" name="On">On</button>
 <button type="submit" value="temp" name="Temp">temp</button>
+<button type="submit" value="newUser" name="newUser">newUser</button>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -44,6 +45,17 @@ else if(isset($_POST['Temp']))
 			die("query faild");
         else
             echo ("boiler check temp");
+}
+else if(isset($_POST['newUser']))
+{
+         $name="yoni";
+         $temp=60;
+         $pass="112113";
+         $phone="0524734844";
+         
+         $response = http_get("http://smart-dude.herokuapp.com/Android_req.php/?order=newUser&name=$name
+         &temp=$temp&password=$pass&phone=$phone");
+        echo $response;
 }
 ?>
 </center>

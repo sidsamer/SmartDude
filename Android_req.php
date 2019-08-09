@@ -27,7 +27,7 @@ $str=htmlspecialchars($_GET["order"]);
          $temp=htmlspecialchars($_GET["temp"]);
          $pass=htmlspecialchars($_GET["password"]);
          $phone=htmlspecialchars($_GET["phone"]);
-         $sql = "select * from users where name='idan';";
+         $sql = "select * from users where name=$name;";
 	     $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
          if($resultCheck==0)

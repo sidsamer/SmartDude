@@ -48,14 +48,15 @@ else if(isset($_POST['Temp']))
 }
 else if(isset($_POST['newUser']))
 {
-         $name="yoni";
+         $name="idan";
          $temp=60;
          $pass="112113";
          $phone="0524734844";
-         
-         $response = http_get("http://smart-dude.herokuapp.com/Android_req.php/?order=newUser&name=$name
-         &temp=$temp&password=$pass&phone=$phone");
+         $response = http_get("http://smart-dude.herokuapp.com/Android_req.php/?order=newUser&name=$name&temp=$temp&password=$pass&phone=$phone");
+        if($response !=null)
         echo $response;
+    else
+        echo "no respond";
 }
 ?>
 </center>

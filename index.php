@@ -48,15 +48,16 @@ else if(isset($_POST['Temp']))
 }
 else if(isset($_POST['newUser']))
 {
-         $name="idan";
+         $name="boris";
          $temp=60;
          $pass="112113";
          $phone="0524734844";
-         $response = http_get("http://smart-dude.herokuapp.com/Android_req.php/?order=newUser&name=$name&temp=$temp&password=$pass&phone=$phone");
-        if($response !=null)
-        echo $response;
+         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newUser&name=$name&temp=$temp&password=$pass&phone=$phone");
+         $contents = file_get_contents($url);
+         if($contents !== false)
+        echo $contents;
     else
-        echo "no respond";
+        echo "cant make http req";
 }
 ?>
 </center>

@@ -29,7 +29,6 @@ $str=htmlspecialchars($_GET["order"]);
          $phone=htmlspecialchars($_GET["phone"]);
          $sql = "select * from users where name='$name';";
 	     $result=mysqli_query($conn,$sql);
-         echo "null?".$result->num_row;
 	     $resultCheck=mysqli_num_rows($result); 
          if($resultCheck==0)
        {
@@ -39,7 +38,7 @@ $str=htmlspecialchars($_GET["order"]);
 		if(!$result)
 			die("query faild");
         else
-            echo ("user create sucssesfuly fa ".$resultCheck."checkkkkkkkkkkkk");
+            echo ("user create sucssesfuly");
        }
        else
            echo ("user allready exist");

@@ -38,10 +38,10 @@ $str=htmlspecialchars($_GET["order"]);
 		if(!$result)
 			die("query faild");
         else
-            echo ("user create sucssesfuly");
+            echo ("user create sucssesfuly fa ".$resultCheck."checkkkkkkkkkkkk");
        }
        else
-           echo ("user allready exist fa fa ".$resultCheck."checkkkkkkkkkkkk");
+           echo ("user allready exist");
      }
  //enter schduled turn on
      else if($str == "newSchdule"){

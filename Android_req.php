@@ -41,7 +41,7 @@ $str=htmlspecialchars($_GET["order"]);
             echo ("user create sucssesfuly");
        }
        else
-           echo ("user allready exist".$resultCheck);
+           echo ("user allready exist fa fa ".$resultCheck."checkkkkkkkkkkkk");
      }
  //enter schduled turn on
      else if($str == "newSchdule"){

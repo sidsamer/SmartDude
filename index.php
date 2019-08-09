@@ -52,7 +52,7 @@ else if(isset($_POST['newUser']))
          $temp=60;
          $pass="112113";
          $phone="0524734844";
-         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newUser&name=$name&temp=$temp&password=$pass&phone=$phone");
+         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newUser&name=$name&temp=$temp&password=$pass&phone=$phone";
          $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;

@@ -30,7 +30,7 @@ $str=htmlspecialchars($_GET["order"]);
          $sql = "select * from users where name=$name;";
 	     $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
-         if($resultCheck==0)
+         if($resultCheck!=null)
        {
            $sql = "INSERT INTO users(name,temp,password,phone) 
            VALUES ('$name','$temp','$pass','$phone');";

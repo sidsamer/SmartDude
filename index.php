@@ -18,6 +18,7 @@ require_once "includes/Training.php";
 <button type="submit" value="newUser" name="newUser">newUser</button>
 <button type="submit" value="login" name="login">login</button>
 <button type="submit" value="scheduTurnOn" name="scheduTurnOn">scheduTurnOn</button>
+<input type="text" name="time">
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -75,7 +76,7 @@ else if(isset($_POST['login']))
 }
 else if(isset($_POST['scheduTurnOn']))
 {
-         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newSchdule&userId=1&day=sunday&showerTime=6:30pm&regular=1";
+         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newSchdule&userId=1&day=sunday&showerTime=".$_POST['time']."&regular=1";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;

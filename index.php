@@ -8,6 +8,7 @@
 <?php
 //this script is a simple user interface for the system.
 include_once 'includes/connection.php';
+require_once "includes/Training.php";
 ?>
 <center>
 <form action="index.php" method='post'>
@@ -16,6 +17,7 @@ include_once 'includes/connection.php';
 <button type="submit" value="temp" name="Temp">temp</button>
 <button type="submit" value="newUser" name="newUser">newUser</button>
 <button type="submit" value="login" name="login">login</button>
+<button type="submit" value="regression" name="regression">regression</button>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -70,6 +72,11 @@ else if(isset($_POST['login']))
         echo "id:".$contents;
     else
         echo "cant make http req";
+}
+else if(isset($_POST['regression']))
+{
+    $reg=new LinearRegression(30,50);
+    echo "out:".$reg->getOut().", boiler:".$reg->getBoiler().", text:".$reg->getText();
 }
 ?>
 </center>

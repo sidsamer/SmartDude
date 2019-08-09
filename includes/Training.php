@@ -16,9 +16,13 @@ class LinearRegression{
         $this->w2=fgets($myfile);
         fclose($myfile);
  }
- 	function getText()
+ 	function getW1()
 	{
-		return $this->w1." ".$this->w2;
+		return $this->w1;
+	}
+    function getW2()
+	{
+		return $this->w2;
 	}
     function getOut()
 	{
@@ -28,5 +32,9 @@ class LinearRegression{
 	{
 		return $this->BoilerTemp;
 	}
+    function CalcDuration()
+    {
+        return 900;
+    }
 }
 ?> 

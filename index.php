@@ -17,7 +17,7 @@ require_once "includes/Training.php";
 <button type="submit" value="temp" name="Temp">temp</button>
 <button type="submit" value="newUser" name="newUser">newUser</button>
 <button type="submit" value="login" name="login">login</button>
-<button type="submit" value="regression" name="regression">regression</button>
+<button type="submit" value="scheduTurnOn" name="scheduTurnOn">scheduTurnOn</button>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -73,10 +73,14 @@ else if(isset($_POST['login']))
     else
         echo "cant make http req";
 }
-else if(isset($_POST['regression']))
+else if(isset($_POST['scheduTurnOn']))
 {
-    $reg=new LinearRegression(30,50);
-    echo "out:".$reg->getOut().", boiler:".$reg->getBoiler().", text:".$reg->getText();
+         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newSchdule&userId=1&day=sunday&showerTime=6:30pm&regular=1";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo $contents;
+    else
+        echo "cant make http req";
 }
 ?>
 </center>

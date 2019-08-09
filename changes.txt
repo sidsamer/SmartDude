@@ -3,3 +3,6 @@ version4:
 
 version5:
 -finish the temp script.
+:version6
+-finish android req page.
+-starting learning script.

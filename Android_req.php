@@ -29,9 +29,9 @@ $str=htmlspecialchars($_GET["order"]);
          $phone=htmlspecialchars($_GET["phone"]);
          $sql = "select * from users where name='$name';";
 	     $result=mysqli_query($conn,$sql);
-         //echo "null?".$result->num_row;
+         echo "null?".$result->num_row;
 	     $resultCheck=mysqli_num_rows($result); 
-         if($resultCheck!=null)
+         if($resultCheck==0)
        {
            $sql = "INSERT INTO users(name,temp,password,phone) 
            VALUES ('$name','$temp','$pass','$phone');";

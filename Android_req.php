@@ -56,14 +56,14 @@ $str=htmlspecialchars($_GET["order"]);
          $turnOnTime=date('H:i:s',strtotime("".$showerTime." -$duration seconds")); //turn on time calculation
          //$turnOnTime= date('H:i:s', strtotime($turnOnTime)); //temp time
          $regular=htmlspecialchars($_GET["regular"]); //1 or 0
-         // $sql = "INSERT INTO turnon(userId,day,turnOnTime,duration,showrTime,regular) 
-         // VALUES ('$userId','$day','$turnOnTime','$duration','$showrTime','$regular');";
-        // $result=mysqli_query($conn,$sql);
-		// if(!$result)
-			// die("query faild");
-        // else
-            //echo ("new Schdule was set!");
-        echo "userId=".$userId." day:".$day." duration:".$duration." showerTime:".$showerTime." TurnOnTime:".$turnOnTime." regular:".$regular;
+         $sql = "INSERT INTO turnon(userId,day,turnOnTime,duration,showrTime,regular) 
+         VALUES ('$userId','$day','$turnOnTime','$duration','$showrTime','$regular');";
+        $result=mysqli_query($conn,$sql);
+		if(!$result)
+			die("query faild");
+        else
+            echo ("new Schdule was set!");
+        //echo "userId=".$userId." day:".$day." duration:".$duration." showerTime:".$showerTime." TurnOnTime:".$turnOnTime." regular:".$regular;
      }
 // get all the schdule 
 else if($str == "getAllSchdules"){

@@ -56,8 +56,7 @@ $str=htmlspecialchars($_GET["order"]);
          $turnOnTime=date('H:i:s',strtotime("".$showerTime." -$duration seconds")); //turn on time calculation
          //$turnOnTime= date('H:i:s', strtotime($turnOnTime)); //temp time
          $regular=htmlspecialchars($_GET["regular"]); //1 or 0
-         $sql = "INSERT INTO turnon(userId,day,turnOnTime,duration,showrTime,regular) 
-         VALUES ('$userId','$day','$turnOnTime','$duration','$showrTime','$regular');";
+         $sql = "INSERT INTO turnon(userId,day,turnOnTime,duration,showrTime,regular) VALUES ($userId,'$day','$turnOnTime',$duration,'$showrTime',$regular);";
         $result=mysqli_query($conn,$sql);
 		if(!$result)
 			die("query faild");

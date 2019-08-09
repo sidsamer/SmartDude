@@ -15,6 +15,7 @@ include_once 'includes/connection.php';
 <button type="submit" value="On" name="On">On</button>
 <button type="submit" value="temp" name="Temp">temp</button>
 <button type="submit" value="newUser" name="newUser">newUser</button>
+<button type="submit" value="login" name="login">login</button>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -56,6 +57,17 @@ else if(isset($_POST['newUser']))
          $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;
+    else
+        echo "cant make http req";
+}
+else if(isset($_POST['login']))
+{
+         $name="boris";
+         $pass="112113";
+         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=login&name=$name&password=$pass";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo "id:".$contents;
     else
         echo "cant make http req";
 }

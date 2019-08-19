@@ -20,6 +20,8 @@ require_once "includes/Training.php";
 <button type="submit" value="getSchedu" name="getSchedu">getSchedu</button>
 <button type="submit" value="scheduTurnOn" name="scheduTurnOn">scheduTurnOn</button>
 <input type="text" name="time">
+<button type="submit" value="regression" name="regression">regression</button>
+<button type="submit" value="train" name="train">train</button>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -92,6 +94,18 @@ else if(isset($_POST['getSchedu']))
         echo $contents;
     else
         echo "cant make http req";
+}
+else if(isset($_POST['regression']))
+{
+    $reg=new LinearRegression(30,50);
+    echo "out:".$reg->getOut().", boiler:".$reg->getBoiler().", text:".$reg->PredictTemp();
+}
+else if(isset($_POST['train']))
+{
+    $trainer=new LinearRegressionTrainer(30,50);
+    echo "weight before training:".$trainer->getW1();
+    $trainer->Train();
+    echo "weight after training:".$trainer->getW1();
 }
 ?>
 </center>

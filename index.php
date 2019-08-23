@@ -104,7 +104,7 @@ else if(isset($_POST['train']))
 {
     $trainer=new LinearRegressionTrainer(30,50);
     echo "weight before training:".$trainer->getW1();
-    $trainer->Train();
+    $trainer->Test();
     echo "weight after training:".$trainer->getW1();
 }
 ?>

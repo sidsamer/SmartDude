@@ -40,8 +40,10 @@ class LinearRegressionInput{
     
     var $ErrorThershold; 
     var $LearningRate;
-    var $ExceptedSucssesRate;
-    var $NumberOfMaximumIterations;
+    var $ExceptedSucssesRate;  ##a succse rate we want to achive.
+    var $actualSucceseRate;
+    var $avgdistance;  ## we want avg distance to be as low as possbile with that succses rate.
+    var $actualAvgDistance; ##the actual avg distnace of the learning.
     var $Data; //array
     var $ExpectedOutputs; //array
     var $TestData; //array
@@ -55,18 +57,25 @@ class LinearRegressionInput{
     function ReadFile(){
         $myfile = fopen("includes/data.txt", "r") or die("Unable to open data file!");
         $this->ErrorThershold=fgets($myfile);
-        $this->LearningRate=fgets($myfile);
-        $this->NumberOfMaximumIterations=fgets($myfile);
         $this->ExceptedSucssesRate=fgets($myfile);
+        $this->avgdistance=fgets($myfile);
+        $this->LearningRate=fgets($myfile);
         fclose($myfile);
     }
     function getData(){
-     for ($i=0;$i<100;$i++)
+     for ($i=0;$i<720;$i++)
      {
          $this->Data[$i]['boiler']=rand(10,40); 
          $this->Data[$i]['out']=rand(10,40);        
          $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
          $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
+     }
+     for ($i=0;$i<100;$i++)
+     {
+         $this->TestData[$i]['boiler']=rand(10,40); 
+         $this->TestData[$i]['out']=rand(10,40);        
+         $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
+         $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
      }
     }
     function ToString(){
@@ -88,32 +97,68 @@ class LinearRegressionTrainer extends LinearRegression{
         fwrite($myfile,$this->w1);
         fclose($myfile);
     }
-
+    function saveData(){
+        $myfile = fopen("includes/data.txt", "w") or die("Unable to open weights file!");
+        fwrite($myfile,$this->Input->ErrorThershold);
+        fwrite($myfile,$this->Input->ExceptedSucssesRate);
+        fwrite($myfile,$this->Input->avgdistance);
+        fwrite($myfile,$this->Input->LearningRate);
+        fclose($myfile);
+    }
     function Train(){
         $i=0;
-        $avg=0;
+        $trend=0; ## find to each mesurament the weight.
+        $this->Input->actualAvgDistance=0;
+        $this->Input->actualSucceseRate=0; 
         foreach ($this->Input->Data as $val)
         {
         $guess=$this->w1*($val['out']-$val['boiler'])+$val['boiler'];
 		$erorr=$guess-$val['target'];
+
         echo "<br>".$i." boiler: ".$val['boiler']." out: ".$val['out']."=".$val['target']."guess: ",$guess." , error:".$erorr." ,w1:".$this->w1;
         if($val['out']-$val['boiler'] !=0) // to prevent deviding by zero
         {
-        $avg=1/(($val['out']-$val['boiler'])/($val['target']-$val['boiler'])); //   1/((out-boiler)/target-boiler)
-        $this->gradient($avg);
+        $trend=1/(($val['out']-$val['boiler'])/($val['target']-$val['boiler'])); //   1/((out-boiler)/target-boiler)
+        $this->gradient($trend);
         }
         $i++;
         }
-        $this->saveWeightsInFile();
+        foreach ($this->Input->TestData as $val)
+        {
+        $guess=$this->w1*($val['out']-$val['boiler'])+$val['boiler'];
+		$erorr=$guess-$val['target'];
+        if(abs($erorr)<=$this->Input->ErrorThershold)
+         $this->Input->actualSucceseRate++;
+        $this->Input->actualAvgDistance+=abs($erorr);
+        }
+        $this->Input->actualSucceseRate/=100;
+        $this->Input->actualAvgDistance/=100;
     }
-    function gradient($avg)
-    {
-        $this->w1=($this->w1*(1-$this->Input->LearningRate))+($avg*$this->Input->LearningRate);
+    function Test(){
+        $learningRate=0.05; //high learning rate, beacuse we dont have enough mesuraments. 
+        $tempw=$this->w1;//temp weight, for equle testing for each learning rate.
+        while($learningRate>0.001)
+          {
+           $this->w1=$tempw;
+           $this->Input->LearningRate=$learningRate;
+           $this->Train();
+           $this->Input->actualSucceseRate*=100;
+        if(($this->Input->actualSucceseRate >=$this->Input->ExceptedSucssesRate) && ($this->Input->actualAvgDistance<=$this->Input->avgdistance))
+     {
+     echo "<br>##########################################################<br>";
+     echo "learning rate:".$learningRate." succes rate:".$this->Input->actualSucceseRate." avg distance:".$this->Input->actualAvgDistance."<br>";
+     echo "<br>##########################################################<br>";
+     $this->saveWeightsInFile();
+     $this->saveData();
+     echo "new weight found!";
+     break;
+     }
+$learningRate-=0.001;
     }
-    function test()
+    }
+    function gradient($trend)
     {
-        
-        return  true; ///pass/faild.
+        $this->w1=($this->w1*(1-$this->Input->LearningRate))+($trend*$this->Input->LearningRate);
     }
     function ToString(){
         echo $this->w1;

@@ -111,7 +111,7 @@ class LinearRegressionTrainer extends LinearRegression{
     
     var $Input;
     
-    public function __construct($Otemp,$Btemp,){
+    public function __construct($Otemp,$Btemp){
         LinearRegression::__construct($Otemp,$Btemp);
         $this->Input=new LinearRegressionInput();
     }

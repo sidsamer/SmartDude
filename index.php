@@ -106,7 +106,7 @@ else if(isset($_POST['train']))
 {
     $trainer=new LinearRegressionTrainer(30,50);
     echo "weight before training:".$trainer->getW1();
-    $trainer->Test("123");
+    $trainer->Test();
     echo "weight after training:".$trainer->getW1();
 }
 else if(isset($_POST['checkTemps']))
@@ -117,8 +117,6 @@ else if(isset($_POST['checkTemps']))
         echo $contents;
     else
         echo "cant make http req";
-    temps();
-    temps();
 }
 ?>
 </center>

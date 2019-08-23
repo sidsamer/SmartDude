@@ -96,20 +96,20 @@ class LinearRegressionInput{
      // }
       // }
    
-     for ($i=0;$i<720;$i++)
-     {
-         $this->Data[$i]['boiler']=rand(10,40); 
-         $this->Data[$i]['out']=rand(10,40);        
-         $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
-         $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
-     }
-     for ($i=0;$i<100;$i++)
-     {
-         $this->TestData[$i]['boiler']=rand(10,40); 
-         $this->TestData[$i]['out']=rand(10,40);        
-         $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
-         $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
-     }
+     // for ($i=0;$i<720;$i++)
+     // {
+         // $this->Data[$i]['boiler']=rand(10,40); 
+         // $this->Data[$i]['out']=rand(10,40);        
+         // $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
+         // $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
+     // }
+     // for ($i=0;$i<100;$i++)
+     // {
+         // $this->TestData[$i]['boiler']=rand(10,40); 
+         // $this->TestData[$i]['out']=rand(10,40);        
+         // $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
+         // $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
+     // }
     }
     function ToString(){
         echo $this->ErrorThershold. "   ".$this->LearningRate. "   ".$this->NumberOfMaximumIterations;

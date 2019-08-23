@@ -64,9 +64,9 @@ class LinearRegressionInput{
         fclose($myfile);
     }
     function getData(){
-        $temps=temps();
-       $size=count($temps);
-       echo "temps size:".$size;
+        //$temps=temps();
+       //$size=count($temps);
+       //echo "temps size:".$size;
      for ($i=0;$i<720;$i++)
      {
          $this->Data[$i]['boiler']=rand(10,40); 

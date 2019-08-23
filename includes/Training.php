@@ -63,38 +63,7 @@ class LinearRegressionInput{
         fclose($myfile);
     }
     function getData(){
-      // $trainSize=0; //size of data we have for training inside db.
-      // $testSize=0; //size of data we have for testing inside db.
-    // $sql = 'SELECT * FROM measurements;';
-    // $result=mysqli_query($conn,$sql);
-    // $resultCheck=mysqli_num_rows($result);
-    // if($resultCheck>0)
-     // {
-           // if($resultCheck>720)//delete old mesuraments.
-           // {
-               // echo "empty now";
-           // }
-          // $testSize=$resultCheck*0.1;
-          // $trainSize=$resultCheck-$testSize;
-          
-       // for ($i=0;$i<$trainSize;$i++) //fetching the training data.
-     // {
-         // $row=mysqli_fetch_assoc($result)
-         // $this->Data[$i]['boiler']=$row['boilerTemp']; 
-         // $this->Data[$i]['out']=$row['outsideTemp'];        
-         // $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
-         // $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
-     // }
-     // for ($i=0;$i<$testSize;$i++) //fetching the testing data.
-     // {
-         // $row=mysqli_fetch_assoc($result)
-         // $this->TestData[$i]['boiler']=$row['boilerTemp']; 
-         // $this->TestData[$i]['out']=$row['outsideTemp'];        
-         // $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
-         // $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
-     // }
-       // }
-        $sql='SELECT * FROM measurements;';
+     $sql='SELECT * FROM measurements;';
     $result=mysqli_query($conn,$sql);
     $resultCheck=mysqli_num_rows($result);
     if($resultCheck>0)

@@ -110,7 +110,7 @@ else if(isset($_POST['train']))
 }
 else if(isset($_POST['checkTemps']))
 {
-    $url="http://smart-dude.herokuapp.com/includes/checkTemps.php";
+    $url="http://smart-dude.herokuapp.com/includes/checkTemp.php";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;

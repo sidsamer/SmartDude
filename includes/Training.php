@@ -68,15 +68,16 @@ class LinearRegressionInput{
        $sql = 'select * from measurements';
        $result=mysqli_query($conn,$sql);
        $resultCheck=mysqli_num_rows($result);
-      // if($resultCheck>0)
-      // {
-          // if($resultCheck>720)//delete old mesuraments.
-          // {
-              // echo "empty now";
-          // }
-          // $testSize=$resultCheck*0.1;
-          // $trainSize=$resultCheck-$testSize;
-          
+      if($resultCheck>0)
+       {
+           if($resultCheck>720)//delete old mesuraments.
+           {
+               echo "empty now";
+           }
+          $testSize=$resultCheck*0.1;
+          $trainSize=$resultCheck-$testSize;
+          echo "<br> testsize:".$testSize." trainsize:".$trainSize;
+       }
           // for ($i=0;$i<$trainSize;$i++) //fetching the training data.
      // {
          // $row=mysqli_fetch_assoc($result)

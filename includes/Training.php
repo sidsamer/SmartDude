@@ -88,10 +88,11 @@ class LinearRegressionInput{
          }
 	 }
      $count=count($temps);
+     echo "mesuraments:".$count."<br><br>";
      $testsize=$count*0.1;
      $trainsize=$count-$testsize;
      $count=0;
-     for ($i=0;$i<$trainsize;$i++)
+     for ($i=0;$i<$trainsize-0.9;$i++)
      {
          $this->Data[$i]['boiler']=$temps[$i]['boiler']; 
          $this->Data[$i]['out']=$temps[$i]['outside'];        
@@ -99,10 +100,10 @@ class LinearRegressionInput{
          $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );
          $count++;         
      }
-     for ($j=$count;$j<$count+$testsize;$j++)
+     for ($j=0,$i;$i<$count+$testsize;$j++)
      {
-         $this->TestData[$j]['boiler']=rand(1,40);//$temps[$j]['boiler']); 
-         $this->TestData[$j]['out']=rand(1,40);//$temps[$j]['outside'];        
+         $this->TestData[$j]['boiler']=$temps[$i]['boiler']); 
+         $this->TestData[$j]['out']=$temps[$i]['outside'];        
          $this->TestExpectedOutputs[$j]= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );  
          $this->TestData[$j]['target']= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );     
      }

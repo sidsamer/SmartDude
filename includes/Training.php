@@ -65,9 +65,9 @@ class LinearRegressionInput{
     function getData(){
       $trainSize=0; //size of data we have for training inside db.
       $testSize=0; //size of data we have for testing inside db.
-      // $sql = 'select * from measurements';
-      // $result=mysqli_query($conn,$sql);
-      // $resultCheck=mysqli_num_rows($result);
+       $sql = 'select * from measurements';
+       $result=mysqli_query($conn,$sql);
+       $resultCheck=mysqli_num_rows($result);
       // if($resultCheck>0)
       // {
           // if($resultCheck>720)//delete old mesuraments.

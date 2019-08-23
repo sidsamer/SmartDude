@@ -2,7 +2,7 @@
 //this script handle the microconroller http requests.
 include_once 'includes/connection.php';
 
-	$weater_url='http://api.openweathermap.org/data/2.5/weather?id=294577&appid=4d77a0bba1a709b9b52103f6981d7ac3';
+	$weater_url='http://api.openweathermap.org/data/2.5/weather?id=294577&appid=4d77a0bba1a709b9b52103f6981d7ac3'; //need to change to be by city(id)
 	$weaterinfoJson = file_get_contents($weater_url);
     $tempviaday_array = json_decode($weaterinfoJson,true);
 		

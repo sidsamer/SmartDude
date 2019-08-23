@@ -2,6 +2,7 @@
 require_once "weights.txt";
 require_once "data.txt";
 include_once 'connection.php';
+require_once 'checkTemp.php';
 class LinearRegression{
 	
 	var $w1; //temp diff weight.
@@ -63,23 +64,9 @@ class LinearRegressionInput{
         fclose($myfile);
     }
     function getData(){
-     $sql='SELECT * FROM measurements;';
-    $result=mysqli_query($conn,$sql);
-    $resultCheck=mysqli_num_rows($result);
-    if($resultCheck>0)
-     {
-         $i=0;
-         while($i<$resultCheck)
-         {
-             	    $row=mysqli_fetch_assoc($result);
-             echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
-             $i++;
-         }
-	 }
-     else
-     {
-         echo("resultCheck:".$resultCheck);
-     }
+        $temps=temps();
+       $size=count($temps);
+       echo "temps size:".$size;
      for ($i=0;$i<720;$i++)
      {
          $this->Data[$i]['boiler']=rand(10,40); 

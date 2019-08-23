@@ -2,7 +2,6 @@
 require_once "weights.txt";
 require_once "data.txt";
 include_once 'includes/connection.php';
-require_once 'includes/checkTemp.php';
 class LinearRegression{
 	
 	var $w1; //temp diff weight.
@@ -50,9 +49,9 @@ class LinearRegressionInput{
     var $TestData; //array
     var $TestExpectedOutputs; //array
     
-    public function __construct($temps){
+    public function __construct(){
         $this->ReadFile();
-        $this->getData($temps);
+        $this->getData();
     }
     
     function ReadFile(){
@@ -63,9 +62,25 @@ class LinearRegressionInput{
         $this->LearningRate=fgets($myfile);
         fclose($myfile);
     }
-    function getData($temps){
-       $size=count($temps);
-       echo "temps size:".$size;
+    function getData(){
+
+         // $sql='SELECT * FROM measurements;';
+    // $result=mysqli_query($conn,$sql);
+    // $resultCheck=mysqli_num_rows($result);
+    // if($resultCheck>0)
+     // {
+         // $i=0;
+         // while($i<$resultCheck)
+         // {
+             // $row=mysqli_fetch_assoc($result);
+             // echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
+             // $temps[$i]['boiler']=$row['boilerTemp'];
+             // $temps[$i]['outside']=$row['outsideTemp'];
+             // $i++;
+         // }
+         // return $temps;
+	 // }
+
      for ($i=0;$i<720;$i++)
      {
          $this->Data[$i]['boiler']=rand(10,40); 
@@ -89,9 +104,9 @@ class LinearRegressionTrainer extends LinearRegression{
     
     var $Input;
     
-    public function __construct($Otemp,$Btemp,$temps){
+    public function __construct($Otemp,$Btemp,){
         LinearRegression::__construct($Otemp,$Btemp);
-        $this->Input=new LinearRegressionInput($temps);
+        $this->Input=new LinearRegressionInput();
     }
     function saveWeightsInFile(){
         echo "<br><br>######################new weights########################<br>";

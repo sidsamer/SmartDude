@@ -101,8 +101,8 @@ class LinearRegressionInput{
      }
      for ($j=$count;$j<$count+$testsize;$j++)
      {
-         $this->TestData[$j]['boiler']=$temps[$j]['boiler']); 
-         $this->TestData[$j]['out']=$temps[$j]['outside'];        
+         $this->TestData[$j]['boiler']=rand(1,40);//$temps[$j]['boiler']); 
+         $this->TestData[$j]['out']=rand(1,40);//$temps[$j]['outside'];        
          $this->TestExpectedOutputs[$j]= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );  
          $this->TestData[$j]['target']= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );     
      }

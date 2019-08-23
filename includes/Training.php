@@ -65,10 +65,10 @@ class LinearRegressionInput{
     function getData(){
       $trainSize=0; //size of data we have for training inside db.
       $testSize=0; //size of data we have for testing inside db.
-      $sql = "select * from measurements";
+      $sql = 'select * from measurements';
       $result=mysqli_query($conn,$sql);
       $resultCheck=mysqli_num_rows($result);
-      if($resultCheck!=0)
+      if($resultCheck>0)
       {
           if($resultCheck>720)//delete old mesuraments.
           {
@@ -94,6 +94,7 @@ class LinearRegressionInput{
          $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
      }
       }
+    }
      // for ($i=0;$i<720;$i++)
      // {
          // $this->Data[$i]['boiler']=rand(10,40); 
@@ -108,7 +109,6 @@ class LinearRegressionInput{
          // $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
          // $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
      // }
-    }
     function ToString(){
         echo $this->ErrorThershold. "   ".$this->LearningRate. "   ".$this->NumberOfMaximumIterations;
     }

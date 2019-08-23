@@ -68,7 +68,7 @@ class LinearRegressionInput{
        $sql = 'SELECT * FROM measurements;';
        $result=mysqli_query($conn,$sql);
        $resultCheck=mysqli_num_rows($result);
-                 //echo "resultcheck:".$resultcheck;
+                 echo "resultcheck:".$resultcheck;
       if(1>0)
        {
            // if($resultCheck>720)//delete old mesuraments.

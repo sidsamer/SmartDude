@@ -50,9 +50,9 @@ class LinearRegressionInput{
     var $TestData; //array
     var $TestExpectedOutputs; //array
     
-    public function __construct(){
+    public function __construct($temps){
         $this->ReadFile();
-        $this->getData();
+        $this->getData($temps);
     }
     
     function ReadFile(){
@@ -63,8 +63,7 @@ class LinearRegressionInput{
         $this->LearningRate=fgets($myfile);
         fclose($myfile);
     }
-    function getData(){
-        $temps=temps();
+    function getData($temps){
        $size=count($temps);
        echo "temps size:".$size;
      for ($i=0;$i<720;$i++)
@@ -90,9 +89,9 @@ class LinearRegressionTrainer extends LinearRegression{
     
     var $Input;
     
-    public function __construct($Otemp,$Btemp){
+    public function __construct($Otemp,$Btemp,$temps){
         LinearRegression::__construct($Otemp,$Btemp);
-        $this->Input=new LinearRegressionInput();
+        $this->Input=new LinearRegressionInput($temps);
     }
     function saveWeightsInFile(){
         echo "<br><br>######################new weights########################<br>";

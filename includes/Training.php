@@ -68,6 +68,7 @@ class LinearRegressionInput{
        $sql = 'SELECT * FROM measurements;';
        $result=mysqli_query($conn,$sql);
        $resultCheck=mysqli_num_rows($result);
+                 //echo "resultcheck:".$resultcheck;
       if($resultCheck>0)
        {
            if($resultCheck>720)//delete old mesuraments.
@@ -94,9 +95,7 @@ class LinearRegressionInput{
          $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
          $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
      }
-     
        }
-          //echo "resultcheck:".$resultcheck;
       }
    
      // for ($i=0;$i<720;$i++)

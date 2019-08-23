@@ -64,14 +64,14 @@ class LinearRegressionInput{
     }
     function getData(){
         $host="eu-cdbr-west-02.cleardb.net";
-$dbuser="b930876c351ee7";
-$pass="0f8d4cc8";
-$dbname="heroku_c26d047c909fd55";
-$conn=mysqli_connect($host,$dbuser,$pass,$dbname);
-if(mysqli_connect_errno())
-{
-	die("Connection Faild!".mysqli_connect_error());
-}
+        $dbuser="b930876c351ee7";
+        $pass="0f8d4cc8";
+        $dbname="heroku_c26d047c909fd55";
+        $conn=mysqli_connect($host,$dbuser,$pass,$dbname);
+        if(mysqli_connect_errno())
+          {
+	         die("Connection Faild!".mysqli_connect_error());
+          }
          $sql='SELECT * FROM measurements;';
     $result=mysqli_query($conn,$sql);
     $resultCheck=mysqli_num_rows($result);
@@ -81,21 +81,23 @@ if(mysqli_connect_errno())
          while($i<$resultCheck)
          {
              $row=mysqli_fetch_assoc($result);
-             echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
+             //echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
              $temps[$i]['boiler']=$row['boilerTemp'];
              $temps[$i]['outside']=$row['outsideTemp'];
              $i++;
          }
 	 }
-
-     for ($i=0;$i<720;$i++)
+     $count=count($temps);
+     $testsize=$count*0.1;
+     $trainsize=$count-$testsize;
+     for ($i=0;$i<$trainsize;$i++)
      {
          $this->Data[$i]['boiler']=rand(10,40); 
          $this->Data[$i]['out']=rand(10,40);        
          $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
          $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
      }
-     for ($i=0;$i<100;$i++)
+     for ($i=0;$i<$testsize;$i++)
      {
          $this->TestData[$i]['boiler']=rand(10,40); 
          $this->TestData[$i]['out']=rand(10,40);        

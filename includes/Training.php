@@ -96,7 +96,7 @@ class LinearRegressionInput{
      }
      
        }
-          echo "resultcheck:".$resultcheck;
+          //echo "resultcheck:".$resultcheck;
       }
    
      // for ($i=0;$i<720;$i++)

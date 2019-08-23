@@ -63,23 +63,30 @@ class LinearRegressionInput{
         fclose($myfile);
     }
     function getData(){
-
-         // $sql='SELECT * FROM measurements;';
-    // $result=mysqli_query($conn,$sql);
-    // $resultCheck=mysqli_num_rows($result);
-    // if($resultCheck>0)
-     // {
-         // $i=0;
-         // while($i<$resultCheck)
-         // {
-             // $row=mysqli_fetch_assoc($result);
-             // echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
-             // $temps[$i]['boiler']=$row['boilerTemp'];
-             // $temps[$i]['outside']=$row['outsideTemp'];
-             // $i++;
-         // }
-         // return $temps;
-	 // }
+        $host="eu-cdbr-west-02.cleardb.net";
+$dbuser="b930876c351ee7";
+$pass="0f8d4cc8";
+$dbname="heroku_c26d047c909fd55";
+$conn=mysqli_connect($host,$dbuser,$pass,$dbname);
+if(mysqli_connect_errno())
+{
+	die("Connection Faild!".mysqli_connect_error());
+}
+         $sql='SELECT * FROM measurements;';
+    $result=mysqli_query($conn,$sql);
+    $resultCheck=mysqli_num_rows($result);
+    if($resultCheck>0)
+     {
+         $i=0;
+         while($i<$resultCheck)
+         {
+             $row=mysqli_fetch_assoc($result);
+             echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
+             $temps[$i]['boiler']=$row['boilerTemp'];
+             $temps[$i]['outside']=$row['outsideTemp'];
+             $i++;
+         }
+	 }
 
      for ($i=0;$i<720;$i++)
      {

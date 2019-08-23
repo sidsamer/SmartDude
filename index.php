@@ -8,8 +8,8 @@
 <?php
 //this script is a simple user interface for the system.
 include_once 'includes/connection.php';
-require_once "includes/Training.php";
-require_once 'includes/checkTemp.php';
+include_once "includes/Training.php";
+include_once 'includes/checkTemp.php';
 ?>
 <center>
 <form action="index.php" method='post'>
@@ -106,7 +106,7 @@ else if(isset($_POST['train']))
 {
     $trainer=new LinearRegressionTrainer(30,50);
     echo "weight before training:".$trainer->getW1();
-    $trainer->Test(null);
+    $trainer->Test(temps());
     echo "weight after training:".$trainer->getW1();
 }
 else if(isset($_POST['checkTemps']))
@@ -117,6 +117,7 @@ else if(isset($_POST['checkTemps']))
         echo $contents;
     else
         echo "cant make http req";
+    temps();
     temps();
 }
 ?>

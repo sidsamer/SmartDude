@@ -99,8 +99,8 @@ class LinearRegressionInput{
      }
      for ($j=0;$j<$testsize;$j++)
      {
-         $this->TestData[$j]['boiler']=$temps[$i+$j]['boiler']); 
-         $this->TestData[$j]['out']=$temps[$i+$j]['outside'];        
+         $this->TestData[$j]['boiler']=$temps[$i+$trainsize]['boiler']); 
+         $this->TestData[$j]['out']=$temps[$i+$trainsize]['outside'];        
          $this->TestExpectedOutputs[$j]= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );  
          $this->TestData[$j]['target']= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );     
      }
@@ -150,7 +150,7 @@ class LinearRegressionTrainer extends LinearRegression{
         }
         $counter++;
         }
-        echo "#################################test time###############################"
+        echo "#################################test time###############################";
         $counter=0;
         foreach ($this->Input->TestData as $val)
         {

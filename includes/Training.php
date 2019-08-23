@@ -92,17 +92,17 @@ class LinearRegressionInput{
      $trainsize=$count-$testsize;
      for ($i=0;$i<$trainsize;$i++)
      {
-         $this->Data[$i]['boiler']=rand(10,40); 
-         $this->Data[$i]['out']=rand(10,40);        
+         $this->Data[$i]['boiler']=$temps[$i]['boiler']; 
+         $this->Data[$i]['out']=$temps[$i]['outside'];        
          $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
          $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
      }
-     for ($i=0;$i<$testsize;$i++)
+     for ($j=0;$j<$testsize;$j++)
      {
-         $this->TestData[$i]['boiler']=rand(10,40); 
-         $this->TestData[$i]['out']=rand(10,40);        
-         $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
-         $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
+         $this->TestData[$j]['boiler']=$temps[$i+$j]['boiler']); 
+         $this->TestData[$j]['out']=$temps[$i+$j]['outside'];        
+         $this->TestExpectedOutputs[$j]= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );  
+         $this->TestData[$j]['target']= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );     
      }
     }
     function ToString(){
@@ -150,11 +150,13 @@ class LinearRegressionTrainer extends LinearRegression{
         }
         $counter++;
         }
+        echo "#################################test time###############################"
         $counter=0;
         foreach ($this->Input->TestData as $val)
         {
         $guess=$this->w1*($val['out']-$val['boiler'])+$val['boiler'];
 		$erorr=$guess-$val['target'];
+        echo "<br>".$counter." boiler: ".$val['boiler']." out: ".$val['out']."=".$val['target']."guess: ",$guess." , error:".$erorr." ,w1:".$this->w1;
         if(abs($erorr)<=$this->Input->ErrorThershold)
          $this->Input->actualSucceseRate++;
         $this->Input->actualAvgDistance+=abs($erorr);

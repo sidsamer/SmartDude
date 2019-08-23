@@ -97,10 +97,11 @@ class LinearRegressionInput{
          $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
          $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
      }
-     for ($j=0;$j<$testsize;$j++)
+     $testsize=$count-$i;
+     for ($j=$i;$j<$testsize;$j++)
      {
-         $this->TestData[$j]['boiler']=rand(1,40);//$temps[$i+$trainsize]['boiler']); 
-         $this->TestData[$j]['out']=rand(1,40);//$temps[$i+$trainsize]['outside'];        
+         $this->TestData[$j]['boiler']=$temps[$j]['boiler']); 
+         $this->TestData[$j]['out']=$temps[$j]['outside'];        
          $this->TestExpectedOutputs[$j]= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );  
          $this->TestData[$j]['target']= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );     
      }
@@ -166,9 +167,9 @@ class LinearRegressionTrainer extends LinearRegression{
         $this->Input->actualAvgDistance/=$counter;
     }
     function Test(){
-        $learningRate=0.05; //high learning rate, beacuse we dont have enough mesuraments. 
+        $learningRate=0.1; //high learning rate, beacuse we dont have enough mesuraments. 
         $tempw=$this->w1;//temp weight, for equle testing for each learning rate.
-        while($learningRate>0.001)
+        while($learningRate>0.01)
           {
            $this->w1=$tempw;
            $this->Input->LearningRate=$learningRate;

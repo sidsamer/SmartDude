@@ -90,15 +90,16 @@ class LinearRegressionInput{
      $count=count($temps);
      $testsize=$count*0.1;
      $trainsize=$count-$testsize;
+     $count=0;
      for ($i=0;$i<$trainsize;$i++)
      {
          $this->Data[$i]['boiler']=$temps[$i]['boiler']; 
          $this->Data[$i]['out']=$temps[$i]['outside'];        
          $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
-         $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
+         $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );
+         $count++;         
      }
-     $testsize=$count-$i;
-     for ($j=$i;$j<$testsize;$j++)
+     for ($j=$count;$j<$count+$testsize;$j++)
      {
          $this->TestData[$j]['boiler']=$temps[$j]['boiler']); 
          $this->TestData[$j]['out']=$temps[$j]['outside'];        

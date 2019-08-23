@@ -22,6 +22,7 @@ require_once "includes/Training.php";
 <input type="text" name="time">
 <button type="submit" value="regression" name="regression">regression</button>
 <button type="submit" value="train" name="train">train</button>
+<button type="submit" value="checkTemps" name="checkTemps">checkTemps</button>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -106,6 +107,15 @@ else if(isset($_POST['train']))
     echo "weight before training:".$trainer->getW1();
     $trainer->Test();
     echo "weight after training:".$trainer->getW1();
+}
+else if(isset($_POST['checkTemps']))
+{
+    $url="http://smart-dude.herokuapp.com/includes/checkTemps";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo $contents;
+    else
+        echo "cant make http req";
 }
 ?>
 </center>

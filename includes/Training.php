@@ -77,8 +77,8 @@ class LinearRegressionInput{
           $testSize=$resultCheck*0.1;
           $trainSize=$resultCheck-$testSize;
           echo "<br> testsize:".$testSize." trainsize:".$trainSize;
-       }
-          for ($i=0;$i<20;$i++) //fetching the training data.
+          
+                    for ($i=0;$i<20;$i++) //fetching the training data.
      {
          //$row=mysqli_fetch_assoc($result)
          $this->Data[$i]['boiler']=rand(10,40);//$row['boilerTemp']; 
@@ -94,6 +94,9 @@ class LinearRegressionInput{
          $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
          $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
      }
+     
+       }
+
       }
    
      // for ($i=0;$i<720;$i++)

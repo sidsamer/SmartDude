@@ -1,7 +1,7 @@
 <?php
 require_once "weights.txt";
 require_once "data.txt";
-require_once "connection.php";
+//require_once "connection.php";
 class LinearRegression{
 	
 	var $w1; //temp diff weight.
@@ -65,53 +65,50 @@ class LinearRegressionInput{
     function getData(){
       $trainSize=0; //size of data we have for training inside db.
       $testSize=0; //size of data we have for testing inside db.
-       $sql = 'SELECT * FROM measurements;';
-       $result=mysqli_query($conn,$sql);
-       $resultCheck=mysqli_num_rows($result);
-                 echo "resultcheck:".$resultcheck;
-      if(1>0)
-       {
-           // if($resultCheck>720)//delete old mesuraments.
-           // {
-               // echo "empty now";
-           // }
+       $sql = 'select * from measurements';
+      // $result=mysqli_query($conn,$sql);
+      // $resultCheck=mysqli_num_rows($result);
+      // if($resultCheck>0)
+      // {
+          // if($resultCheck>720)//delete old mesuraments.
+          // {
+              // echo "empty now";
+          // }
           // $testSize=$resultCheck*0.1;
           // $trainSize=$resultCheck-$testSize;
-          // echo "<br> testsize:".$testSize." trainsize:".$trainSize;
           
-       for ($i=0;$i<30;$i++) //fetching the training data.
-     {
-         //$row=mysqli_fetch_assoc($result)
-         $this->Data[$i]['boiler']=rand(10,40);//$row['boilerTemp']; 
-         $this->Data[$i]['out']=rand(10,40);//$row['outsideTemp'];        
-         $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
-         $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
-     }
-     for ($i=0;$i<10;$i++) //fetching the testing data.
-     {
-         //$row=mysqli_fetch_assoc($result)
-         $this->TestData[$i]['boiler']=rand(10,40);//$row['boilerTemp']; 
-         $this->TestData[$i]['out']=rand(10,40);//$row['outsideTemp'];        
-         $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
-         $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
-     }
-       }
-      }
-   
-     // for ($i=0;$i<720;$i++)
+          // for ($i=0;$i<$trainSize;$i++) //fetching the training data.
      // {
-         // $this->Data[$i]['boiler']=rand(10,40); 
-         // $this->Data[$i]['out']=rand(10,40);        
+         // $row=mysqli_fetch_assoc($result)
+         // $this->Data[$i]['boiler']=$row['boilerTemp']; 
+         // $this->Data[$i]['out']=$row['outsideTemp'];        
          // $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
          // $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
      // }
-     // for ($i=0;$i<100;$i++)
+     // for ($i=0;$i<$testSize;$i++) //fetching the testing data.
      // {
-         // $this->TestData[$i]['boiler']=rand(10,40); 
-         // $this->TestData[$i]['out']=rand(10,40);        
+         // $row=mysqli_fetch_assoc($result)
+         // $this->TestData[$i]['boiler']=$row['boilerTemp']; 
+         // $this->TestData[$i]['out']=$row['outsideTemp'];        
          // $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
          // $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
      // }
+      // }
+     for ($i=0;$i<720;$i++)
+     {
+         $this->Data[$i]['boiler']=rand(10,40); 
+         $this->Data[$i]['out']=rand(10,40);        
+         $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
+         $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
+     }
+     for ($i=0;$i<100;$i++)
+     {
+         $this->TestData[$i]['boiler']=rand(10,40); 
+         $this->TestData[$i]['out']=rand(10,40);        
+         $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
+         $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
+     }
+}
     function ToString(){
         echo $this->ErrorThershold. "   ".$this->LearningRate. "   ".$this->NumberOfMaximumIterations;
     }

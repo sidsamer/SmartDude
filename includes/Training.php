@@ -1,7 +1,7 @@
 <?php
 require_once "weights.txt";
 require_once "data.txt";
-require_once "includes/connection.php";
+require_once "connection.php";
 class LinearRegression{
 	
 	var $w1; //temp diff weight.

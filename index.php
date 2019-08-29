@@ -121,7 +121,7 @@ else if(isset($_POST['checkTemps']))
 }
 else if(isset($_POST['ScheduleTurnOn'])) 
 {
-    $url="http://smart-dude.herokuapp.com/includes/ScheduleTurnOn.php";
+    $url="http://smart-dude.herokuapp.com/ScheduleTurnOn.php";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;

@@ -24,6 +24,7 @@ include 'includes/checkTemp.php';
 <button type="submit" value="regression" name="regression">regression</button>
 <button type="submit" value="train" name="train">train</button>
 <button type="submit" value="checkTemps" name="checkTemps">checkTemps</button>
+<button type="submit" value="ScheduleTurnOn" name="ScheduleTurnOn">ScheduleTurnOn</button>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -112,6 +113,15 @@ else if(isset($_POST['train']))
 else if(isset($_POST['checkTemps']))
 {
     $url="http://smart-dude.herokuapp.com/includes/checkTemp.php";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo $contents;
+    else
+        echo "cant make http req";
+}
+else if(isset($_POST['ScheduleTurnOn'])) 
+{
+    $url="http://smart-dude.herokuapp.com/includes/ScheduleTurnOn.php";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;

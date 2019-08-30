@@ -20,7 +20,7 @@ include_once 'boilerStatus.txt';
 <button type="submit" value="ShowSchedule" name="ShowSchedule">Show Schedule</button>
 <button type="submit" value="train" name="train">train</button><br><br>
 <input type="text" placeholder="Name" name="Name"><br>
-<input type="text" placeholder="Temp" name="Temp"><br>
+<input type="text" placeholder="Favorite Temp" name="FavTemp"><br>
 <input type="text" placeholder="Pass" name="Pass"><br>
 <input type="text" placeholder="Phone" name="Phone"><br>
 <button type="submit" value="newUser" name="newUser">newUser</button><br><br>
@@ -66,19 +66,19 @@ else if(isset($_POST['On']))
         fwrite($myfile,$status);
         fclose($myfile);
 }
-// else if(isset($_POST['Temp']))
-// {
-    // $sql = "INSERT INTO tasks(task) VALUES ('temp');";
-        // $result=mysqli_query($conn,$sql);
-		// if(!$result)
-			// die("query faild");
-        // else
-            // echo ("boiler check temp");
-// }
+else if(isset($_POST['Temp']))
+{
+    $sql = "INSERT INTO tasks(task) VALUES ('temp');";
+        $result=mysqli_query($conn,$sql);
+		if(!$result)
+			die("query faild");
+        else
+            echo ("boiler check temp");
+}
 else if(isset($_POST['newUser']))
 {
          $name=$_POST['Name'];
-         $temp=$_POST['Temp'];
+         $temp=$_POST['FavTemp'];
          $pass=$_POST['Pass'];
          $phone=$_POST['Phone'];
          //$name="boris";

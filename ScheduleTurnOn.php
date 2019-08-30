@@ -22,6 +22,7 @@ $futureTime=date('H:i:s',strtotime("".$nowTime." +300 seconds"));//plus 5 minute
            if( $status=="off" ) //if boiler is off, were looking for a turn on in the (5 minutes radious(+-)).
                {
               $sql="SELECT * FROM turnon where day='$day' and turnOnTime>='$pastTime' and turnOnTime<='$futureTime'";
+              echo $sql;
 	          $result=mysqli_query($conn,$sql);
 	          $resultCheck=mysqli_num_rows($result); 
               if($resultCheck>0)

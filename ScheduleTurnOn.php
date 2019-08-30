@@ -15,5 +15,6 @@ $sql="SELECT * FROM turnon";
                echo $row['userId']." ".$row['showerTime']." ";
            }
        }
-
+ $temp=shell_exec('wget http://smart-dude.herokuapp.com/Android_req.php/?order=on');
+ echo $temp;
 ?>

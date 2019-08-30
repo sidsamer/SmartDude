@@ -71,6 +71,10 @@ else if(isset($_POST['newUser']))
          $temp=$_POST['Temp'];
          $pass=$_POST['Pass'];
          $phone=$_POST['Phone'];
+         //$name="boris";
+         //$temp=60;
+         //$pass="112113";
+         //$phone="0524734844";
          $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newUser&name=$name&temp=$temp&password=$pass&phone=$phone";
          $contents = file_get_contents($url);
          if($contents !== false)
@@ -82,6 +86,8 @@ else if(isset($_POST['login']))
 {
          $name=$_POST['UserName'];
          $pass=$_POST['UserPass'];
+         //$name="boris";
+         //$pass="112113";
          $url="http://smart-dude.herokuapp.com/Android_req.php/?order=login&name=$name&password=$pass";
           $contents = file_get_contents($url);
          if($contents !== false)
@@ -92,6 +98,7 @@ else if(isset($_POST['login']))
 else if(isset($_POST['regression']))
 {
     $reg=new LinearRegression(intval($_POST['TempIn']),intval($_POST['TempOut']));
+    //$reg=new LinearRegression(30,50);
     echo "out:".$reg->getOut().", boiler:".$reg->getBoiler().", text:".$reg->PredictTemp();
 }
 else if(isset($_POST['train']))

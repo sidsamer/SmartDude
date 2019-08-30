@@ -14,7 +14,7 @@ $str=htmlspecialchars($_GET["order"]);
         else
             echo ("boiler turn on");
         $status="on";
-        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!");
+        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!"); //saving boiler status
         fwrite($myfile,$status);
         fclose($myfile);
 	 }
@@ -27,7 +27,7 @@ $str=htmlspecialchars($_GET["order"]);
         else
             echo ("boiler turn off");
         $status="off";
-        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!");
+        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!"); //saving boiler status
         fwrite($myfile,$status);
         fclose($myfile);
 	 }

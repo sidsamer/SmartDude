@@ -2,6 +2,7 @@
 //this script handle the user/android http requests.
 include_once 'includes/connection.php';
 require_once "includes/Training.php";
+include_once 'boilerStatus.txt';
 
 $str=htmlspecialchars($_GET["order"]);
 //turn on boiler
@@ -12,6 +13,10 @@ $str=htmlspecialchars($_GET["order"]);
 			die("query faild");
         else
             echo ("boiler turn on");
+        $status="on";
+        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!");
+        fwrite($myfile,$status);
+        fclose($myfile);
 	 }
 //turn off boiler	 
 	 else if($str == "off" /*and boiler on*/){
@@ -21,6 +26,10 @@ $str=htmlspecialchars($_GET["order"]);
 			die("query faild");
         else
             echo ("boiler turn off");
+        $status="off";
+        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!");
+        fwrite($myfile,$status);
+        fclose($myfile);
 	 }
  //create new user    
      else if($str == "newUser"){
@@ -88,5 +97,12 @@ else if($str == "login"){
            $row=mysqli_fetch_assoc($result);
            echo $row['id']; //yet to be tested,returns id.
        }
+}
+else if($str == "status"){
+        $myfile = fopen("boilerStatus.txt", "r") or die("Unable to open status file!");
+$status=fgets($myfile);
+fclose($myfile);
+echo "<br> boiler status: ".$status."<br>";
+        
 }
 ?>

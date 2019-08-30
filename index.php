@@ -9,11 +9,19 @@
 //this script is a simple user interface for the system.
 include_once 'includes/connection.php';
 require_once "includes/Training.php";
+include_once 'boilerStatus.txt';
 ?>
 <center>
+<?php
+$myfile = fopen("boilerStatus.txt", "r") or die("Unable to open status file!");
+$status=fgets($myfile);
+fclose($myfile);
+echo "<br> boiler status: ".$status."<br>";
+?>
 <form action="index.php" method='post'>
 <button type="submit" value="Off" name="Off">Off</button>
 <button type="submit" value="On" name="On">On</button>
+<button type="submit" value="Off" name="Off">status</button>
 <button type="submit" value="temp" name="Temp">temp</button>
 <button type="submit" value="ShowSchedule" name="ShowSchedule">Show Schedule</button>
 <button type="submit" value="train" name="train">train</button><br><br>
@@ -46,6 +54,10 @@ if(isset($_POST['Off']))
 			die("query faild");
         else
             echo ("boiler turn off");
+        $status="off";
+        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!");
+        fwrite($myfile,$status);
+        fclose($myfile);
 }
 else if(isset($_POST['On']))
 {
@@ -55,6 +67,10 @@ else if(isset($_POST['On']))
 			die("query faild");
         else
             echo ("boiler turn on");
+        $status="on";
+        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!");
+        fwrite($myfile,$status);
+        fclose($myfile);
 }
 // else if(isset($_POST['Temp']))
 // {
@@ -124,6 +140,15 @@ else if(isset($_POST['ScheduleTurnOn']))
 else if(isset($_POST['ShowSchedule'])) 
 {
     $url="http://smart-dude.herokuapp.com/Android_req.php/?order=getAllSchdules";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo $contents;
+    else
+        echo "cant make http req";
+}
+else if(isset($_POST['status'])) 
+{
+    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=status";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;

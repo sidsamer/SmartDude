@@ -4,10 +4,11 @@ include_once 'includes/connection.php';
 
 $day=strtolower(date("l"));
 $nowTime=date("h:i:s");
+$nowTime=date('H:i:s',strtotime("".$nowTime." +10800 seconds"));
 $pastTime=date('H:i:s',strtotime("".$nowTime." -300 seconds"));
 $futureTime=date('H:i:s',strtotime("".$nowTime." +300 seconds"));
 
-$sql="SELECT * FROM turnon where day='$day'";
+$sql="SELECT * FROM turnon where day='$day' and turnOnTime>='$pastTime' and turnOnTime<='$futureTime'";
 	     $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
          if($resultCheck>0)

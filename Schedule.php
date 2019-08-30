@@ -33,7 +33,7 @@ $sql="SELECT * FROM turnon where day='$day' and showerTime>'$nowTime' and shower
                    $duration=$reg->CalcDuration(); //need to be upgrated.
                    $turnOnTime=date('H:i:s',strtotime("".$showerTime." -$duration seconds")); //turn on time calculation
                    $sql="delete from turnon where id=$id";
-                   $sql = "INSERT INTO turnon(userId,day,turnOnTime,duration,showerTime,regular) VALUES ($id,'$day','$turnOnTime',$duration,'$showerTime',$regular);";
+                   $sql = "INSERT INTO turnon(userId,day,turnOnTime,duration,showerTime,regular) VALUES ('$user','$day','$turnOnTime','$duration','$showerTime','$regular');";
                    $result=mysqli_query($conn,$sql);
 		           if(!$result)
 			         die("query faild");

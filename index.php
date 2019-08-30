@@ -15,7 +15,7 @@ include_once 'boilerStatus.txt';
 <form action="index.php" method='post'>
 <button type="submit" value="Off" name="Off">Off</button>
 <button type="submit" value="On" name="On">On</button>
-<button type="submit" value="Off" name="Off">status</button>
+<button type="submit" value="Status" name="Status">status</button>
 <button type="submit" value="temp" name="Temp">temp</button>
 <button type="submit" value="ShowSchedule" name="ShowSchedule">Show Schedule</button>
 <button type="submit" value="train" name="train">train</button><br><br>
@@ -140,7 +140,7 @@ else if(isset($_POST['ShowSchedule']))
     else
         echo "cant make http req";
 }
-else if(isset($_POST['status'])) 
+else if(isset($_POST['Status'])) 
 {
     $url="http://smart-dude.herokuapp.com/Android_req.php/?order=status";
           $contents = file_get_contents($url);

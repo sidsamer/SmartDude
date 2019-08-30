@@ -12,12 +12,6 @@ require_once "includes/Training.php";
 include_once 'boilerStatus.txt';
 ?>
 <center>
-<?php
-$myfile = fopen("boilerStatus.txt", "r") or die("Unable to open status file!");
-$status=fgets($myfile);
-fclose($myfile);
-echo "<br> boiler status: ".$status."<br>";
-?>
 <form action="index.php" method='post'>
 <button type="submit" value="Off" name="Off">Off</button>
 <button type="submit" value="On" name="On">On</button>

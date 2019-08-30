@@ -12,7 +12,7 @@ fclose($myfile);
   
 //since heroku scheduler limit you to run the sceduler only for 10 minutes margins, we will check 5 minutes before and after to give us 5 minutes error top!  
 $day=strtolower(date("l"));
-$nowTime=date("h:i:s");
+$nowTime=date("H:i:s");
 $nowTime=date('H:i:s',strtotime("".$nowTime." +10800 seconds")); //current time in israel(server +3 hours).
 $pastTime=date('H:i:s',strtotime("".$nowTime." -300 seconds")); //minus 5 minutes.
 $futureTime=date('H:i:s',strtotime("".$nowTime." +300 seconds"));//plus 5 minutes.

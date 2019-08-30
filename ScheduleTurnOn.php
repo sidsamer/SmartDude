@@ -14,10 +14,10 @@ $sql="SELECT * FROM turnon where day='$day'";
        {
            while($row=mysqli_fetch_assoc($result))
            {
-               echo "user:"$row['userId']." time:".$row['showerTime']." regular:".$row['regular']."<br>";
+               echo "user:".$row['userId']." time:".$row['showerTime']." regular:".$row['regular']."<br>";
            }
        }
-       echo "day:".$day."<br>";
+echo "day:".$day."<br>";
 echo "time now:".$nowTime."<br>";
 echo "time -5 minutes: ".$pastTime."<br>";
 echo "time +5 minutes: ".$futureTime."<br>";

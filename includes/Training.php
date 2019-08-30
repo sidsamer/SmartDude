@@ -29,7 +29,7 @@ class LinearRegression{
 	}
     function CalcDuration()
     {
-        return 900;
+        return 10800;
     }
     function PredictTemp()
     {

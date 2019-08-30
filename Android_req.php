@@ -55,15 +55,13 @@ $str=htmlspecialchars($_GET["order"]);
      }
  //enter schduled turn on
      else if($str == "newSchdule"){
-         $reg=new LinearRegression(30,50);
+         //$reg=new LinearRegression(30,50);
          $userId=htmlspecialchars($_GET["userId"]);
          $day=htmlspecialchars($_GET["day"]); //day in string exe: 'sunday'
          $showerTime=htmlspecialchars($_GET["showerTime"]);//time in string exe: '6:30 pm'
-         $duration=$reg->CalcDuration(); //duration calculated
+         $duration=10800; // three hours max.
          $showerTime=date('H:i:s', strtotime($showerTime));
-         //$turnOnTime=htmlspecialchars($_GET["turnOnTime"]);
          $turnOnTime=date('H:i:s',strtotime("".$showerTime." -$duration seconds")); //turn on time calculation
-         //$turnOnTime= date('H:i:s', strtotime($turnOnTime)); //temp time
          $regular=htmlspecialchars($_GET["regular"]); //1 or 0
          $sql = "INSERT INTO turnon(userId,day,turnOnTime,duration,showerTime,regular) VALUES ($userId,'$day','$turnOnTime',$duration,'$showerTime',$regular);";
         $result=mysqli_query($conn,$sql);

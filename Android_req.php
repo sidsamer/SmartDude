@@ -62,7 +62,6 @@ $str=htmlspecialchars($_GET["order"]);
 			die("query faild");
         else
             echo ("new Schdule was set!");
-        //echo "userId=".$userId." day:".$day." duration:".$duration." showerTime:".$showerTime." TurnOnTime:".$turnOnTime." regular:".$regular;
      }
 // get all the schdule 
 else if($str == "getAllSchdules"){

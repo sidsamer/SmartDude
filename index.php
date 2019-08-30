@@ -8,23 +8,32 @@
 <?php
 //this script is a simple user interface for the system.
 include_once 'includes/connection.php';
-include_once "includes/Training.php";
-include 'includes/checkTemp.php';
+require_once "includes/Training.php";
 ?>
 <center>
 <form action="index.php" method='post'>
 <button type="submit" value="Off" name="Off">Off</button>
 <button type="submit" value="On" name="On">On</button>
 <button type="submit" value="temp" name="Temp">temp</button>
-<button type="submit" value="newUser" name="newUser">newUser</button>
-<button type="submit" value="login" name="login">login</button>
-<button type="submit" value="getSchedu" name="getSchedu">getSchedu</button>
-<button type="submit" value="scheduTurnOn" name="scheduTurnOn">scheduTurnOn</button>
-<input type="text" name="time">
-<button type="submit" value="regression" name="regression">regression</button>
-<button type="submit" value="train" name="train">train</button>
-<button type="submit" value="checkTemps" name="checkTemps">checkTemps</button>
-<button type="submit" value="ScheduleTurnOn" name="ScheduleTurnOn">ScheduleTurnOn</button>
+<button type="submit" value="ScheduleTurnOn" name="ScheduleTurnOn">Show Schedule</button>
+<button type="submit" value="train" name="train">train</button><br><br>
+<input type="text" placeholder="Name" name="Name"><br>
+<input type="text" placeholder="Temp" name="Temp"><br>
+<input type="text" placeholder="Pass" name="Pass"><br>
+<button type="submit" value="newUser" name="newUser">newUser</button><br><br>
+<input type="text" placeholder="Phone" name="Phone"><br>
+<input type="text" placeholder="Name" name="UserName"><br>
+<input type="text" placeholder="Pass" name="UserPass"><br>
+<button type="submit" value="login" name="login">login</button><br><br>
+<input type="text" placeholder="boiler Temp" name="TempIn"><br>
+<input type="text" placeholder="Outside Temp" name="TempOut"><br>
+<button type="submit" value="regression" name="regression">regression</button><br><br>
+<input type="text" placeholder="User Id" name="userId"><br>
+<input type="text" placeholder="Day" name="day"><br>
+<input type="text" placeholder="Time" name="time"><br>
+<input type="text" placeholder="Regular or not" name="regular"><br>
+<button type="submit" value="ScheduleTurnOn" name="ScheduleTurnOn">ScheduleTurnOn</button><br>
+
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -58,10 +67,10 @@ else if(isset($_POST['Temp']))
 }
 else if(isset($_POST['newUser']))
 {
-         $name="boris";
-         $temp=60;
-         $pass="112113";
-         $phone="0524734844";
+         $name=$_POST['Name'];
+         $temp=$_POST['Temp'];
+         $pass=$_POST['Pass'];
+         $phone=$_POST['Phone'];
          $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newUser&name=$name&temp=$temp&password=$pass&phone=$phone";
          $contents = file_get_contents($url);
          if($contents !== false)
@@ -71,8 +80,8 @@ else if(isset($_POST['newUser']))
 }
 else if(isset($_POST['login']))
 {
-         $name="boris";
-         $pass="112113";
+         $name=$_POST['UserName'];
+         $pass=$_POST['UserPass'];
          $url="http://smart-dude.herokuapp.com/Android_req.php/?order=login&name=$name&password=$pass";
           $contents = file_get_contents($url);
          if($contents !== false)
@@ -80,27 +89,9 @@ else if(isset($_POST['login']))
     else
         echo "cant make http req";
 }
-else if(isset($_POST['scheduTurnOn']))
-{
-         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newSchdule&userId=1&day=sunday&showerTime=".$_POST['time']."&regular=1";
-          $contents = file_get_contents($url);
-         if($contents !== false)
-        echo $contents;
-    else
-        echo "cant make http req";
-}
-else if(isset($_POST['getSchedu']))
-{
-      $url="http://smart-dude.herokuapp.com/Android_req.php/?order=getAllSchdules";
-          $contents = file_get_contents($url);
-         if($contents !== false)
-        echo $contents;
-    else
-        echo "cant make http req";
-}
 else if(isset($_POST['regression']))
 {
-    $reg=new LinearRegression(30,50);
+    $reg=new LinearRegression($_POST['TempIn'],$_POST['TempOut']);
     echo "out:".$reg->getOut().", boiler:".$reg->getBoiler().", text:".$reg->PredictTemp();
 }
 else if(isset($_POST['train']))
@@ -110,18 +101,22 @@ else if(isset($_POST['train']))
     $trainer->Test();
     echo "weight after training:".$trainer->getW1();
 }
-else if(isset($_POST['checkTemps']))
+else if(isset($_POST['ScheduleTurnOn'])) 
 {
-    $url="http://smart-dude.herokuapp.com/includes/checkTemp.php";
+    $userid=$_POST['userId'];
+    $day=$_POST['day'];
+    $time=$_POST['time'];
+    $regular=$_POST['regular'];
+    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newSchdule&userId=$userid&day=$day&showerTime=$time&regular=$regular";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;
     else
         echo "cant make http req";
 }
-else if(isset($_POST['ScheduleTurnOn'])) 
+else if(isset($_POST['Show Schedule'])) 
 {
-    $url="http://smart-dude.herokuapp.com/ScheduleTurnOn.php";
+    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=getAllSchdules";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;

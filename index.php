@@ -15,13 +15,13 @@ require_once "includes/Training.php";
 <button type="submit" value="Off" name="Off">Off</button>
 <button type="submit" value="On" name="On">On</button>
 <button type="submit" value="temp" name="Temp">temp</button>
-<button type="submit" value="ScheduleTurnOn" name="ScheduleTurnOn">Show Schedule</button>
+<button type="submit" value="ShowSchedule" name="ShowSchedule">Show Schedule</button>
 <button type="submit" value="train" name="train">train</button><br><br>
 <input type="text" placeholder="Name" name="Name"><br>
 <input type="text" placeholder="Temp" name="Temp"><br>
 <input type="text" placeholder="Pass" name="Pass"><br>
-<button type="submit" value="newUser" name="newUser">newUser</button><br><br>
 <input type="text" placeholder="Phone" name="Phone"><br>
+<button type="submit" value="newUser" name="newUser">newUser</button><br><br>
 <input type="text" placeholder="Name" name="UserName"><br>
 <input type="text" placeholder="Pass" name="UserPass"><br>
 <button type="submit" value="login" name="login">login</button><br><br>
@@ -91,7 +91,7 @@ else if(isset($_POST['login']))
 }
 else if(isset($_POST['regression']))
 {
-    $reg=new LinearRegression($_POST['TempIn'],$_POST['TempOut']);
+    $reg=new LinearRegression(intval($_POST['TempIn']),intval($_POST['TempOut']));
     echo "out:".$reg->getOut().", boiler:".$reg->getBoiler().", text:".$reg->PredictTemp();
 }
 else if(isset($_POST['train']))
@@ -114,7 +114,7 @@ else if(isset($_POST['ScheduleTurnOn']))
     else
         echo "cant make http req";
 }
-else if(isset($_POST['Show Schedule'])) 
+else if(isset($_POST['ShowSchedule'])) 
 {
     $url="http://smart-dude.herokuapp.com/Android_req.php/?order=getAllSchdules";
           $contents = file_get_contents($url);

@@ -58,7 +58,7 @@ $str=htmlspecialchars($_GET["order"]);
          $regular=htmlspecialchars($_GET["regular"]); //1 or 0
          $sql = "INSERT INTO turnon(userId,day,turnOnTime,duration,showerTime,regular) VALUES ($userId,'$day','$turnOnTime',$duration,'$showerTime',$regular);";
         $result=mysqli_query($conn,$sql);
-		if(!$result)
+		if(!$result)0
 			die("query faild");
         else
             echo ("new Schdule was set!");

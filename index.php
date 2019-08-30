@@ -56,15 +56,15 @@ else if(isset($_POST['On']))
         else
             echo ("boiler turn on");
 }
-else if(isset($_POST['Temp']))
-{
-    $sql = "INSERT INTO tasks(task) VALUES ('temp');";
-        $result=mysqli_query($conn,$sql);
-		if(!$result)
-			die("query faild");
-        else
-            echo ("boiler check temp");
-}
+// else if(isset($_POST['Temp']))
+// {
+    // $sql = "INSERT INTO tasks(task) VALUES ('temp');";
+        // $result=mysqli_query($conn,$sql);
+		// if(!$result)
+			// die("query faild");
+        // else
+            // echo ("boiler check temp");
+// }
 else if(isset($_POST['newUser']))
 {
          $name=$_POST['Name'];

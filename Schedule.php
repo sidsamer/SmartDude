@@ -6,7 +6,7 @@ require_once "includes/Training.php";
 $day=strtolower(date("l")); //current day.
 $nowTime=date("H:i:s"); //current time.
 $nowTime=date('H:i:s',strtotime("".$nowTime." +10800 seconds")); //current time in israel(server +3 hours).
-$pastTime=date('H:i:s',strtotime("".$nowTime." -300 seconds")); //minus 5 minutes.
+$nearFutureTime=date('H:i:s',strtotime("".$nowTime." +600 seconds")); //plus 10 minutes.
 $futureTime=date('H:i:s',strtotime("".$nowTime." +10800 seconds"));//plus 3 hours.
 
 ///////////////////////check temps///////////////////////
@@ -18,7 +18,8 @@ $futureTime=date('H:i:s',strtotime("".$nowTime." +10800 seconds"));//plus 3 hour
             echo ("boiler check temp");
 /////////////////////recalculate shower time////////////////////////
          $reg=new LinearRegression(30,50); 
-$sql="SELECT * FROM turnon where day='$day' and showerTime>'$nowTime' and showerTime<='$futureTime'";
+         $currTemp=rand(20,30); //need to insert real temps;
+$sql="SELECT * FROM turnon where day='$day' and showerTime<='$futureTime' and turnOnTime>'$nearFutureTime'";
               echo $sql;
 	          $result=mysqli_query($conn,$sql);
 	          $resultCheck=mysqli_num_rows($result); 
@@ -30,9 +31,22 @@ $sql="SELECT * FROM turnon where day='$day' and showerTime>'$nowTime' and shower
                    $user=$row['userId']; //in order to get the user fav water temp.
                    $showerTime=$row['showerTime'];
                    $regular=$row['regular'];
-                   $duration=$reg->CalcDuration(); //need to be upgrated.
+                   $sql="select * from users where id='$user'"; //to check user fav temps.
+	               $result=mysqli_query($conn,$sql);
+                   $resultCheck=mysqli_num_rows($result);
+                   if($resultCheck>0)
+              {
+                  $row=mysqli_fetch_assoc($result);
+                  $favTemp=$row['temp'];
+              }
+              else
+              {
+                   $favTemp=40; //avg temp humans like to take a shower. 
+              }
+                   $duration=$reg->CalcDuration($currTemp,$favTemp); //need to be upgrated.
                    $turnOnTime=date('H:i:s',strtotime("".$showerTime." -$duration seconds")); //turn on time calculation
                    $sql="delete from turnon where id='$id'";
+                   $result=mysqli_query($conn,$sql);
                    	if(!$result)
 			         die("delete query faild");
                    else

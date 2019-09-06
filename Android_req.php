@@ -105,7 +105,7 @@ echo "<br> boiler status: ".$status."<br>";
 }
 else if($str == "recover"){
         $name=htmlspecialchars($_GET["name"]);
-        $pass=htmlspecialchars($_GET["phone"]);
+        $phone=htmlspecialchars($_GET["phone"]);
         $sql ="select password from users where name='$name' and phone='$phone'";
          $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 

@@ -103,4 +103,18 @@ fclose($myfile);
 echo "<br> boiler status: ".$status."<br>";
         
 }
+else if($str == "recover"){
+        $name=htmlspecialchars($_GET["name"]);
+        $pass=htmlspecialchars($_GET["phone"]);
+        $sql ="select password from users where name='$name' and phone='$phone'";
+         $result=mysqli_query($conn,$sql);
+	     $resultCheck=mysqli_num_rows($result); 
+          if($resultCheck>0)
+       {
+           $row=mysqli_fetch_assoc($result);
+           echo $row['password'];
+       }
+       else
+           echo "cant find user or phone";
+}
 ?>

@@ -10,12 +10,9 @@ $nearFutureTime=date('H:i:s',strtotime("".$nowTime." +600 seconds")); //plus 10 
 $futureTime=date('H:i:s',strtotime("".$nowTime." +10800 seconds"));//plus 3 hours.
 
 ///////////////////////check temps///////////////////////
-    $sql = "INSERT INTO tasks(task) VALUES ('temp');";
-        $result=mysqli_query($conn,$sql);
-		if(!$result)
-			die("query faild");
-        else
-            echo ("boiler check temp");
+    $temp=rand(20,40); //represent the temp inside the boiler.
+    $res=shell_exec("wget http://smart-dude.herokuapp.com/temp.php/?temp=$temp");
+    echo $res."<br>"; //delete
 /////////////////////recalculate shower time////////////////////////
          $reg=new LinearRegression(30,50); 
          $currTemp=rand(20,30); //need to insert real temps;

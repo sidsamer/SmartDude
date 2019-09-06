@@ -27,9 +27,16 @@ class LinearRegression{
 	{
 		return $this->BoilerTemp;
 	}
-    function CalcDuration()
+    function CalcDuration($currTemp,$wantedTemp)
     {
-        return 10800;
+        $HeaterElementRating=2.5; //heater element rating in kW.
+        $Liters=150; // amount of liters in the tank.
+        //$pt=(4.2*L*T)/3600  L=size of boiler(150 liter) T=wanted temp minus current temp. 
+        if($currTemp>=$wantedTemp) //if we dont need to turnon the boiler.
+            return 0;
+        $pt=(4.2*$Liters*($wantedTemp-$currTemp))/3600;     //Pt is the power used to heat the water, in kWh ((4.2*L*T)/3600). 
+        $time=($pt/$HeaterElementRating)*60*60; //the heating time in seconds.
+        return $time;
     }
     function PredictTemp()
     {

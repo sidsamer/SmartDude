@@ -34,8 +34,10 @@ include_once 'boilerStatus.txt';
 <input type="text" placeholder="Day" name="day"><br>
 <input type="text" placeholder="Time" name="time"><br>
 <input type="text" placeholder="Regular or not" name="regular"><br>
-<button type="submit" value="ScheduleTurnOn" name="ScheduleTurnOn">ScheduleTurnOn</button><br>
-
+<button type="submit" value="ScheduleTurnOn" name="ScheduleTurnOn">ScheduleTurnOn</button><br><br>
+<input type="text" placeholder="Name" name="RecoverUserName"><br>
+<input type="text" placeholder="Phone" name="RecoverUserPhone"><br>
+<button type="submit" value="recover" name="recover">Recover pass</button><br>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -146,6 +148,17 @@ else if(isset($_POST['Status']))
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;
+    else
+        echo "cant make http req";
+}
+else if(isset($_POST['recover'])) 
+{
+         $name=$_POST['RecoverUserName'];
+         $phone=$_POST['RecoverUserPhone'];
+         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=recover&name=$name&phone=$phone";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo "pass:".$contents;
     else
         echo "cant make http req";
 }

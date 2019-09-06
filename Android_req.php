@@ -117,4 +117,13 @@ else if($str == "recover"){
        else
            echo "cant find user or phone";
 }
+else if($str == "delete"){
+        $id=htmlspecialchars($_GET["id"]);
+        $sql="delete from users where id=$id";
+        $result=mysqli_query($conn,$sql);
+                   	if(!$result)
+			         die("delete query faild");
+                   else
+                     echo ("user is deleted!");
+}
 ?>

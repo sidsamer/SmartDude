@@ -13,7 +13,8 @@ version10:
 version 11:
 -automate everything,
 version 12:
--the start of the calculation.
+-duration calculation.
 version 13
 -recover password mode.
 -changed the temp reading to be random.
+-delete user.

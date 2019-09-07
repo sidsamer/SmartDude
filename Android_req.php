@@ -93,7 +93,7 @@ else if($str == "getAllSchdules"){
        {
            while($row=mysqli_fetch_assoc($result))
            {
-               echo $row['userId']." ".$row['showerTime']." "; //yet to be done,need to send asociative array.
+               echo $row['id']." ".$row['userId']." ".$row['showerTime']." "; //yet to be done,need to send asociative array.
            }
        }
 }
@@ -189,5 +189,14 @@ else if($str == "get_boiler_data"){
         else{
             echo "cant find uid, cant read boiler data!";
         }
+}
+else if($str == "delete_schdule"){
+        $id=htmlspecialchars($_GET["id"]);
+        $sql="delete from turnon where id=$id";
+        $result=mysqli_query($conn,$sql);
+                   	if(!$result)
+			         die("delete query faild");
+                   else
+                     echo ("Schdule is deleted!");  
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
-require_once "weights.txt";
-require_once "data.txt";
+//require_once "weights.txt";
+//require_once "data.txt";
 include_once 'includes/connection.php';
 class LinearRegression{
 	
@@ -27,10 +27,10 @@ class LinearRegression{
 	{
 		return $this->BoilerTemp;
 	}
-    function CalcDuration($currTemp,$wantedTemp)
+    function CalcDuration($currTemp,$wantedTemp,$volume)
     {
         $HeaterElementRating=2.5; //heater element rating in kW.
-        $Liters=150; // amount of liters in the tank.
+        $Liters=$volume; // amount of liters in the tank.
         //$pt=(4.2*L*T)/3600  L=size of boiler(150 liter) T=wanted temp minus current temp. 
         if($currTemp>=$wantedTemp) //if we dont need to turnon the boiler.
             return 0;

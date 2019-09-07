@@ -124,8 +124,12 @@ echo "<br> boiler status: ".$status."<br>";
 else if($str == "recover"){
         $name=htmlspecialchars($_GET["name"]);
         $phone=htmlspecialchars($_GET["phone"]);
-        //$phone=htmlspecialchars($_GET["uid"]);
-        ///check uid valid/////
+        $uid=htmlspecialchars($_GET["uid"]); //uinique id for the system.
+        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");//check uid valid
+        $uid2=fgets($myfile);
+        fclose($myfile);
+        if((int)$uid == (int)$uid2)
+        { 
         $sql ="select password from users where name='$name' and phone='$phone'";
          $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
@@ -136,6 +140,9 @@ else if($str == "recover"){
        }
        else
            echo "cant find user or phone";
+        }
+       else
+        echo "cant find uid, cant read boiler data!";           
 }
 else if($str == "delete"){
         $id=htmlspecialchars($_GET["id"]);
@@ -181,7 +188,6 @@ else if($str == "get_boiler_data"){
         }
         else{
             echo "cant find uid, cant read boiler data!";
-                            echo "1:".$uid." 2:".$uid2;
         }
 }
 ?>

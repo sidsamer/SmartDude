@@ -38,6 +38,7 @@ include_once 'boilerStatus.txt';
 <button type="submit" value="ScheduleTurnOn" name="ScheduleTurnOn">ScheduleTurnOn</button><br><br>
 <input type="text" placeholder="Name" name="RecoverUserName"><br>
 <input type="text" placeholder="Phone" name="RecoverUserPhone"><br>
+<input type="text" placeholder="UID" name="RecoverUid"><br>
 <button type="submit" value="recover" name="recover">Recover pass</button><br><br>
 <input type="text" placeholder="ID" name="ID"><br>
 <button type="submit" value="delete" name="delete">Delete User</button><br><br>
@@ -154,7 +155,8 @@ else if(isset($_POST['recover']))
 {
          $name=$_POST['RecoverUserName'];
          $phone=$_POST['RecoverUserPhone'];
-         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=recover&name=$name&phone=$phone";
+         $uid=$_POST['RecoverUid'];
+         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=recover&name=$name&phone=$phone&uid=$uid";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo "pass:".$contents;

@@ -185,7 +185,7 @@ else if(isset($_POST['boiler_data']))
     else
         echo "cant make http req";
 }
-else if(isset($_POST['delete'])) 
+else if(isset($_POST['deleteSchedule'])) 
 {
     $id=$_POST['Schedule_ID'];
     $url="http://smart-dude.herokuapp.com/Android_req.php/?order=delete_schdule&id=$id";

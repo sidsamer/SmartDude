@@ -21,7 +21,27 @@ include_once 'includes/connection.php';
 			die("query faild");
         else
             echo("out:".$tempOut." boiler:".$BoilerTemp." inserted");
-
+    
+    $sql="select * from measurements order by id asc";  //get number of mesuraments.
+    $result=mysqli_query($conn,$sql);
+	$resultCheck=mysqli_num_rows($result); 
+       if($resultCheck>70) //need only last month.
+           {
+              $sql="select id from measurements order by id asc limit 1"; //get the oldest mesurament id.
+              $result=mysqli_query($conn,$sql);
+	          $resultCheck=mysqli_num_rows($result); 
+               if($resultCheck!=0)
+             {
+                 $row=mysqli_fetch_assoc($result);
+                 $id=$row['id'];
+                 $sql="delete from measurements where id='$id'";//delete the oldest mesurament.
+                         $result=mysqli_query($conn,$sql);
+		     if(!$result)
+			    die("query faild");
+             else
+               echo ("oldest mesurament deleted!");
+             }    
+           }
 
 
 

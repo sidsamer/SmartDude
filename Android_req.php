@@ -41,6 +41,8 @@ $str=htmlspecialchars($_GET["order"]);
          $uid=htmlspecialchars($_GET["uid"]);
         $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");//check uid valid
         $uid2=fgets($myfile);
+        $mail=fgets($myfile);
+        $vol=fgets($myfile);
         fclose($myfile);
         if((int)$uid == (int)$uid2)
         { 
@@ -55,7 +57,9 @@ $str=htmlspecialchars($_GET["order"]);
 		if(!$result)
 			die("query faild");
         else
-            echo ("user create sucssesfuly");
+        {
+        echo ("user create sucssesfuly");
+        }
        }
        else
            echo ("user allready exist");
@@ -97,6 +101,9 @@ else if($str == "getAllSchdules"){
 else if($str == "login"){
         $name=htmlspecialchars($_GET["name"]);
         $pass=htmlspecialchars($_GET["password"]);
+        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");//check uid valid
+        $uid=fgets($myfile);
+        fclose($myfile);
         $sql ="select id from users where name='$name' and password='$pass'";
          $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
@@ -104,6 +111,7 @@ else if($str == "login"){
        {
            $row=mysqli_fetch_assoc($result);
            echo $row['id']; //yet to be tested,returns id.
+           echo " ".$uid;
        }
 }
 else if($str == "status"){
@@ -149,10 +157,9 @@ else if($str == "boiler_data"){
         if((int)$uid == (int)$uid2)
         {
         $myfile = fopen("boilerData.txt", "w") or die("Unable to open boiler data file!");
-        fwrite($myfile,$uid."\n");
-        fwrite($myfile,$numOfUsers);
-        fwrite($myfile,$vol."\n");
-        fwrite($myfile,$mail);
+        fwrite($myfile,$uid.PHP_EOL);
+        fwrite($myfile,$mail.PHP_EOL);
+        fwrite($myfile,$vol.PHP_EOL);
         fclose($myfile);
         echo "boiler data saved/updated";
         }
@@ -164,13 +171,11 @@ else if($str == "get_boiler_data"){
         $uid=htmlspecialchars($_GET["uid"]); //every system will have its own uid.
         $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
         $uid2=fgets($myfile);
-        $numOfUsers=fgets($myfile);
-        $vol=fgets($myfile);
         $mail=fgets($myfile);
+        $vol=fgets($myfile);
         fclose($myfile);
         if((int)$uid == (int)$uid2)
         {
-        echo "Users:".$numOfUsers."<br>";
         echo "Volume:".$vol."<br>";
         echo "Mail:".$mail."<br>";
         }

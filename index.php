@@ -23,6 +23,7 @@ include_once 'boilerStatus.txt';
 <input type="text" placeholder="Favorite Temp" name="FavTemp"><br>
 <input type="text" placeholder="Pass" name="Pass"><br>
 <input type="text" placeholder="Phone" name="Phone"><br>
+<input type="text" placeholder="UID" name="Uid"><br>
 <button type="submit" value="newUser" name="newUser">newUser</button><br><br>
 <input type="text" placeholder="Name" name="UserName"><br>
 <input type="text" placeholder="Pass" name="UserPass"><br>
@@ -39,7 +40,9 @@ include_once 'boilerStatus.txt';
 <input type="text" placeholder="Phone" name="RecoverUserPhone"><br>
 <button type="submit" value="recover" name="recover">Recover pass</button><br><br>
 <input type="text" placeholder="ID" name="ID"><br>
-<button type="submit" value="delete" name="delete">delete user</button><br>
+<button type="submit" value="delete" name="delete">Delete User</button><br><br>
+<input type="text" placeholder="UID" name="UID"><br>
+<button type="submit" value="boiler_data" name="boiler_data">Boiler Data</button><br><br>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -85,11 +88,8 @@ else if(isset($_POST['newUser']))
          $temp=$_POST['FavTemp'];
          $pass=$_POST['Pass'];
          $phone=$_POST['Phone'];
-         //$name="boris";
-         //$temp=60;
-         //$pass="112113";
-         //$phone="0524734844";
-         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newUser&name=$name&temp=$temp&password=$pass&phone=$phone";
+         $uid=$_POST['Uid'];
+         $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newUser&name=$name&temp=$temp&password=$pass&phone=$phone&uid=$uid";
          $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;
@@ -100,8 +100,6 @@ else if(isset($_POST['login']))
 {
          $name=$_POST['UserName'];
          $pass=$_POST['UserPass'];
-         //$name="boris";
-         //$pass="112113";
          $url="http://smart-dude.herokuapp.com/Android_req.php/?order=login&name=$name&password=$pass";
           $contents = file_get_contents($url);
          if($contents !== false)
@@ -112,7 +110,6 @@ else if(isset($_POST['login']))
 else if(isset($_POST['regression']))
 {
     $reg=new LinearRegression(intval($_POST['TempIn']),intval($_POST['TempOut']));
-    //$reg=new LinearRegression(30,50);
     echo "out:".$reg->getOut().", boiler:".$reg->getBoiler().", text:".$reg->PredictTemp();
 }
 else if(isset($_POST['train']))
@@ -168,6 +165,16 @@ else if(isset($_POST['delete']))
 {
     $id=$_POST['ID'];
     $url="http://smart-dude.herokuapp.com/Android_req.php/?order=delete&id=$id";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo $contents;
+    else
+        echo "cant make http req";
+}
+else if(isset($_POST['boiler_data'])) 
+{
+    $uid=$_POST['UID'];
+    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=get_boiler_data&uid=$uid";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;

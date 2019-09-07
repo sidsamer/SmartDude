@@ -9,7 +9,7 @@
 //this script is a simple user interface for the system.
 include_once 'includes/connection.php';
 require_once "includes/Training.php";
-include_once 'boilerStatus.txt';
+//include_once 'boilerStatus.txt';
 ?>
 <center>
 <form action="index.php" method='post'>

@@ -2,7 +2,8 @@
 //this script handle the user/android http requests.
 include_once 'includes/connection.php';
 require_once "includes/Training.php";
-include_once 'boilerStatus.txt';
+//include_once 'boilerStatus.txt';
+//include_once 'boilerData.txt';
 
 $str=htmlspecialchars($_GET["order"]);
 //turn on boiler
@@ -37,6 +38,12 @@ $str=htmlspecialchars($_GET["order"]);
          $temp=htmlspecialchars($_GET["temp"]);
          $pass=htmlspecialchars($_GET["password"]);
          $phone=htmlspecialchars($_GET["phone"]);
+         $uid=htmlspecialchars($_GET["uid"]);
+        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");//check uid valid
+        $uid2=fgets($myfile);
+        fclose($myfile);
+        if((int)$uid == (int)$uid2)
+        { 
          $sql = "select * from users where name='$name';";
 	     $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
@@ -52,6 +59,9 @@ $str=htmlspecialchars($_GET["order"]);
        }
        else
            echo ("user allready exist");
+        }
+        else
+            echo ("cant find uid, cant create a new user!");
      }
  //enter schduled turn on
      else if($str == "newSchdule"){
@@ -106,6 +116,8 @@ echo "<br> boiler status: ".$status."<br>";
 else if($str == "recover"){
         $name=htmlspecialchars($_GET["name"]);
         $phone=htmlspecialchars($_GET["phone"]);
+        //$phone=htmlspecialchars($_GET["uid"]);
+        ///check uid valid/////
         $sql ="select password from users where name='$name' and phone='$phone'";
          $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
@@ -125,5 +137,46 @@ else if($str == "delete"){
 			         die("delete query faild");
                    else
                      echo ("user is deleted!");
+}
+else if($str == "boiler_data"){
+        $uid=htmlspecialchars($_GET["uid"]); //every system will have its own uid.
+        $vol=htmlspecialchars($_GET["volume"]); //size of the boiler.
+        $mail=htmlspecialchars($_GET["mail"]); ///to send uid in mail if needed.
+        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
+        $uid2=fgets($myfile);
+        $numOfUsers=fgets($myfile);
+        fclose($myfile);
+        if((int)$uid == (int)$uid2)
+        {
+        $myfile = fopen("boilerData.txt", "w") or die("Unable to open boiler data file!");
+        fwrite($myfile,$uid."\n");
+        fwrite($myfile,$numOfUsers);
+        fwrite($myfile,$vol."\n");
+        fwrite($myfile,$mail);
+        fclose($myfile);
+        echo "boiler data saved/updated";
+        }
+        else{
+            echo "cant find uid, cant create/update boiler data!";
+        }
+}
+else if($str == "get_boiler_data"){
+        $uid=htmlspecialchars($_GET["uid"]); //every system will have its own uid.
+        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
+        $uid2=fgets($myfile);
+        $numOfUsers=fgets($myfile);
+        $vol=fgets($myfile);
+        $mail=fgets($myfile);
+        fclose($myfile);
+        if((int)$uid == (int)$uid2)
+        {
+        echo "Users:".$numOfUsers."<br>";
+        echo "Volume:".$vol."<br>";
+        echo "Mail:".$mail."<br>";
+        }
+        else{
+            echo "cant find uid, cant read boiler data!";
+                            echo "1:".$uid." 2:".$uid2;
+        }
 }
 ?>

@@ -93,7 +93,7 @@ else if($str == "getAllSchdules"){
        {
            while($row=mysqli_fetch_assoc($result))
            {
-               echo $row['id']." ".$row['userId']." ".$row['showerTime']."<br>"; //yet to be done,need to send asociative array.
+               echo "id:".$row['id']." userid:".$row['userId']." time:".$row['showerTime']." day:".$row['day']." regular:".$row['regular']."\n"; //yet to be done,need to send asociative array.
            }
        }
 }

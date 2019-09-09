@@ -86,6 +86,16 @@ $str=htmlspecialchars($_GET["order"]);
      }
 // get all the schdule 
 else if($str == "getAllSchdules"){
+	$sql="select id,name from users";
+	     $result=mysqli_query($conn,$sql);
+	     $resultCheck=mysqli_num_rows($result); 
+         if($resultCheck>0)
+       {
+           while($row=mysqli_fetch_assoc($result))
+           {
+              $users[$row['id']]=$row['name'];
+	   }
+       }
          $sql = "select * from turnon;";
 	     $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
@@ -93,7 +103,7 @@ else if($str == "getAllSchdules"){
        {
            while($row=mysqli_fetch_assoc($result))
            {
-               echo "id:".$row['id']." userid:".$row['userId']." time:".$row['showerTime']." day:".$row['day']." regular:".$row['regular']."\n"; //yet to be done,need to send asociative array.
+               echo "name:".$users[$row['id']]."id:".$row['id']." userid:".$row['userId']." time:".$row['showerTime']." day:".$row['day']." regular:".$row['regular'].", "; //yet to be done,need to send asociative array.
            }
        }
 }

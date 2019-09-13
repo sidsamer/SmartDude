@@ -57,6 +57,12 @@ $str=htmlspecialchars($_GET["order"]);
 			die("query faild");
         else
         {
+        $myfile = fopen("numOfUsers.txt", "r") or die("Unable to open boiler data file!");
+        $num=fgets($myfile);
+        fclose($myfile);
+        $myfile = fopen("numOfUsers.txt", "w") or die("Unable to open boiler data file!");
+        fwrite($myfile,$num.PHP_EOL);
+        fclose($myfile);
         echo ("user create sucssesfuly");
         }
        }

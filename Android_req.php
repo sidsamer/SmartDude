@@ -209,7 +209,7 @@ else if($str == "delete_schdule"){
                      echo ("Schdule is deleted!");  
 }
 else if($str == "num_users"){
-        $uid=htmlspecialchars($_GET["uid"]); //every system will have its own uid.
+        $uid=htmlspecialchars($_GET["id"]); //every system will have its own uid.
         $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
         $uid2=fgets($myfile);
         fclose($myfile);

@@ -221,7 +221,8 @@ else if($str == "num_users"){
         echo "Num of users:".$num."<br>";
         }
         else{
-            echo "cant find uid, cant get number of users!";
+            echo "cant find uid, cant get number of users!<br>";
+            echo "uid:".(int)$uid." uid2:".(int)$uid2;
         }
 }
 ?>

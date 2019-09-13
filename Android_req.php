@@ -4,7 +4,6 @@ include_once 'includes/connection.php';
 require_once "includes/Training.php";
 //include_once 'boilerStatus.txt';
 //include_once 'boilerData.txt';
-
 $str=htmlspecialchars($_GET["order"]);
 //turn on boiler
      if($str == "on" /*and boiler off*/){ 

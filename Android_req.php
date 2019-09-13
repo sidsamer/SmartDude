@@ -232,4 +232,17 @@ else if($str == "num_users"){
             echo "cant find uid, cant get number of users!<br>";
         }
 }
+else if($str == "check_uid"){
+        $uid=htmlspecialchars($_GET["id"]); //every system will have its own uid.
+        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
+        $uid2=fgets($myfile);
+        fclose($myfile);
+        if((int)$uid == (int)$uid2)
+        {
+        echo "yes";
+        }
+        else{
+            echo "cant find uid";
+        }
+}
 ?>

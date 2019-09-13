@@ -46,6 +46,8 @@ require_once "includes/Training.php";
 <button type="submit" value="deleteSchedule" name="deleteSchedule">Delete Schedule</button><br><br>
 <input type="text" placeholder="UID" name="UID"><br>
 <button type="submit" value="boiler_data" name="boiler_data">Boiler Data</button><br><br>
+<input type="text" placeholder="UID" name="UIDusers"><br>
+<button type="submit" value="NumOfUsers" name="NumOfUsers">Number of users</button><br><br>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -189,6 +191,16 @@ else if(isset($_POST['deleteSchedule']))
 {
     $id=$_POST['Schedule_ID'];
     $url="http://smart-dude.herokuapp.com/Android_req.php/?order=delete_schdule&id=$id";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo $contents;
+    else
+        echo "cant make http req";
+}
+else if(isset($_POST['NumOfUsers'])) 
+{
+    $id=$_POST['UIDusers'];
+    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=num_users&id=$id";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;

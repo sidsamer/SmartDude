@@ -60,6 +60,7 @@ $str=htmlspecialchars($_GET["order"]);
         $myfile = fopen("numOfUsers.txt", "r") or die("Unable to open boiler data file!");
         $num=fgets($myfile);
         fclose($myfile);
+        $num=(int)$num+1;
         $myfile = fopen("numOfUsers.txt", "w") or die("Unable to open boiler data file!");
         fwrite($myfile,$num.PHP_EOL);
         fclose($myfile);

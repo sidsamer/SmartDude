@@ -215,6 +215,7 @@ else if($str == "delete_schdule"){
                    else
                      echo ("Schdule is deleted!");  
 }
+// returns number of users in the system
 else if($str == "num_users"){
         $uid=htmlspecialchars($_GET["id"]); //every system will have its own uid.
         $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
@@ -225,11 +226,10 @@ else if($str == "num_users"){
         fclose($myfile);
         if((int)$uid == (int)$uid2)
         {
-        echo "Num of users:".$num."<br>";
+        echo $num;
         }
         else{
             echo "cant find uid, cant get number of users!<br>";
-            echo "uid:".(int)$uid." uid2:".(int)$uid2;
         }
 }
 ?>

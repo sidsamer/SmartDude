@@ -190,6 +190,7 @@ else if($str == "boiler_data"){
             echo "cant find uid, cant create/update boiler data!";
         }
 }
+//checks uniqe-id amd then returns volume and mail.
 else if($str == "get_boiler_data"){
         $uid=htmlspecialchars($_GET["uid"]); //every system will have its own uid.
         $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
@@ -206,6 +207,7 @@ else if($str == "get_boiler_data"){
             echo "cant find uid, cant read boiler data!";
         }
 }
+//delete certine turn on from schdule.
 else if($str == "delete_schdule"){
         $id=htmlspecialchars($_GET["id"]);
         $sql="delete from turnon where id=$id";
@@ -232,6 +234,7 @@ else if($str == "num_users"){
             echo "cant find uid, cant get number of users!<br>";
         }
 }
+//checks if uniqid is valid.
 else if($str == "check_uid"){
         $uid=htmlspecialchars($_GET["id"]); //every system will have its own uid.
         $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");

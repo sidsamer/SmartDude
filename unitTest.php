@@ -9,8 +9,10 @@
 //this script is a simple user interface for the system.
 include_once 'includes/connection.php';
 require_once "includes/Training.php";
-//include_once 'boilerStatus.txt';
 ?>
+<form  action="menu.php" method="POST">
+<button type="submit" name="exit">Exit</button>
+</form>
 <center>
 <form action="unitTest.php" method='post'>
 <button type="submit" value="Off" name="Off">Off</button>
@@ -206,6 +208,11 @@ else if(isset($_POST['NumOfUsers']))
         echo $contents;
     else
         echo "cant make http req";
+}
+else if(isset($_POST['exit'])) 
+{
+    setcookie('Id',$Id,time()-10);
+	header('Location: index.php');
 }
 ?>
 </center>

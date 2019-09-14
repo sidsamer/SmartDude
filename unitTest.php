@@ -12,7 +12,7 @@ require_once "includes/Training.php";
 //include_once 'boilerStatus.txt';
 ?>
 <center>
-<form action="index.php" method='post'>
+<form action="unitTest.php" method='post'>
 <button type="submit" value="Off" name="Off">Off</button>
 <button type="submit" value="On" name="On">On</button>
 <button type="submit" value="Status" name="Status">status</button>

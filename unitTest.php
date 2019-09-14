@@ -10,7 +10,7 @@
 include_once 'includes/connection.php';
 require_once "includes/Training.php";
 ?>
-<form  action="menu.php" method="POST">
+<form  action="unitTest.php" method="POST">
 <button type="submit" name="exit">Exit</button>
 </form>
 <center>

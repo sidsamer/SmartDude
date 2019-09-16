@@ -1,7 +1,5 @@
 <?php
-
-//אם ישנו כיבוי עתידי שהדלקתו כבר עבר לא מכבים לפני.
-//זמן מקלחת שכבר עבר ולא רגולר.
+//this script checks if theres a turn on that need to be done.
 include_once 'includes/connection.php';
 include_once 'boilerStatus.txt';
 
@@ -52,8 +50,7 @@ $futureTime=date('H:i:s',strtotime("".$nowTime." +300 seconds"));//plus 5 minute
               }
 
        }
-       
-       
+
               $sql="SELECT * FROM turnon where day='$day' and showerTime<'$nowTime'"; //find all the old schedules, the ones whose not regular will be deleted.
 	          $result=mysqli_query($conn,$sql);
 	          $resultCheck=mysqli_num_rows($result); 

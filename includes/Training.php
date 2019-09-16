@@ -194,12 +194,12 @@ class LinearRegressionTrainer extends LinearRegression{
      echo "new weight found!";
      break;
      }
-$learningRate-=0.001;
+$learningRate-=0.001; //slowing down the learning rate to be more acurate.
     }
     }
     function gradient($trend)
     {
-        $this->w1=($this->w1*(1-$this->Input->LearningRate))+($trend*$this->Input->LearningRate);
+        $this->w1=($this->w1*(1-$this->Input->LearningRate))+($trend*$this->Input->LearningRate); //new weight equal prev weight.
     }
     function ToString(){
         echo $this->w1;

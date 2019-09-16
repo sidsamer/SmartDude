@@ -48,7 +48,7 @@ td{
 <br><br><br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
 <form action='menu.php' method='post' >
-<input type="text" name="Task" placeholder="Enter New Task" required pattern="[^()/><\][\\\x22,'=;|]+"><br>
+<input type="text" placeholder="Regular or not" name="regular"required pattern="[^()/><\][\\\x22,'=;|]+"><br>
 <input type="datetime-local" name="Deadline" required><br>
 <button type="submit" value="SignUp" name="submit">Create/Update</button>
 </form>
@@ -90,25 +90,24 @@ if(isset($_POST['RemoveSubmit']))
 <?php
 if(isset($_POST['submit']))
 {
-	
-	// $Deadline=$_POST['Deadline'];
-	// $Task=$_POST['Task'];
-	// $sql="INSERT INTO task(id,body,deadline) ".
-			// "values (".$_SESSION['Id'].",'$Task','$Deadline');";
-			// $res=mysqli_query($conn,$sql);
-			// if(!$res)
-				// echo("query faild".mysqli_connect_error());
-            echo "submit pressed!\n";
-			header('Location: menu.php'); 
+	$userid=$_SESSION['Id'];
+    $day=date("l", strtotime($_POST['Deadline']));
+    $time=date('H:i:s',strtotime($_POST['Deadline']));
+    $regular=$_POST['regular'];
+    // $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newSchdule&userId=$userid&day=$day&showerTime=$time&regular=$regular";
+          // $contents = file_get_contents($url);
+         // if($contents !== false)
+        // echo $contents;
+    // else
+        // echo "cant make http req";
+	    // header('Location: menu.php'); 
+        echo $userid." ".$day." ".$time." ".$regular" ";
 
 }
 ?>
 <div class="board"; id="board";">
 <form action="Board.php"  method='post' target="myFrame2">
 <?php
-echo date("l");
-echo " Uniqe id:".$_SESSION['Uid'];
-echo " id:".$_SESSION['Id'];
 for($i=0;$i<7;$i++)
 {
 	?>

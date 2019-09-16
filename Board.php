@@ -31,7 +31,7 @@ if(isset($_POST['dayButton']))
 		   $day =$row['day'];
            $showerTime=$row['showerTime'];
 		   echo "<tr>";
-		    echo "<td>".$row['userId']."</td><td style='color:Chartreuse;'>".$day."</td>".$showerTime."</td>";
+		    echo "<td style='color:Chartreuse;'>".$row['userId']."</td><td style='color:Chartreuse;'>".$showerTime."</td><td style='color:Chartreuse;'>".$day."</td>";
 		   echo "</tr>";
 	   }
 	   }

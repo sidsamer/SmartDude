@@ -77,18 +77,27 @@ $str=htmlspecialchars($_GET["order"]);
      else if($str == "newSchdule"){
          //$reg=new LinearRegression(30,50);
          $userId=htmlspecialchars($_GET["userId"]);
-         $day=htmlspecialchars($_GET["day"]); //day in string exe: 'sunday'
+         $day=htmlspecialchars($_GET["day"]); //day in string exe: 'sunday'.
+         $day=strtolower($day); //change day to lower case.
          $showerTime=htmlspecialchars($_GET["showerTime"]);//time in string exe: '6:30 pm'
          $duration=7200; // two hours max.
          $showerTime=date('H:i:s', strtotime($showerTime));
          $turnOnTime=date('H:i:s',strtotime("".$showerTime." -$duration seconds")); //turn on time calculation
-         $regular=htmlspecialchars($_GET["regular"]); //1 or 0
+         $regular=htmlspecialchars($_GET["regular"]); //if its a regular shower or a one time of. 
+         $sql="SELECT * FROM turnon where day='$day' and showerTime='$showerTime'";
+	     $result=mysqli_query($conn,$sql);
+	     $resultCheck=mysqli_num_rows($result); 
+         if($resultCheck==0)
+         {
          $sql = "INSERT INTO turnon(userId,day,turnOnTime,duration,showerTime,regular) VALUES ($userId,'$day','$turnOnTime',$duration,'$showerTime',$regular);";
         $result=mysqli_query($conn,$sql);
 		if(!$result)
 			die("query faild");
         else
             echo ("new Schdule was set!");
+         }
+         else
+             echo "schdule allready set in this hour!";
      }
 // get all the schdule 
 else if($str == "getAllSchdules"){
@@ -129,12 +138,14 @@ else if($str == "login"){
            echo $row['id']; //yet to be tested,returns id.
            echo " ".$uid;
        }
+       else
+           echo "no";
 }
 else if($str == "status"){
 $myfile = fopen("boilerStatus.txt", "r") or die("Unable to open status file!");
 $status=fgets($myfile);
 fclose($myfile);
-echo "<br> boiler status: ".$status."<br>";
+echo "boiler status: ".$status;
         
 }
 else if($str == "recover"){

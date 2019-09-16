@@ -11,10 +11,10 @@ session_start();
 <?php
 if(isset($_COOKIE['Id']))
 {
-         echo "cokie found<br>";
-	     header('Location: unitTest.php'); 
+         echo "cokie found<br>"; 
 		 $_SESSION['Uid']=$_COOKIE['Uid'];
 		 $_SESSION['Id']=$_COOKIE['Id'];
+         header('Location: unitTest.php');
 }
 else
     echo "cokie was not found<br>";
@@ -43,17 +43,11 @@ if(isset($_POST['page']))
         if($resultCheck>0)
        {
          $row=mysqli_fetch_assoc($result);
-
          setcookie('Id',$Id,time()+(60*60*24*7));
 		 setcookie('Uid',$uid,time()+(60*60*24*7));
-         
-         if(isset($_COOKIE['Id']))
-{
-                  echo "cokie was set";
-}
-         header('Location: unitTest.php');
          $_SESSION['Id']=$row['id'];
          $_SESSION['Uid']=$uid;
+        header('Location: unitTest.php');
        }
 }
 ?>

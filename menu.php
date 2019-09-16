@@ -106,7 +106,7 @@ if(isset($_POST['submit']))
 <div class="board"; id="board";">
 <form action="Board.php"  method='post' target="myFrame2">
 <?php
-
+echo date("l");
 for($i=0;$i<7;$i++)
 {
 	?>

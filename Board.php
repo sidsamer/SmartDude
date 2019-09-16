@@ -19,10 +19,7 @@ td{
 <?php
 if(isset($_POST['dayButton']))
 {
-	$date =new DateTime($_POST['dayButton']);
-	date_add($date, date_interval_create_from_date_string('1 days'));
-	$result = $date->format('Y-m-d H:i:s');
-      $sql="select userId,showerTime,day from turnon where userId=".$_SESSION['Uid']." and day ='".$_POST['dayButton']."';";
+      $sql="select userId,showerTime,day from turnon where day ='".$_POST['dayButton']."';";
  $result=mysqli_query($conn,$sql);
         $resultCheck=mysqli_num_rows($result);
         if($resultCheck>0)

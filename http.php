@@ -1,6 +1,8 @@
 <?php
+//this script handle the microconroller http requests.
 include_once 'includes/connection.php';
- $sql='SELECT * FROM tasks ORDER BY id asc LIMIT 1;';
+
+    $sql='SELECT * FROM tasks ORDER BY id asc LIMIT 1;';
     $result=mysqli_query($conn,$sql);
     $resultCheck=mysqli_num_rows($result);
     if($resultCheck>0)

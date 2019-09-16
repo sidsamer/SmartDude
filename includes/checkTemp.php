@@ -1,6 +1,7 @@
 <?php
 //this script handle the microconroller http requests.
 include_once 'connection.php';
+
     $sql='SELECT * FROM measurements;';
     $result=mysqli_query($conn,$sql);
     $resultCheck=mysqli_num_rows($result);
@@ -9,10 +10,8 @@ include_once 'connection.php';
          $i=0;
          while($i<$resultCheck)
          {
-             $row=mysqli_fetch_assoc($result);
+             	    $row=mysqli_fetch_assoc($result);
              echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
-             $temps[$i]['boiler']=$row['boilerTemp'];
-             $temps[$i]['outside']=$row['outsideTemp'];
              $i++;
          }
 	 }
@@ -20,5 +19,3 @@ include_once 'connection.php';
      {
          echo("resultCheck:".$resultCheck);
      }
-
- ?>

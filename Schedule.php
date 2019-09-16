@@ -15,7 +15,12 @@ $futureTime=date('H:i:s',strtotime("".$nowTime." +10800 seconds"));//plus 3 hour
     echo $res."<br>"; //delete
 /////////////////////recalculate shower time////////////////////////
          $reg=new LinearRegression(30,50); 
-         $currTemp=rand(20,30); //need to insert real temps;
+        $currTemp=rand(20,30); //need to insert real temps;
+        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
+        $uid2=fgets($myfile); //dont need.
+        $mail=fgets($myfile); //dont need.
+        $volume=fgets($myfile); //size of boiler.
+        fclose($myfile);
 $sql="SELECT * FROM turnon where day='$day' and showerTime<='$futureTime' and turnOnTime>'$nearFutureTime'";
               echo $sql;
 	          $result=mysqli_query($conn,$sql);
@@ -40,7 +45,7 @@ $sql="SELECT * FROM turnon where day='$day' and showerTime<='$futureTime' and tu
               {
                    $favTemp=40; //avg temp humans like to take a shower. 
               }
-                   $duration=$reg->CalcDuration($currTemp,$favTemp); //need to be upgrated.
+                   $duration=$reg->CalcDuration($currTemp,$favTemp,$volume); //need to be upgrated.
                    $turnOnTime=date('H:i:s',strtotime("".$showerTime." -$duration seconds")); //turn on time calculation
                    $sql="delete from turnon where id='$id'";
                    $result=mysqli_query($conn,$sql);

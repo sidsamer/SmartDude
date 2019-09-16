@@ -21,7 +21,7 @@ if(isset($_POST['dayButton']))
 {
       $day=$_POST['dayButton'];
       $day=strtolower($day); //change day to lower case.
-      $sql="select userId,showerTime,day from turnon where day ='".$day."';";
+      $sql="select userId,showerTime,day,regular from turnon where day ='".$day."';";
  $result=mysqli_query($conn,$sql);
         $resultCheck=mysqli_num_rows($result);
         if($resultCheck>0)
@@ -30,8 +30,13 @@ if(isset($_POST['dayButton']))
 	   {
 		   $day =$row['day'];
            $showerTime=$row['showerTime'];
+           if($row['showerTime']==1)
+               $regular="1";
+           else
+               $regular="";
 		   echo "<tr>";
-		    echo "<td style='color:Chartreuse;'>".$row['userId']."</td><td style='color:Chartreuse;'>".$showerTime."</td><td style='color:Chartreuse;'>".$day."</td>";
+		    echo "<td style='color:Chartreuse;'>".$row['userId']."</td><td style='color:Chartreuse;'>".$showerTime.
+            "</td><td style='color:Chartreuse;'>".$day."</td>"."</td><td style='color:Chartreuse;'>".$regular."</td>";
 		   echo "</tr>";
 	   }
 	   }

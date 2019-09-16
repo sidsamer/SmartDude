@@ -47,8 +47,8 @@ td{
 <button class="RemoveButton" onclick="NoteBody('RemoveForm');">X</button>
 <br><br><br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
-<form action='menu.php' method='post' >
-<input type="text" placeholder="Regular or not" name="regular"required pattern="[^()/><\][\\\x22,'=;|]+"><br>
+<form action='menu.php' method='post'>
+<input type="text" placeholder="Regular or not" name="regular" required pattern="[^()/><\][\\\x22,'=;|]+"><br>
 <input type="datetime-local" name="Deadline" required><br>
 <button type="submit" value="SignUp" name="submit">Create/Update</button>
 </form>
@@ -101,7 +101,7 @@ if(isset($_POST['submit']))
     // else
         // echo "cant make http req";
 	    // header('Location: menu.php'); 
-        echo $userid." ".$day." ".$time." ".$regular" ";
+        echo $userid." ".$day." ".$time." ".$regular." ";
 
 }
 ?>

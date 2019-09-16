@@ -42,6 +42,9 @@ td{
 
 </style>
 <body>
+<form  action="unitTest.php" method="POST">
+<button type="submit" name="exit">Exit</button>
+</form>
 <CENTER>
 <button class="NewButton" onclick="NoteBody('ScheduleForm');">+</button>
 <button class="RemoveButton" onclick="NoteBody('RemoveForm');">X</button>

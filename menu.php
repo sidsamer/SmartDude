@@ -81,10 +81,12 @@ if(isset($_POST['RemoveSubmit']))
 	   }
      
   ?>
+
   </select>
   <br><br>
 <button type="submit" value="Submit" name="RemoveSubmit">Remove</button>
 </form>
+</div>
 <?php
 if(isset($_POST['submit']))
 {
@@ -116,7 +118,7 @@ for($i=0;$i<7;$i++)
 <div class="container">
 <iframe id="myFrame2" src="Board.php" name="myFrame2" height="600px" width="100%" style="border:none;"></iframe>
 </div>
-</div>
+
 
 </CENTER>
 </body>

@@ -43,9 +43,14 @@ if(isset($_POST['page']))
         if($resultCheck>0)
        {
          $row=mysqli_fetch_assoc($result);
-         echo "cokie and session set";
+
          setcookie('Id',$Id,time()+(60*60*24*7));
 		 setcookie('Uid',$uid,time()+(60*60*24*7));
+         
+         if(isset($_COOKIE['Id']))
+{
+                  echo "cokie was set";
+}
          header('Location: unitTest.php');
          $_SESSION['Id']=$row['id'];
          $_SESSION['Uid']=$uid;

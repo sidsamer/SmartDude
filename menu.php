@@ -53,22 +53,13 @@ td{
 <button type="submit" value="SignUp" name="submit">Create/Update</button>
 </form>
 </div>
-<?php
-if(isset($_POST['RemoveSubmit']))
-{
-	$val=$_POST['RemoveTaskList'];
-	$sql="DELETE FROM turnon where id=$val";
-	$res=mysqli_query($conn,$sql);
-			if(!$res)
-				echo("query faild".mysqli_connect_error());
-}
-?>
+
 <div class="RemoveForm"; id="RemoveForm"; style="display:none;">
 <form action="menu.php" method='post'>
   <select name="RemoveTaskList">
   <?php
   
-        $sql="select userId,id,showerTime,day from turnon where id=".$_SESSION['Id'].";";
+        $sql="select userId,id,showerTime,day from turnon where userId=".$_SESSION['Id'].";";
         $result=mysqli_query($conn,$sql);
         $resultCheck=mysqli_num_rows($result);
         if($resultCheck>0)
@@ -102,6 +93,16 @@ if(isset($_POST['submit']))
         echo "cant make http req";
 	    header('Location: menu.php'); 
 
+}
+
+if(isset($_POST['RemoveSubmit']))
+{
+	$val=$_POST['RemoveTaskList'];
+	$sql="DELETE FROM turnon where id=$val";
+	$res=mysqli_query($conn,$sql);
+			if(!$res)
+				echo("query faild".mysqli_connect_error());
+            header('Location: menu.php');
 }
 ?>
 <div class="board"; id="board";">

@@ -31,7 +31,7 @@ if(isset($_POST['dayButton']))
 		   $day =$row['day'];
            $showerTime=$row['showerTime'];
            if($row['showerTime']==1)
-               $regular="1";
+               $regular="regular";
            else
                $regular="";
 		   echo "<tr>";

@@ -94,14 +94,13 @@ if(isset($_POST['submit']))
     $day=date("l", strtotime($_POST['Deadline']));
     $time=date('H:i:s',strtotime($_POST['Deadline']));
     $regular=$_POST['regular'];
-    // $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newSchdule&userId=$userid&day=$day&showerTime=$time&regular=$regular";
-          // $contents = file_get_contents($url);
-         // if($contents !== false)
-        // echo $contents;
-    // else
-        // echo "cant make http req";
-	    // header('Location: menu.php'); 
-        echo $userid." ".$day." ".$time." ".$regular." ";
+    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newSchdule&userId=$userid&day=$day&showerTime=$time&regular=$regular";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo $contents;
+    else
+        echo "cant make http req";
+	    header('Location: menu.php'); 
 
 }
 ?>

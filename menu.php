@@ -68,7 +68,7 @@ if(isset($_POST['RemoveSubmit']))
   <select name="RemoveTaskList">
   <?php
   
-        $sql="select userId,id,showerTime,day from turnon where id=".$_SESSION['Uid'].";";
+        $sql="select userId,id,showerTime,day from turnon where id=".$_SESSION['Id'].";";
         $result=mysqli_query($conn,$sql);
         $resultCheck=mysqli_num_rows($result);
         if($resultCheck>0)
@@ -107,10 +107,12 @@ if(isset($_POST['submit']))
 <form action="Board.php"  method='post' target="myFrame2">
 <?php
 echo date("l");
+echo " Uniqe id:".$_SESSION['Uid'];
+echo " id:".$_SESSION['Id'];
 for($i=0;$i<7;$i++)
 {
 	?>
-<button type="submit" value= "<?php echo date("l"); ?>" name="dayButton"><?php echo date("l", strtotime("+$i days")); ?></button>
+<button type="submit" value= "<?php echo date("l", strtotime("+$i days")); ?>" name="dayButton"><?php echo date("l", strtotime("+$i days")); ?></button>
 <?php
 }
 ?>

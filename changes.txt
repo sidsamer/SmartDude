@@ -1,26 +1,8 @@
 version4:
 -script that take care of the requests from the user interface(Android).
+
 version5:
 -finish the temp script.
 :version6
 -finish android req page.
 -starting learning script.
-version 9:
--training and learning phase.
-version10:
-- turn on schedule is up!
--live status of the boiler.
-version 11:
--automate everything,
-version 12:
--duration calculation.
-version 13
--recover password mode.
--changed the temp reading to be random.
--delete user.
-version 15
--number of users.
-- check user id.
-version 17
--edit android_req
--discription

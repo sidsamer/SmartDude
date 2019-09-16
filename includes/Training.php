@@ -1,7 +1,8 @@
 <?php
-//require_once "weights.txt";
-//require_once "data.txt";
-include_once 'includes/connection.php';
+
+require_once "weights.txt";
+require_once "data.txt";
+include_once "connection.php";
 class LinearRegression{
 	
 	var $w1; //temp diff weight.
@@ -27,16 +28,9 @@ class LinearRegression{
 	{
 		return $this->BoilerTemp;
 	}
-    function CalcDuration($currTemp,$wantedTemp,$volume)
+    function CalcDuration()
     {
-        $HeaterElementRating=2.5; //heater element rating in kW.
-        $Liters=$volume; // amount of liters in the tank.
-        //$pt=(4.2*L*T)/3600  L=size of boiler(150 liter) T=wanted temp minus current temp. 
-        if($currTemp>=$wantedTemp) //if we dont need to turnon the boiler.
-            return 0;
-        $pt=(4.2*$Liters*($wantedTemp-$currTemp))/3600;     //Pt is the power used to heat the water, in kWh ((4.2*L*T)/3600). 
-        $time=($pt/$HeaterElementRating)*60*60; //the heating time in seconds.
-        return $time;
+        return 900;
     }
     function PredictTemp()
     {
@@ -70,16 +64,16 @@ class LinearRegressionInput{
         fclose($myfile);
     }
     function getData(){
-        $host="eu-cdbr-west-02.cleardb.net";
-        $dbuser="b930876c351ee7";
-        $pass="0f8d4cc8";
-        $dbname="heroku_c26d047c909fd55";
-        $conn=mysqli_connect($host,$dbuser,$pass,$dbname);
-        if(mysqli_connect_errno())
-          {
-	         die("Connection Faild!".mysqli_connect_error());
-          }
-         $sql='SELECT * FROM measurements;';
+        $host="localhost";
+$dbuser="root";
+$pass="";
+$dbname="SmartDude";
+$conn=mysqli_connect($host,$dbuser,$pass,$dbname);
+if(mysqli_connect_errno())
+{
+	die("Connection Faild!".mysqli_connect_error());
+}
+       $sql='SELECT * FROM measurements;';
     $result=mysqli_query($conn,$sql);
     $resultCheck=mysqli_num_rows($result);
     if($resultCheck>0)
@@ -88,33 +82,31 @@ class LinearRegressionInput{
          while($i<$resultCheck)
          {
              $row=mysqli_fetch_assoc($result);
-             //echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
+             echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
              $temps[$i]['boiler']=$row['boilerTemp'];
              $temps[$i]['outside']=$row['outsideTemp'];
              $i++;
          }
 	 }
-     $count=count($temps);
-     echo "mesuraments:".$count."<br><br>";
-     $testsize=$count*0.1;
-     $trainsize=$count-$testsize;
-     $count=0;
-     for ($i=0;$i<$trainsize;$i++)
+     else
      {
-         $this->Data[$i]['boiler']=$temps[$i]['boiler']; 
-         $this->Data[$i]['out']=$temps[$i]['outside'];        
+         echo("resultCheck:".$resultCheck);
+     }
+     for ($i=0;$i<720;$i++)
+     {
+         $this->Data[$i]['boiler']=rand(10,40); 
+         $this->Data[$i]['out']=rand(10,40);        
          $this->ExpectedOutputs[$i]= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );  
-         $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );
-         $count++;         
+         $this->Data[$i]['target']= (($this->Data[$i]['boiler']*0.5)+($this->Data[$i]['out']*0.5) );     
      }
-     for ($j=0,$i;$i<$count+$testsize;$j++,$i++)
+     for ($i=0;$i<100;$i++)
      {
-         $this->TestData[$j]['boiler']=$temps[$i]['boiler']; 
-         $this->TestData[$j]['out']=$temps[$i]['outside'];        
-         $this->TestExpectedOutputs[$j]= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );  
-         $this->TestData[$j]['target']= (($this->TestData[$j]['boiler']*0.5)+($this->TestData[$j]['out']*0.5) );     
+         $this->TestData[$i]['boiler']=rand(10,40); 
+         $this->TestData[$i]['out']=rand(10,40);        
+         $this->TestExpectedOutputs[$i]= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );  
+         $this->TestData[$i]['target']= (($this->TestData[$i]['boiler']*0.5)+($this->TestData[$i]['out']*0.5) );     
      }
-    }
+}
     function ToString(){
         echo $this->ErrorThershold. "   ".$this->LearningRate. "   ".$this->NumberOfMaximumIterations;
     }
@@ -160,13 +152,11 @@ class LinearRegressionTrainer extends LinearRegression{
         }
         $counter++;
         }
-        echo "<br><br>#################################test time###############################<br><br>";
         $counter=0;
         foreach ($this->Input->TestData as $val)
         {
         $guess=$this->w1*($val['out']-$val['boiler'])+$val['boiler'];
 		$erorr=$guess-$val['target'];
-        echo "<br>".$counter." boiler: ".$val['boiler']." out: ".$val['out']."=".$val['target']."guess: ",$guess." , error:".$erorr." ,w1:".$this->w1;
         if(abs($erorr)<=$this->Input->ErrorThershold)
          $this->Input->actualSucceseRate++;
         $this->Input->actualAvgDistance+=abs($erorr);
@@ -176,9 +166,9 @@ class LinearRegressionTrainer extends LinearRegression{
         $this->Input->actualAvgDistance/=$counter;
     }
     function Test(){
-        $learningRate=0.1; //high learning rate, beacuse we dont have enough mesuraments. 
+        $learningRate=0.05; //high learning rate, beacuse we dont have enough mesuraments. 
         $tempw=$this->w1;//temp weight, for equle testing for each learning rate.
-        while($learningRate>0.01)
+        while($learningRate>0.001)
           {
            $this->w1=$tempw;
            $this->Input->LearningRate=$learningRate;
@@ -194,12 +184,12 @@ class LinearRegressionTrainer extends LinearRegression{
      echo "new weight found!";
      break;
      }
-$learningRate-=0.001; //slowing down the learning rate to be more acurate.
+$learningRate-=0.001;
     }
     }
     function gradient($trend)
     {
-        $this->w1=($this->w1*(1-$this->Input->LearningRate))+($trend*$this->Input->LearningRate); //new weight equal prev weight.
+        $this->w1=($this->w1*(1-$this->Input->LearningRate))+($trend*$this->Input->LearningRate);
     }
     function ToString(){
         echo $this->w1;

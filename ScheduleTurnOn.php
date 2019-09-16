@@ -1,5 +1,7 @@
 <?php
-//this script checks if theres a turn on that need to be done.
+
+//אם ישנו כיבוי עתידי שהדלקתו כבר עבר לא מכבים לפני.
+//זמן מקלחת שכבר עבר ולא רגולר.
 include_once 'includes/connection.php';
 include_once 'boilerStatus.txt';
 
@@ -20,7 +22,7 @@ $futureTime=date('H:i:s',strtotime("".$nowTime." +300 seconds"));//plus 5 minute
            if( $status=="off" ) //if boiler is off, were looking for a turn on in the (5 minutes radious(+-)).
                {
               $sql="SELECT * FROM turnon where day='$day' and turnOnTime>='$pastTime' and turnOnTime<='$futureTime'";
-              echo $sql;
+              echo "<br>".$sql."<br>";
 	          $result=mysqli_query($conn,$sql);
 	          $resultCheck=mysqli_num_rows($result); 
               if($resultCheck>0)
@@ -32,6 +34,7 @@ $futureTime=date('H:i:s',strtotime("".$nowTime." +300 seconds"));//plus 5 minute
                }
           else   //status on.
                {
+                                 echo "<br>blet2<br>";
               $sql="SELECT * FROM turnon where day='$day' and showerTime>='$pastTime' and showerTime<='$futureTime' order by showerTime asc limit 1"; //check what is the closest turn off.
 	          $result=mysqli_query($conn,$sql);
 	          $resultCheck=mysqli_num_rows($result); 
@@ -50,7 +53,8 @@ $futureTime=date('H:i:s',strtotime("".$nowTime." +300 seconds"));//plus 5 minute
               }
 
        }
-
+       
+                     echo "<br>blet3<br>";
               $sql="SELECT * FROM turnon where day='$day' and showerTime<'$nowTime'"; //find all the old schedules, the ones whose not regular will be deleted.
 	          $result=mysqli_query($conn,$sql);
 	          $resultCheck=mysqli_num_rows($result); 

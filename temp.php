@@ -25,7 +25,7 @@ include_once 'includes/connection.php';
     $sql="select * from measurements order by id asc";  //get number of mesuraments.
     $result=mysqli_query($conn,$sql);
 	$resultCheck=mysqli_num_rows($result); 
-       if($resultCheck>720) //need only last month.
+       if($resultCheck>70) //need only last month.
            {
               $sql="select id from measurements order by id asc limit 1"; //get the oldest mesurament id.
               $result=mysqli_query($conn,$sql);

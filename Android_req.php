@@ -4,6 +4,7 @@ include_once 'includes/connection.php';
 require_once "includes/Training.php";
 //include_once 'boilerStatus.txt';
 //include_once 'boilerData.txt';
+
 $str=htmlspecialchars($_GET["order"]);
 //turn on boiler
      if($str == "on" /*and boiler off*/){ 
@@ -40,8 +41,6 @@ $str=htmlspecialchars($_GET["order"]);
          $uid=htmlspecialchars($_GET["uid"]);
         $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");//check uid valid
         $uid2=fgets($myfile);
-        $mail=fgets($myfile);
-        $vol=fgets($myfile);
         fclose($myfile);
         if((int)$uid == (int)$uid2)
         { 
@@ -57,13 +56,6 @@ $str=htmlspecialchars($_GET["order"]);
 			die("query faild");
         else
         {
-        $myfile = fopen("numOfUsers.txt", "r") or die("Unable to open boiler data file!");
-        $num=fgets($myfile);
-        fclose($myfile);
-        $num=(int)$num+1;
-        $myfile = fopen("numOfUsers.txt", "w") or die("Unable to open boiler data file!");
-        fwrite($myfile,$num.PHP_EOL);
-        fclose($myfile);
         echo ("user create sucssesfuly");
         }
        }
@@ -77,40 +69,21 @@ $str=htmlspecialchars($_GET["order"]);
      else if($str == "newSchdule"){
          //$reg=new LinearRegression(30,50);
          $userId=htmlspecialchars($_GET["userId"]);
-         $day=htmlspecialchars($_GET["day"]); //day in string exe: 'sunday'.
-         $day=strtolower($day); //change day to lower case.
+         $day=htmlspecialchars($_GET["day"]); //day in string exe: 'sunday'
          $showerTime=htmlspecialchars($_GET["showerTime"]);//time in string exe: '6:30 pm'
          $duration=7200; // two hours max.
          $showerTime=date('H:i:s', strtotime($showerTime));
          $turnOnTime=date('H:i:s',strtotime("".$showerTime." -$duration seconds")); //turn on time calculation
-         $regular=htmlspecialchars($_GET["regular"]); //if its a regular shower or a one time of. 
-         $sql="SELECT * FROM turnon where day='$day' and showerTime='$showerTime'";
-	     $result=mysqli_query($conn,$sql);
-	     $resultCheck=mysqli_num_rows($result); 
-         if($resultCheck==0)
-         {
+         $regular=htmlspecialchars($_GET["regular"]); //1 or 0
          $sql = "INSERT INTO turnon(userId,day,turnOnTime,duration,showerTime,regular) VALUES ($userId,'$day','$turnOnTime',$duration,'$showerTime',$regular);";
         $result=mysqli_query($conn,$sql);
 		if(!$result)
 			die("query faild");
         else
             echo ("new Schdule was set!");
-         }
-         else
-             echo "schdule allready set in this hour!";
      }
 // get all the schdule 
 else if($str == "getAllSchdules"){
-	$sql="select id,name from users";
-	     $result=mysqli_query($conn,$sql);
-	     $resultCheck=mysqli_num_rows($result); 
-         if($resultCheck>0)
-       {
-           while($row=mysqli_fetch_assoc($result))
-           {
-              $users[$row['id']]=$row['name'];
-	   }
-       }
          $sql = "select * from turnon;";
 	     $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
@@ -118,7 +91,7 @@ else if($str == "getAllSchdules"){
        {
            while($row=mysqli_fetch_assoc($result))
            {
-               echo "name:".$users[$row['userId']]." id:".$row['id']." userid:".$row['userId']." time:".$row['showerTime']." day:".$row['day']." regular:".$row['regular'].", "; //yet to be done,need to send asociative array.
+               echo $row['userId']." ".$row['showerTime']." "; //yet to be done,need to send asociative array.
            }
        }
 }
@@ -138,14 +111,12 @@ else if($str == "login"){
            echo $row['id']; //yet to be tested,returns id.
            echo " ".$uid;
        }
-       else
-           echo "no";
 }
 else if($str == "status"){
 $myfile = fopen("boilerStatus.txt", "r") or die("Unable to open status file!");
 $status=fgets($myfile);
 fclose($myfile);
-echo "boiler status: ".$status;
+echo "<br> boiler status: ".$status."<br>";
         
 }
 else if($str == "recover"){
@@ -167,9 +138,6 @@ else if($str == "recover"){
        }
        else
            echo "cant find user or phone";
-        }
-       else
-        echo "cant find uid, cant read boiler data!";           
 }
 else if($str == "delete"){
         $id=htmlspecialchars($_GET["id"]);
@@ -201,7 +169,6 @@ else if($str == "boiler_data"){
             echo "cant find uid, cant create/update boiler data!";
         }
 }
-//checks uniqe-id amd then returns volume and mail.
 else if($str == "get_boiler_data"){
         $uid=htmlspecialchars($_GET["uid"]); //every system will have its own uid.
         $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
@@ -216,47 +183,7 @@ else if($str == "get_boiler_data"){
         }
         else{
             echo "cant find uid, cant read boiler data!";
-        }
-}
-//delete certine turn on from schdule.
-else if($str == "delete_schdule"){
-        $id=htmlspecialchars($_GET["id"]);
-        $sql="delete from turnon where id=$id";
-        $result=mysqli_query($conn,$sql);
-                   	if(!$result)
-			         die("delete query faild");
-                   else
-                     echo ("Schdule is deleted!");  
-}
-// returns number of users in the system
-else if($str == "num_users"){
-        $uid=htmlspecialchars($_GET["id"]); //every system will have its own uid.
-        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
-        $uid2=fgets($myfile);
-        fclose($myfile);
-        $myfile = fopen("numOfUsers.txt", "r") or die("Unable to open boiler data file!");
-        $num=fgets($myfile);
-        fclose($myfile);
-        if((int)$uid == (int)$uid2)
-        {
-        echo $num;
-        }
-        else{
-            echo "cant find uid, cant get number of users!<br>";
-        }
-}
-//checks if uniqid is valid.
-else if($str == "check_uid"){
-        $uid=htmlspecialchars($_GET["id"]); //every system will have its own uid.
-        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
-        $uid2=fgets($myfile);
-        fclose($myfile);
-        if((int)$uid == (int)$uid2)
-        {
-        echo "yes";
-        }
-        else{
-            echo "cant find uid";
+                            echo "1:".$uid." 2:".$uid2;
         }
 }
 ?>

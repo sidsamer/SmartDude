@@ -63,9 +63,9 @@ session_start();
 </div>
 <div class="UpdateForm"; id="UpdateForm"; style="display:none;">
 <form action="menu.php" method='post'>
-  <input type="text" name="Volume" value="">
-  <input type="email" name="Email">
-<button type="submit" value="Submit" name="UpdateSubmit">Update</button>
+  <input type="text" name="Volume" placeholder="Volume"><br>
+  <input type="email" name="Email" placeholder="Email"><br>
+<button type="submit" value="Submit" name="UpdateSubmit">Update Boiler</button>
 </form>
 </div>
 <br><br>
@@ -100,7 +100,7 @@ else if(isset($_POST['UpdateSubmit']))
 	$vol=$_POST['Volume'];
     $email=$_POST['Email'];
     $uid=$_SESSION['Uid'];
-        $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newSchdule&uid=$uid&volume=$vol&mail=$email";
+        $url="http://smart-dude.herokuapp.com/Android_req.php/?order=boiler_data&uid=$uid&volume=$vol&mail=$email";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;

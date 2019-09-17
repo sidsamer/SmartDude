@@ -10,12 +10,12 @@ session_start();
 .NewButton{
 	background-color:#0080ff;
 	position: absolute; 
-right:0;
+right:20;
 }
 .RemoveButton{
 	background-color:#0080ff;
 	position: absolute; 
-left:0;
+left:20;
 }
 .container {
  height:100%;
@@ -23,14 +23,6 @@ left:0;
  max-width: 500px;
  }
 
-.board button{
-	background-color:#262626  	;
-	 border-radius: 0px;
- border: 1px solid DarkSlateGray;
- padding: 10px 1px;
- font-size:11px;
-float: left;
-}
 table{
 background-color:black;
 }
@@ -46,12 +38,14 @@ td{
 <button type="submit" name="exit">Exit</button>
 </form>
 <CENTER>
-<button class="NewButton" onclick="NoteBody('ScheduleForm');">+</button>
-<button class="RemoveButton" onclick="NoteBody('RemoveForm');">X</button>
+<button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button>
+<button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button>
 <br><br><br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
 <form action='menu.php' method='post'>
-<input type="text" placeholder="Regular or not" name="regular" required pattern="[^()/><\][\\\x22,'=;|]+"><br>
+<select name="regular"><br>
+'<option value='0'>Not Regular</option>
+'<option value='1'>Regular</option>
 <input type="datetime-local" name="Deadline" required><br>
 <button type="submit" value="SignUp" name="submit">Create/Update</button>
 </form>

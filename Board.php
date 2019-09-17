@@ -30,7 +30,7 @@ if(isset($_POST['dayButton']))
 	   {
 		   $day =$row['day'];
            $showerTime=$row['showerTime'];
-           if($row['showerTime']==1)
+           if($row['showerTime']==1 || $row['showerTime']=='1')
                $regular="regular";
            else
                $regular="";

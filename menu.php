@@ -7,25 +7,40 @@ session_start();
 <script src="javascript.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+.NewButton{
+	background-color:#0080ff;
+	position: absolute; 
+right:20;
+}
+.RemoveButton{
+	background-color:#0080ff;
+	position: absolute; 
+left:20;
+}
 .container {
  height:100%;
  width:100%;
  max-width: 500px;
  }
 
+table{
+background-color:black;
+}
+td{
+    border-bottom: 2px solid white;
+	padding-up: 5px;
+	padding-right: 10px;
+}
 
 </style>
-<body style="background-color:powderblue;">
-<form  action="menu.php" method="POST">
+<body>
+<form  action="unitTest.php" method="POST">
 <button type="submit" name="exit">Exit</button>
-<button type="submit" name="deleteUser">DeleteUser</button>
 </form>
 <CENTER>
-<table>
-<td style='padding:30px;'><button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button></td>
-<td style='padding:30px;'><button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button></td>
-</table>
-<br>
+<button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button>
+<button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button>
+<br><br><br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
 <form action='menu.php' method='post'>
 <select name="regular"><br>
@@ -60,7 +75,6 @@ session_start();
 <button type="submit" value="Submit" name="RemoveSubmit">Remove</button>
 </form>
 </div>
-<br><br>
 <?php
 if(isset($_POST['submit']))
 {
@@ -78,7 +92,7 @@ if(isset($_POST['submit']))
 
 }
 
-else if(isset($_POST['RemoveSubmit']))
+if(isset($_POST['RemoveSubmit']))
 {
 	$val=$_POST['RemoveTaskList'];
 	$sql="DELETE FROM turnon where id=$val";
@@ -87,34 +101,17 @@ else if(isset($_POST['RemoveSubmit']))
 				echo("query faild".mysqli_connect_error());
             header('Location: menu.php');
 }
-else if(isset($_POST['exit'])) 
-{
-    setcookie('Id',$Id,time()-10);
-	header('Location: index.php');
-}
-else if(isset($_POST['deleteUser'])) 
-{
-    $userid=$_SESSION['Id'];
-         setcookie('Id',$Id,time()-10);  
-		 $sql = "delete from users where id='$userid';";
-        $result=mysqli_query($conn,$sql);
-		if(!$result)
-			die("query faild");
-	header('Location: index.php');
-}
 ?>
-<div class="board"; id="board;">
+<div class="board"; id="board";">
 <form action="Board.php"  method='post' target="myFrame2">
-<select type="submit" name="dayButton">
 <?php
 for($i=0;$i<7;$i++)
 {
-    echo "<option value=".date("l", strtotime("+$i days")).";>".date("l", strtotime("+$i days"))."</option>";
+	?>
+<button type="submit" value= "<?php echo date("l", strtotime("+$i days")); ?>" name="dayButton"><?php echo date("l", strtotime("+$i days")); ?></button>
+<?php
 }
 ?>
-  </select>
-  <br><br>
-  <button type="submit" value="Submit" name="Day">Day</button>
 </form>
 <div class="container">
 <iframe id="myFrame2" src="Board.php" name="myFrame2" height="600px" width="100%" style="border:none;"></iframe>

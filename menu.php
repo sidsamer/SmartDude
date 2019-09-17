@@ -15,7 +15,7 @@ session_start();
 
 
 </style>
-<body style="background-color:powderblue;">
+<body style="background-color:blue;">
 <form  action="menu.php" method="POST">
 <button type="submit" name="exit">Exit</button>
 <button type="submit" name="deleteUser">DeleteUser</button>
@@ -150,6 +150,17 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
            echo "<tr><th>User</th><th>time</th><th>day</th><th>regular</th></tr>";
 	     while($row=mysqli_fetch_assoc($result))
 	   {
+         $userId=$row['userId'];
+         $sql="select name from users where id=$userId";
+	     $result=mysqli_query($conn,$sql);
+	     $resultCheck=mysqli_num_rows($result); 
+         if($resultCheck>0)
+       {
+           $row=mysqli_fetch_assoc($result)
+           $name=$row['name'];
+	   }
+       else
+           $name="unknown";
 		   $day =$row['dayButton'];
            $showerTime=$row['showerTime'];
            if((int)$row['regular']==1)
@@ -157,7 +168,7 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
            else
                $regular="";
 		   echo "<tr>";
-		    echo "<td style='color:Chartreuse;'>".$row['userId']."</td><td style='color:Chartreuse;'>".$showerTime.
+		    echo "<td style='color:Chartreuse;'>".$name."</td><td style='color:Chartreuse;'>".$showerTime.
             "</td><td style='color:Chartreuse;'>".$day."</td>"."</td><td style='color:Chartreuse;'>".$regular."</td>";
 		   echo "</tr>";
 	   }

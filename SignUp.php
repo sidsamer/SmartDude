@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<body>
+<body style="background-color:powderblue;">
 <?php
 include_once 'includes/connection.php';
 ?>

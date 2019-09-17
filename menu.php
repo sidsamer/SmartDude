@@ -96,7 +96,6 @@ else if(isset($_POST['deleteUser']))
 {
     $userid=$_SESSION['Id'];
          setcookie('Id',$Id,time()-10);  
-         if($str == "on" /*and boiler off*/){ 
 		 $sql = "delete from users where id='$userid';";
         $result=mysqli_query($conn,$sql);
 		if(!$result)

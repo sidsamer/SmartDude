@@ -156,7 +156,7 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
 	     $resultCheck=mysqli_num_rows($result); 
          if($resultCheck>0)
        {
-           $row=mysqli_fetch_assoc($result)
+           $row=mysqli_fetch_assoc($result);
            $name=$row['name'];
 	   }
        else

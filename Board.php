@@ -29,8 +29,8 @@ if(isset($_POST['dayButton']))
 	     while($row=mysqli_fetch_assoc($result))
 	   {
 		   $day =$row['day'];
-           $showerTime=$row['regular'];
-           if((int)$row['showerTime']==1)
+           $showerTime=$row['showerTime'];
+           if((int)$row['regular']==1)
                $regular="regular";
            else
                $regular="";

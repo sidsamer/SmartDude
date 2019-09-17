@@ -37,8 +37,8 @@ td{
 </form>
 <CENTER>
 <table>
-<td><button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button></td>
-<td><button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button></td>
+<td style='padding:15px;'><button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button></td>
+<td style='padding:15px;'><button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button></td>
 </table>
 <br><br><br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">

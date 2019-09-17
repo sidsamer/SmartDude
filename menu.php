@@ -21,14 +21,6 @@ session_start();
  max-width: 500px;
  }
 
-table{
-background-color:black;
-}
-td{
-    border-bottom: 2px solid white;
-	padding-up: 5px;
-	padding-right: 10px;
-}
 
 </style>
 <body>

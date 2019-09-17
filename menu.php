@@ -93,6 +93,11 @@ if(isset($_POST['RemoveSubmit']))
 				echo("query faild".mysqli_connect_error());
             header('Location: menu.php');
 }
+if(isset($_POST['exit'])) 
+{
+    setcookie('Id',$Id,time()-10);
+	header('Location: index.php');
+}
 ?>
 <div class="board"; id="board";">
 <form action="Board.php"  method='post' target="myFrame2">

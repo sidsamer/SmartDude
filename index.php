@@ -3,7 +3,7 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body style="background-color:powderblue;">
+<body style="background-color:blue;">
 <?php
 include_once 'includes/connection.php';
 session_start();

@@ -147,7 +147,7 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
         if($resultCheck>0)
        {
            echo "<table bgcolor='blue'>";
-           echo "<tr><th>User</th><th>time</th><th>day</th><th>regular</th></tr>";
+           echo "<tr><th>User</th><th>time</th><th>regular</th></tr>";
 	     while($row=mysqli_fetch_assoc($result))
 	   {
           $name="unknown";
@@ -168,7 +168,7 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
                $regular="";
 		   echo "<tr>";
 		    echo "<td style='color:Chartreuse;'>".$name."</td><td style='color:Chartreuse;'>".$showerTime.
-            "</td><td style='color:Chartreuse;'>".$day."</td>"."</td><td style='color:Chartreuse;'>".$regular."</td>";
+            "</td>"."</td><td style='color:Chartreuse;'>".$regular."</td>";
 		   echo "</tr>";
 	   }
        echo "</table>";

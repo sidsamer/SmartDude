@@ -29,11 +29,11 @@ if(isset($_POST['dayButton']))
 	     while($row=mysqli_fetch_assoc($result))
 	   {
 		   $day =$row['day'];
-           $showerTime=$row['showerTime'];
+           $showerTime=$row['regular'];
            if((int)$row['showerTime']==1)
                $regular="regular";
            else
-               $regular=$row['showerTime']+"no";
+               $regular="";
 		   echo "<tr>";
 		    echo "<td style='color:Chartreuse;'>".$row['userId']."</td><td style='color:Chartreuse;'>".$showerTime.
             "</td><td style='color:Chartreuse;'>".$day."</td>"."</td><td style='color:Chartreuse;'>".$regular."</td>";

@@ -10,12 +10,10 @@ session_start();
 .NewButton{
 	background-color:#0080ff;
 	position: absolute; 
-right:0;
 }
 .RemoveButton{
 	background-color:#0080ff;
 	position: absolute; 
-left:0;
 }
 .container {
  height:100%;
@@ -34,12 +32,14 @@ td{
 
 </style>
 <body>
-<form  action="unitTest.php" method="POST">
+<form  action="menu.php" method="POST">
 <button type="submit" name="exit">Exit</button>
 </form>
 <CENTER>
-<button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button>
-<button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button>
+<table>
+<td><button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button></td>
+<td><button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button></td>
+</table>
 <br><br><br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
 <form action='menu.php' method='post'>

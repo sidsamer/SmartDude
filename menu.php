@@ -7,14 +7,6 @@ session_start();
 <script src="javascript.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-.NewButton{
-	background-color:#0080ff;
-	position: absolute; 
-}
-.RemoveButton{
-	background-color:#0080ff;
-	position: absolute; 
-}
 .container {
  height:100%;
  width:100%;

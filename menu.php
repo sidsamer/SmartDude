@@ -108,7 +108,7 @@ else if(isset($_POST['deleteUser']))
 <?php
 for($i=0;$i<7;$i++)
 {
-    echo "<option value=".date("l", strtotime("+$i days")).";>".date("l", strtotime("+$i days"))."</option>";
+    echo "<option value=".date("l", strtotime("+$i days")).">".date("l", strtotime("+$i days"))."</option>";
 }
 ?>
   </select>
@@ -116,7 +116,7 @@ for($i=0;$i<7;$i++)
   <button type="submit" value="Submit" name="Day">Day</button>
 </form>
 <?php
-if(isset($_POST['Day']))
+if(isset($_POST['Day']) || isset($_POST['dayButton']))
 {
       $day=$_POST['dayButton'];
       $day=strtolower($day); //change day to lower case.

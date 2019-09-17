@@ -103,7 +103,7 @@ else if(isset($_POST['deleteUser']))
 	header('Location: index.php');
 }
 ?>
-<form action="Board.php"  method='post' >
+<form action="menu.php"  method='post' >
 <select type="submit" name="dayButton">
 <?php
 for($i=0;$i<7;$i++)

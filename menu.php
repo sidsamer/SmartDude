@@ -24,6 +24,7 @@ session_start();
 <table>
 <td style='padding:30px;'><button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button></td>
 <td style='padding:30px;'><button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button></td>
+<td style='padding:30px;'><button class="UpdateButton" onclick="NoteBody('UpdateForm');">Update</button></td>
 </table>
 <br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
@@ -60,6 +61,13 @@ session_start();
 <button type="submit" value="Submit" name="RemoveSubmit">Remove</button>
 </form>
 </div>
+<div class="UpdateForm"; id="UpdateForm"; style="display:none;">
+<form action="menu.php" method='post'>
+  <input type="text" name="Volume" value="">
+  <input type="email" name="Email">
+<button type="submit" value="Submit" name="UpdateSubmit">Update</button>
+</form>
+</div>
 <br><br>
 <?php
 if(isset($_POST['submit']))
@@ -85,6 +93,19 @@ else if(isset($_POST['RemoveSubmit']))
 	$res=mysqli_query($conn,$sql);
 			if(!$res)
 				echo("query faild".mysqli_connect_error());
+            header('Location: menu.php');
+}
+else if(isset($_POST['UpdateSubmit']))
+{
+	$vol=$_POST['Volume'];
+    $email=$_POST['Email'];
+    $uid=$_SESSION['Uid'];
+        $url="http://smart-dude.herokuapp.com/Android_req.php/?order=newSchdule&uid=$uid&volume=$vol&mail=$email";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo $contents;
+    else
+        echo "cant make http req";
             header('Location: menu.php');
 }
 else if(isset($_POST['exit'])) 
@@ -120,7 +141,6 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
 {
       $day=$_POST['dayButton'];
       $day=strtolower($day); //change day to lower case.
-      echo $day;
       $sql="select userId,showerTime,day,regular from turnon where day ='".$day."';";
  $result=mysqli_query($conn,$sql);
         $resultCheck=mysqli_num_rows($result);

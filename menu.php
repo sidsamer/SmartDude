@@ -10,12 +10,12 @@ session_start();
 .NewButton{
 	background-color:#0080ff;
 	position: absolute; 
-right:20;
+right:0;
 }
 .RemoveButton{
 	background-color:#0080ff;
 	position: absolute; 
-left:20;
+left:0;
 }
 .container {
  height:100%;

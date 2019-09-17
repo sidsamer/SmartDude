@@ -30,10 +30,10 @@ if(isset($_POST['dayButton']))
 	   {
 		   $day =$row['day'];
            $showerTime=$row['showerTime'];
-           if($row['showerTime']==1 || $row['showerTime']=='1')
+           if((int)$row['showerTime']==1)
                $regular="regular";
            else
-               $regular="";
+               $regular=$row['showerTime']+"no";
 		   echo "<tr>";
 		    echo "<td style='color:Chartreuse;'>".$row['userId']."</td><td style='color:Chartreuse;'>".$showerTime.
             "</td><td style='color:Chartreuse;'>".$day."</td>"."</td><td style='color:Chartreuse;'>".$regular."</td>";

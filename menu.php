@@ -111,7 +111,7 @@ else if(isset($_POST['deleteUser']))
 for($i=0;$i<7;$i++)
 {
 	?>
-<option value=<?php echo date("l", strtotime("+$i days")); ?></option>
+<option value=<?php echo date("l", strtotime("+$i days")); ?><?php echo date("l", strtotime("+$i days")); ?></option>
 <?php
 }
 ?>

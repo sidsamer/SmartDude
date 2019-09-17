@@ -120,6 +120,7 @@ if(isset($_POST['Day']))
 {
       $day=$_POST['dayButton'];
       $day=strtolower($day); //change day to lower case.
+      echo $day;
       $sql="select userId,showerTime,day,regular from turnon where day ='".$day."';";
  $result=mysqli_query($conn,$sql);
         $resultCheck=mysqli_num_rows($result);

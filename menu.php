@@ -151,14 +151,14 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
 	     while($row=mysqli_fetch_assoc($result))
 	   {
           $name="unknown";
-          $userId=$row['userId'];
-          $sql="select name from users where id=$userId";
-	      $result=mysqli_query($conn,$sql);
-	      $resultCheck=mysqli_num_rows($result); 
-          if($resultCheck>0)
+          $user=$row['userId'];
+          $sql2="select name from users where id=$$user";
+	      $result2=mysqli_query($conn,$sql2);
+	      $resultCheck2=mysqli_num_rows($result2); 
+          if($resultCheck2>0)
         {
-           $row=mysqli_fetch_assoc($result);
-           $name=$row['name'];
+           $row2=mysqli_fetch_assoc($result2);
+           $name=$row2['name'];
 	    }
 		   $day=$row['dayButton'];
            $showerTime=$row['showerTime'];

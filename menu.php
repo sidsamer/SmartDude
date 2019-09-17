@@ -105,6 +105,7 @@ else if(isset($_POST['deleteUser']))
 ?>
 <div class="board"; id="board";">
 <form action="Board.php"  method='post' target="myFrame2">
+<button type="submit" value="Submit" name="ok">Submit</button>
 <select type="submit" name="dayButton">
 <?php
 for($i=0;$i<7;$i++)

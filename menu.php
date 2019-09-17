@@ -152,7 +152,7 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
 	   {
           $name="unknown";
           $user=$row['userId'];
-          $sql2="select name from users where id=$$user";
+          $sql2="select name from users where id=$user";
 	      $result2=mysqli_query($conn,$sql2);
 	      $resultCheck2=mysqli_num_rows($result2); 
           if($resultCheck2>0)

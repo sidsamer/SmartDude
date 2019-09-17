@@ -126,6 +126,7 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
         $resultCheck=mysqli_num_rows($result);
         if($resultCheck>0)
        {
+           echo "<table>";
 	     while($row=mysqli_fetch_assoc($result))
 	   {
 		   $day =$row['dayButton'];
@@ -139,6 +140,7 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
             "</td><td style='color:Chartreuse;'>".$day."</td>"."</td><td style='color:Chartreuse;'>".$regular."</td>";
 		   echo "</tr>";
 	   }
+       echo "/<table>";
 	   }
 }
 ?>

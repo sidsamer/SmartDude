@@ -103,8 +103,7 @@ else if(isset($_POST['deleteUser']))
 	header('Location: index.php');
 }
 ?>
-<div class="board"; id="board";">
-<form action="Board.php"  method='post' target="myFrame2">
+<form action="Board.php"  method='post' >
 <select type="submit" name="dayButton">
 <?php
 for($i=0;$i<7;$i++)
@@ -116,9 +115,32 @@ for($i=0;$i<7;$i++)
   <br><br>
   <button type="submit" value="Submit" name="Day">Day</button>
 </form>
-<div class="container">
-<iframe id="myFrame2" src="Board.php" name="myFrame2" height="600px" width="100%" style="border:none;"></iframe>
-</div>
+<?php
+if(isset($_POST['Day']))
+{
+      $day=$_POST['dayButton'];
+      $day=strtolower($day); //change day to lower case.
+      $sql="select userId,showerTime,day,regular from turnon where day ='".$day."';";
+ $result=mysqli_query($conn,$sql);
+        $resultCheck=mysqli_num_rows($result);
+        if($resultCheck>0)
+       {
+	     while($row=mysqli_fetch_assoc($result))
+	   {
+		   $day =$row['dayButton'];
+           $showerTime=$row['showerTime'];
+           if((int)$row['regular']==1)
+               $regular="regular";
+           else
+               $regular="";
+		   echo "<tr>";
+		    echo "<td style='color:Chartreuse;'>".$row['userId']."</td><td style='color:Chartreuse;'>".$showerTime.
+            "</td><td style='color:Chartreuse;'>".$day."</td>"."</td><td style='color:Chartreuse;'>".$regular."</td>";
+		   echo "</tr>";
+	   }
+	   }
+}
+?>
 
 
 </CENTER>

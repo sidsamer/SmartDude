@@ -150,20 +150,16 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
            echo "<tr><th>User</th><th>time</th><th>day</th><th>regular</th></tr>";
 	     while($row=mysqli_fetch_assoc($result))
 	   {
-         // $userId=$row['userId'];
-         // $sql="select name from users where id=$userId";
-	     // $result=mysqli_query($conn,$sql);
-	     // $resultCheck=mysqli_num_rows($result); 
-         // if($resultCheck>0)
-       // {
-           // $row=mysqli_fetch_assoc($result);
-           // $name=$row['name'];
-	   // }
-       // else
-       // {
-           // $name="unknown";
-       // }
-           $name="unknown";
+          $name="unknown";
+          $userId=$row['userId'];
+          $sql="select name from users where id=$userId";
+	      $result=mysqli_query($conn,$sql);
+	      $resultCheck=mysqli_num_rows($result); 
+          if($resultCheck>0)
+        {
+           $row=mysqli_fetch_assoc($result);
+           $name=$row['name'];
+	    }
 		   $day=$row['dayButton'];
            $showerTime=$row['showerTime'];
            if((int)$row['regular']==1)

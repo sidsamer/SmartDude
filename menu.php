@@ -160,8 +160,10 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
            $name=$row['name'];
 	   }
        else
+       {
            $name="unknown";
-		   $day =$row['dayButton'];
+       }
+		   $day=$row['dayButton'];
            $showerTime=$row['showerTime'];
            if((int)$row['regular']==1)
                $regular="regular";

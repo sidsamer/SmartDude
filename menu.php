@@ -105,14 +105,11 @@ else if(isset($_POST['deleteUser']))
 ?>
 <div class="board"; id="board";">
 <form action="Board.php"  method='post' target="myFrame2">
-
 <select type="submit" name="dayButton">
 <?php
 for($i=0;$i<7;$i++)
 {
-	?>
-<option value=<?php echo date("l", strtotime("+$i days")); ?><?php echo date("l", strtotime("+$i days")); ?></option>
-<?php
+    echo "<option value=".date("l", strtotime("+$i days")).";>".date("l", strtotime("+$i days"))."</option>";
 }
 ?>
 </form>

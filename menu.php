@@ -15,16 +15,17 @@ session_start();
 
 
 </style>
-<body>
+<body style="background-color:powderblue;">
 <form  action="menu.php" method="POST">
 <button type="submit" name="exit">Exit</button>
+<button type="submit" name="deleteUser">DeleteUser</button>
 </form>
 <CENTER>
 <table>
 <td style='padding:30px;'><button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button></td>
 <td style='padding:30px;'><button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button></td>
 </table>
-<br><br><br>
+<br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
 <form action='menu.php' method='post'>
 <select name="regular"><br>
@@ -59,6 +60,7 @@ session_start();
 <button type="submit" value="Submit" name="RemoveSubmit">Remove</button>
 </form>
 </div>
+<br><br>
 <?php
 if(isset($_POST['submit']))
 {
@@ -76,7 +78,7 @@ if(isset($_POST['submit']))
 
 }
 
-if(isset($_POST['RemoveSubmit']))
+else if(isset($_POST['RemoveSubmit']))
 {
 	$val=$_POST['RemoveTaskList'];
 	$sql="DELETE FROM turnon where id=$val";
@@ -85,9 +87,20 @@ if(isset($_POST['RemoveSubmit']))
 				echo("query faild".mysqli_connect_error());
             header('Location: menu.php');
 }
-if(isset($_POST['exit'])) 
+else if(isset($_POST['exit'])) 
 {
     setcookie('Id',$Id,time()-10);
+	header('Location: index.php');
+}
+else if(isset($_POST['deleteUser'])) 
+{
+    $userid=$_SESSION['Id'];
+         setcookie('Id',$Id,time()-10);  
+         if($str == "on" /*and boiler off*/){ 
+		 $sql = "delete from users where id='$userid';";
+        $result=mysqli_query($conn,$sql);
+		if(!$result)
+			die("query faild");
 	header('Location: index.php');
 }
 ?>

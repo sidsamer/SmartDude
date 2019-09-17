@@ -106,13 +106,13 @@ else if(isset($_POST['deleteUser']))
 <div class="board"; id="board;">
 <form action="Board.php"  method='post' target="myFrame2">
 <select name="dayButton">
-<button type="submit" value="Submit" name="Day">Day</button>
 <?php
 for($i=0;$i<7;$i++)
 {
     echo "<option value=".date("l", strtotime("+$i days")).";>".date("l", strtotime("+$i days"))."</option>";
 }
 ?>
+<button type="submit" value="Submit" name="Day">Day</button>
 </form>
 <div class="container">
 <iframe id="myFrame2" src="Board.php" name="myFrame2" height="600px" width="100%" style="border:none;"></iframe>

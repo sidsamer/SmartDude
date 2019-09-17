@@ -17,7 +17,7 @@ td{
 <div class="tasks"; id="boards"; style="display:block; background-color:black;">
 <table>
 <?php
-if(isset($_POST['dayButton']))
+if(isset($_POST['Day']))
 {
       $day=$_POST['dayButton'];
       $day=strtolower($day); //change day to lower case.

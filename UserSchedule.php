@@ -12,12 +12,17 @@ session_start();
  width:100%;
  max-width: 500px;
  }
-
-
+ button{
+ background-color:transparent;
+ color:LightGray;
+ border:none;
+ font-size:15px;
+ padding: 10px 15px;
+ }
 </style>
 <body style="background-color:blue;">
 <form  action="UserSchedule.php" method="POST">
-<button type="submit" name="exit">Exit</button>
+<button type="submit" name="back">Back</button>
 <button type="submit" name="deleteUser">DeleteUser</button>
 </form>
 <CENTER>
@@ -83,7 +88,7 @@ if(isset($_POST['submit']))
         echo $contents;
     else
         echo "cant make http req";
-	    header('Location: menu.php'); 
+       header('Location: UserSchedule.php'); 
 
 }
 
@@ -94,7 +99,7 @@ else if(isset($_POST['RemoveSubmit']))
 	$res=mysqli_query($conn,$sql);
 			if(!$res)
 				echo("query faild".mysqli_connect_error());
-            header('Location: menu.php');
+        header('Location: UserSchedule.php'); 
 }
 else if(isset($_POST['UpdateSubmit']))
 {
@@ -107,12 +112,11 @@ else if(isset($_POST['UpdateSubmit']))
         echo $contents;
     else
         echo "cant make http req";
-            header('Location: menu.php');
+        header('Location: UserSchedule.php'); 
 }
-else if(isset($_POST['exit'])) 
+else if(isset($_POST['back'])) 
 {
-    setcookie('Id',$Id,time()-10);
-	header('Location: index.php');
+	header('Location: menu.php');
 }
 else if(isset($_POST['deleteUser'])) 
 {

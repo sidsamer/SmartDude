@@ -21,9 +21,9 @@ session_start();
 </form>
 <CENTER>
 <form  action="menu.php" method="POST">
-<button type="submit" name="Schedule">Schedule</button>
-<button type="submit" name="Settings">Settings</button>
-<button type="submit" name="About">About</button>
+<button type="submit" name="Schedule">Schedule</button><br>
+<button type="submit" name="Settings">Settings</button><br>
+<button type="submit" name="About">About</button><br>
 </form>
 <?php
 if(isset($_POST['Schedule']))
@@ -33,8 +33,7 @@ if(isset($_POST['Schedule']))
 
 else if(isset($_POST['Settings']))
 {
-   //header('Location: Settings.php');
-   echo "settings";
+   header('Location: Settings.php');
 }
 else if(isset($_POST['About']))
 {

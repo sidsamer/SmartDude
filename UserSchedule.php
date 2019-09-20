@@ -31,13 +31,13 @@ session_start();
 </table>
 <br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
-<form action='UserSchedule' method='post'>
+<form action='UserSchedule.php' method='post'>
 <input type="datetime-local" name="Deadline" required><br>
 <select name="regular">
 <option value='0'>Not Regular</option>
 <option value='1'>Regular</option>
 </select><br>
-<button type="submit" value="SignUp" name="CreateSubmit">Create/Update</button>
+<button type="submit" value="SignUp" name="CreateSubmit">submit</button>
 </form>
 </div>
 

@@ -21,7 +21,7 @@ session_start();
 </form>
 <CENTER>
 <br><br><br>
-<form  action="menu.php" method="POST">
+<form  action="Settings.php" method="POST">
 <input type="text" name="Volume" placeholder="Volume"><br>
 <input type="email" name="Email" placeholder="Email"><br>
 <button type="submit" name="define">Define System</button><br><br>

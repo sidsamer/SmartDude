@@ -27,6 +27,7 @@ session_start();
           $contents = file_get_contents($url);
     if($contents !== false)
     {
+        echo "val:".$contents."<br>";
         if($contents=="off")
            echo '<button style="background-color:red;" type="submit" value="on" name="Status">off</button><br><br>'; //to turn on
        else
@@ -60,6 +61,7 @@ else if(isset($_POST['exit']))
 }
 else if(isset($_POST['Status'])) 
 {
+    echo "status:".$_POST['Status']."<br>";
    if($_POST['Status']=="off" || $_POST['Status']=="undefined")
          $sql = "INSERT INTO tasks(task) VALUES ('off');";
      else

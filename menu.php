@@ -28,7 +28,7 @@ session_start();
     if($contents !== false)
     {
         echo "val:".$contents."<br>";
-        if(strval($contents)==strval("off"))
+        if((string)$contents==(string)"off")
            echo '<button style="background-color:red;" type="submit" value="on" name="Status">off</button><br><br>'; //to turn on
        else
            echo '<button style="background-color:green;" type="submit" value="off" name="Status">on</button><br><br>'; //to turn off

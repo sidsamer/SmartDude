@@ -29,10 +29,12 @@ session_start();
 <br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
 <form action='menu.php' method='post'>
-<select name="regular"><br>
-'<option value='0'>Not Regular</option>
-'<option value='1'>Regular</option>
 <input type="datetime-local" name="Deadline" required><br>
+<select name="regular">
+<option value='0'>Not Regular</option>
+<option value='1'>Regular</option>
+</select>
+<br>
 <button type="submit" value="SignUp" name="submit">Create/Update</button>
 </form>
 </div>

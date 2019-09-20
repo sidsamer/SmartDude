@@ -50,6 +50,8 @@ require_once "includes/Training.php";
 <button type="submit" value="boiler_data" name="boiler_data">Boiler Data</button><br><br>
 <input type="text" placeholder="UID" name="UIDusers"><br>
 <button type="submit" value="NumOfUsers" name="NumOfUsers">Number of users</button><br><br>
+<input type="text" placeholder="Day" name="Day_sch"><br>
+<button type="submit" value="Day_Schedule" name="Day_Schedule">Day Schedule</button><br><br>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -203,6 +205,16 @@ else if(isset($_POST['NumOfUsers']))
 {
     $id=$_POST['UIDusers'];
     $url="http://smart-dude.herokuapp.com/Android_req.php/?order=num_users&id=$id";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo $contents;
+    else
+        echo "cant make http req";
+}
+else if(isset($_POST['Day_Schedule'])) 
+{
+    $day=$_POST['Day_sch'];
+    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=day_Schedule&day=$day";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo $contents;

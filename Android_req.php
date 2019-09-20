@@ -123,7 +123,7 @@ else if($str == "getAllSchdules"){
        }
 }
 //get schdules of single day
-else if($str == "day_Schdule"){
+else if($str == "day_Schedule"){
     $day=htmlspecialchars($_GET["day"]);
     $day=strtolower($day); //change day to lower case.
 	$sql="select id,name from users";

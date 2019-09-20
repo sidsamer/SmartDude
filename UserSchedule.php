@@ -124,7 +124,7 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
         $resultCheck=mysqli_num_rows($result);
         if($resultCheck>0)
        {
-           echo "<table bgcolor='blue' border="2">";
+           echo "<table bgcolor='blue'>";
            echo "<tr><th>User</th><th>time</th><th>regular</th></tr>";
 	     while($row=mysqli_fetch_assoc($result))
 	   {

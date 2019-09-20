@@ -2,7 +2,15 @@
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<style>
+ button{
+ background-color:transparent;
+ color:LightGray;
+ border:none;
+ font-size:15px;
+ padding: 10px 15px;
+ }
+</style>
 <body style="background-color:blue;">
 <?php
 include_once 'includes/connection.php';

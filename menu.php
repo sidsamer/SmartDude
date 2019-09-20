@@ -7,6 +7,7 @@ session_start();
 <script src="javascript.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+color=white;
  button{
  background-color:transparent;
   border-radius:50%;

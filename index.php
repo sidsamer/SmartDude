@@ -3,6 +3,7 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+color=white;
  button{
  background-color:transparent;
  border-radius:50%;
@@ -10,6 +11,10 @@
  font-size:15px;
  padding: 10px 15px;
  }
+  input {
+  padding: 4px 4px;
+  margin: 4px 0;
+}
 </style>
 <body style="background-color:blue;">
 <?php

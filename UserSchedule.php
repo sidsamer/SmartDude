@@ -7,6 +7,7 @@ session_start();
 <script src="javascript.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+color=white;
 .container {
  height:100%;
  width:100%;
@@ -32,11 +33,11 @@ session_start();
 <br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
 <form action='UserSchedule.php' method='post'>
-<input type="datetime-local" name="Deadline" required><br>
+<input type="datetime-local" name="Deadline" required><br><br>
 <select name="regular">
 <option value='0'>Not Regular</option>
 <option value='1'>Regular</option>
-</select><br>
+</select><br><br>
 <button type="submit" value="SignUp" name="CreateSubmit">submit</button>
 </form>
 </div>

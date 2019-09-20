@@ -6,7 +6,6 @@
  button{
  background-color:transparent;
  color:LightGray;
- border:none;
  font-size:15px;
  padding: 10px 15px;
  }

@@ -10,7 +10,6 @@ session_start();
  button{
  background-color:transparent;
  color:LightGray;
- border:none;
  font-size:15px;
  padding: 10px 15px;
  }
@@ -20,10 +19,11 @@ session_start();
 <button type="submit" name="exit">Exit</button>
 </form>
 <CENTER>
+<br><br><br><br>
 <form  action="menu.php" method="POST">
-<button type="submit" name="Schedule">Schedule</button><br>
-<button type="submit" name="Settings">Settings</button><br>
-<button type="submit" name="About">About</button><br>
+<button type="submit" name="Schedule">Schedule</button><br><br>
+<button type="submit" name="Settings">Settings</button><br><br>
+<button type="submit" name="About">About</button><br><br>
 </form>
 <?php
 if(isset($_POST['Schedule']))

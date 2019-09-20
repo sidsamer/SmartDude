@@ -10,14 +10,13 @@ session_start();
  button{
  background-color:transparent;
  color:LightGray;
- border:none;
  font-size:15px;
  padding: 10px 15px;
  }
 </style>
 <body style="background-color:blue;">
-<form  action="menu.php" method="POST">
-<button type="submit" name="exit">Exit</button>
+<form  action="Settings.php" method="POST">
+<button type="submit" name="back">Back</button>
 </form>
 <CENTER>
 <form  action="menu.php" method="POST">
@@ -49,6 +48,10 @@ else if(isset($_POST['deleteUser']))
         $result=mysqli_query($conn,$sql);
 		if(!$result)
 			die("query faild");
+	header('Location: index.php');
+}
+else if(isset($_POST['back'])) 
+{
 	header('Location: index.php');
 }
 ?>

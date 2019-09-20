@@ -10,7 +10,7 @@ session_start();
  button{
  background-color:transparent;
   border-radius:50%;
- color:LightGray;
+ color:white;
  font-size:15px;
  padding: 10px 15px;
  }
@@ -28,12 +28,12 @@ session_start();
     if($contents !== false)
     {
         if($contents=="off")
-           echo '<button style="color:red;" type="submit" value="on" name="Status">off</button><br><br>'; //to turn on
+           echo '<button style="background-color:red;" type="submit" value="on" name="Status">off</button><br><br>'; //to turn on
        else
-           echo '<button style="color:green;" type="submit" value="off" name="Status">on</button><br><br>'; //to turn off
+           echo '<button style="background-color:green;" type="submit" value="off" name="Status">on</button><br><br>'; //to turn off
     }
     else
-        echo '<button style="color:gray;" type="submit" value="none" name="Status">undefined</button><br><br>';  //to turn on
+        echo '<button style="background-color:gray;" type="submit" value="none" name="Status">undefined</button><br><br>';  //to turn on
 ?>
 <button type="submit" name="Schedule">Schedule</button><br><br>
 <button type="submit" name="Settings">Settings</button><br><br>
@@ -77,7 +77,7 @@ else if(isset($_POST['Status']))
         fwrite($myfile,$status);
         fclose($myfile);
         }
-   header('Location: Settings.php');
+   header('Location: menu.php');
 }
 ?>
 </CENTER>

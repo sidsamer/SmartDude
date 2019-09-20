@@ -14,7 +14,7 @@ if(isset($_COOKIE['Id']))
          echo "cokie found<br>"; 
 		 $_SESSION['Uid']=$_COOKIE['Uid'];
 		 $_SESSION['Id']=$_COOKIE['Id'];
-         header('Location: menu.php');
+         header('Location: UserSchedule.php');
 }
 else
     echo "cokie was not found<br>";
@@ -47,7 +47,7 @@ if(isset($_POST['page']))
 		 setcookie('Uid',$uid,time()+(60*60*24*7));
          $_SESSION['Id']=$row['id'];
          $_SESSION['Uid']=$uid;
-        header('Location: menu.php');
+        header('Location: UserSchedule.php');
        }
 }
 ?>

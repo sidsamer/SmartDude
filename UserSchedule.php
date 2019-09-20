@@ -16,7 +16,7 @@ session_start();
 
 </style>
 <body style="background-color:blue;">
-<form  action="menu.php" method="POST">
+<form  action="UserSchedule.php" method="POST">
 <button type="submit" name="exit">Exit</button>
 <button type="submit" name="deleteUser">DeleteUser</button>
 </form>
@@ -28,7 +28,7 @@ session_start();
 </table>
 <br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
-<form action='menu.php' method='post'>
+<form action='UserSchedule' method='post'>
 <input type="datetime-local" name="Deadline" required><br>
 <select name="regular"><br>
 <option value='0'>Not Regular</option>
@@ -39,7 +39,7 @@ session_start();
 </div>
 
 <div class="RemoveForm"; id="RemoveForm"; style="display:none;">
-<form action="menu.php" method='post'>
+<form action="UserSchedule.php" method='post'>
   <select name="RemoveTaskList">
   <?php
   
@@ -63,7 +63,7 @@ session_start();
 </form>
 </div>
 <div class="UpdateForm"; id="UpdateForm"; style="display:none;">
-<form action="menu.php" method='post'>
+<form action="UserSchedule.php" method='post'>
   <input type="text" name="Volume" placeholder="Volume"><br>
   <input type="email" name="Email" placeholder="Email"><br>
 <button type="submit" value="Submit" name="UpdateSubmit">Update Boiler</button>
@@ -125,7 +125,7 @@ else if(isset($_POST['deleteUser']))
 	header('Location: index.php');
 }
 ?>
-<form action="menu.php"  method='post' >
+<form action="UserSchedule.php"  method='post' >
 <select type="submit" name="dayButton">
 <?php
 for($i=0;$i<7;$i++)

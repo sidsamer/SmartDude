@@ -9,6 +9,7 @@ session_start();
 <style>
  button{
  background-color:transparent;
+  border-radius:50%;
  color:LightGray;
  font-size:15px;
  padding: 10px 15px;

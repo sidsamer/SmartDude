@@ -9,6 +9,7 @@ session_start();
 <style>
  button{
  background-color:transparent;
+ border-radius:50%;
  color:LightGray;
  font-size:15px;
  padding: 10px 15px;
@@ -19,11 +20,12 @@ session_start();
 <button type="submit" name="back">Back</button>
 </form>
 <CENTER>
+<br><br><br>
 <form  action="menu.php" method="POST">
 <input type="text" name="Volume" placeholder="Volume"><br>
 <input type="email" name="Email" placeholder="Email"><br>
-<button type="submit" name="define">Define System</button><br>
-<button type="submit" name="deleteUser">Delete User</button><br>
+<button type="submit" name="define">Define System</button><br><br>
+<button type="submit" name="deleteUser">Delete User</button><br><br>
 </form>
 <?php
 if(isset($_POST['define']))
@@ -52,7 +54,7 @@ else if(isset($_POST['deleteUser']))
 }
 else if(isset($_POST['back'])) 
 {
-	header('Location: index.php');
+	header('Location: menu.php');
 }
 ?>
 </CENTER>

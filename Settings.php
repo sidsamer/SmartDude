@@ -25,6 +25,7 @@ session_start();
 <input type="text" name="Volume" placeholder="Volume"><br>
 <input type="email" name="Email" placeholder="Email"><br>
 <button type="submit" name="define">Define System</button><br><br>
+<button type="submit" name="data">System Data</button><br><br>
 <button type="submit" name="deleteUser">Delete User</button><br><br>
 </form>
 <?php
@@ -51,6 +52,24 @@ else if(isset($_POST['deleteUser']))
 		if(!$result)
 			die("query faild");
 	header('Location: index.php');
+}
+else if(isset($_POST['data'])) 
+{
+    
+    $uid=$_SESSION['Uid'];
+        $url="http://smart-dude.herokuapp.com/Android_req.php/?order=get_boiler_data&uid=$uid";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo $contents."<br>";
+    else
+        echo "cant make http req, cant get boiler data";
+    
+    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=num_users&uid=$uid";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo "users:".$contents;
+    else
+        echo "cant make http req, cant get number of users";
 }
 else if(isset($_POST['back'])) 
 {

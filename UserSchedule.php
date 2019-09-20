@@ -7,6 +7,9 @@ session_start();
 <script src="javascript.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+table, th, td {
+  border: 2px solid black;
+}
 body {
 color:white;
 }
@@ -121,7 +124,7 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
         $resultCheck=mysqli_num_rows($result);
         if($resultCheck>0)
        {
-           echo "<table bgcolor='blue'>";
+           echo "<table bgcolor='blue' border="2">";
            echo "<tr><th>User</th><th>time</th><th>regular</th></tr>";
 	     while($row=mysqli_fetch_assoc($result))
 	   {

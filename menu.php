@@ -9,7 +9,6 @@ session_start();
 <style>
 body {
 color:white;
-background-image: url("page2.png");
 }
  button{
  background-color:transparent;

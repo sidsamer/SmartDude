@@ -146,6 +146,9 @@ else if($str == "day_Schedule"){
                echo "name:".$users[$row['userId']]." id:".$row['id']." userid:".$row['userId']." time:".$row['showerTime']." day:".$row['day']." regular:".$row['regular'].", "; //yet to be done,need to send asociative array.
            }
        }
+       else{
+           echo "no Schdules for this day";
+       }
 }
 // login into user
 else if($str == "login"){

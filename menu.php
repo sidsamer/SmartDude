@@ -23,18 +23,16 @@ session_start();
 <br><br><br><br>
 <form  action="menu.php" method="POST">
 <?php
-    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=status";
-          $contents = file_get_contents($url);
-    if($contents !== false)
-    {
-        echo "val:".$contents."<br>";
-        if(!strcmp($contents,"off"))
+    $myfile = fopen("boilerStatus.txt", "r") or die("Unable to open status file!");
+    $status=fgets($myfile);
+    fclose($myfile);
+
+        echo "val:".$status."<br>";
+        if($status=="off")
            echo '<button style="background-color:red;" type="submit" value="on" name="Status">off</button><br><br>'; //to turn on
        else
            echo '<button style="background-color:green;" type="submit" value="off" name="Status">on</button><br><br>'; //to turn off
-    }
-    else
-        echo '<button style="background-color:gray;" type="submit" value="none" name="Status">undefined</button><br><br>';  //to turn on
+     
 ?>
 <button type="submit" name="Schedule">Schedule</button><br><br>
 <button type="submit" name="Settings">Settings</button><br><br>
@@ -62,7 +60,7 @@ else if(isset($_POST['exit']))
 else if(isset($_POST['Status'])) 
 {
     echo "status:".$_POST['Status']."<br>";
-   if($_POST['Status']=="off" || $_POST['Status']=="undefined")
+   if($_POST['Status']=="off")
          $sql = "INSERT INTO tasks(task) VALUES ('off');";
      else
          $sql = "INSERT INTO tasks(task) VALUES ('on');";
@@ -71,12 +69,8 @@ else if(isset($_POST['Status']))
 			die("query faild");
         else
         {
-        if($_POST['Status']=="off" || $_POST['Status']=="undefined")
-        $status="off";
-        else
-         $status="on";
         $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!");
-        fwrite($myfile,$status);
+        fwrite($myfile,$_POST['Status']);
         fclose($myfile);
         }
    header('Location: menu.php');

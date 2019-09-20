@@ -28,16 +28,17 @@ session_start();
 <?php
 if(isset($_POST['Schedule']))
 {
-	    header('Location: UserSchedule.php'); 
+  header('Location: UserSchedule.php'); 
 }
 
 else if(isset($_POST['Settings']))
 {
-            header('Location: Settings.php');
+   //header('Location: Settings.php');
+   echo "settings";
 }
 else if(isset($_POST['About']))
 {
-	echo "this is the about secttion"
+	echo "this is the about secttion";
 }
 else if(isset($_POST['exit'])) 
 {

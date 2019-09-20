@@ -23,13 +23,11 @@ session_start();
 <body style="background-color:blue;">
 <form  action="UserSchedule.php" method="POST">
 <button type="submit" name="back">Back</button>
-<button type="submit" name="deleteUser">DeleteUser</button>
 </form>
 <CENTER>
 <table>
 <td style='padding:30px;'><button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button></td>
 <td style='padding:30px;'><button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button></td>
-<td style='padding:30px;'><button class="UpdateButton" onclick="NoteBody('UpdateForm');">Update</button></td>
 </table>
 <br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
@@ -39,7 +37,7 @@ session_start();
 <option value='0'>Not Regular</option>
 <option value='1'>Regular</option>
 </select><br>
-<button type="submit" value="SignUp" name="submit">Create/Update</button>
+<button type="submit" value="SignUp" name="CreateSubmit">Create/Update</button>
 </form>
 </div>
 
@@ -67,16 +65,9 @@ session_start();
 <button type="submit" value="Submit" name="RemoveSubmit">Remove</button>
 </form>
 </div>
-<div class="UpdateForm"; id="UpdateForm"; style="display:none;">
-<form action="UserSchedule.php" method='post'>
-  <input type="text" name="Volume" placeholder="Volume"><br>
-  <input type="email" name="Email" placeholder="Email"><br>
-<button type="submit" value="Submit" name="UpdateSubmit">Update Boiler</button>
-</form>
-</div>
 <br><br>
 <?php
-if(isset($_POST['submit']))
+if(isset($_POST['CreateSubmit']))
 {
 	$userid=$_SESSION['Id'];
     $day=date("l", strtotime($_POST['Deadline']));
@@ -88,8 +79,7 @@ if(isset($_POST['submit']))
         echo $contents;
     else
         echo "cant make http req";
-       header('Location: UserSchedule.php'); 
-
+        header('Location: UserSchedule.php');  
 }
 
 else if(isset($_POST['RemoveSubmit']))
@@ -101,32 +91,9 @@ else if(isset($_POST['RemoveSubmit']))
 				echo("query faild".mysqli_connect_error());
         header('Location: UserSchedule.php'); 
 }
-else if(isset($_POST['UpdateSubmit']))
-{
-	$vol=$_POST['Volume'];
-    $email=$_POST['Email'];
-    $uid=$_SESSION['Uid'];
-        $url="http://smart-dude.herokuapp.com/Android_req.php/?order=boiler_data&uid=$uid&volume=$vol&mail=$email";
-          $contents = file_get_contents($url);
-         if($contents !== false)
-        echo $contents;
-    else
-        echo "cant make http req";
-        header('Location: UserSchedule.php'); 
-}
 else if(isset($_POST['back'])) 
 {
 	header('Location: menu.php');
-}
-else if(isset($_POST['deleteUser'])) 
-{
-    $userid=$_SESSION['Id'];
-         setcookie('Id',$Id,time()-10);  
-		 $sql = "delete from users where id='$userid';";
-        $result=mysqli_query($conn,$sql);
-		if(!$result)
-			die("query faild");
-	header('Location: index.php');
 }
 ?>
 <form action="UserSchedule.php"  method='post' >
@@ -180,8 +147,6 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
 	   }
 }
 ?>
-
-
 </CENTER>
 </body>
 </html>

@@ -64,7 +64,7 @@ else if(isset($_POST['data']))
     else
         echo "cant make http req, cant get boiler data";
     
-    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=num_users&uid=$uid";
+    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=num_users&id=$uid";
           $contents = file_get_contents($url);
          if($contents !== false)
         echo "users:".$contents;

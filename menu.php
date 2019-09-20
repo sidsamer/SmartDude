@@ -26,8 +26,6 @@ session_start();
     $myfile = fopen("boilerStatus.txt", "r") or die("Unable to open status file!");
     $status=fgets($myfile);
     fclose($myfile);
-
-        echo "val:".$status."<br>";
         if($status=="off")
            echo '<button style="background-color:red;" type="submit" value="on" name="Status">off</button><br><br>'; //to turn on
        else

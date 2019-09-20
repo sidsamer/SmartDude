@@ -122,6 +122,31 @@ else if($str == "getAllSchdules"){
            }
        }
 }
+//get schdules of single day
+else if($str == "day_Schdule"){
+    $day=htmlspecialchars($_GET["day"]);
+    $day=strtolower($day); //change day to lower case.
+	$sql="select id,name from users";
+	     $result=mysqli_query($conn,$sql);
+	     $resultCheck=mysqli_num_rows($result); 
+         if($resultCheck>0)
+       {
+           while($row=mysqli_fetch_assoc($result))
+           {
+              $users[$row['id']]=$row['name'];
+	   }
+       }
+         $sql = "select * from turnon where day='$day' order by showerTime;";
+	     $result=mysqli_query($conn,$sql);
+	     $resultCheck=mysqli_num_rows($result); 
+         if($resultCheck>0)
+       {
+           while($row=mysqli_fetch_assoc($result))
+           {
+               echo "name:".$users[$row['userId']]." id:".$row['id']." userid:".$row['userId']." time:".$row['showerTime']." day:".$row['day']." regular:".$row['regular'].", "; //yet to be done,need to send asociative array.
+           }
+       }
+}
 // login into user
 else if($str == "login"){
         $name=htmlspecialchars($_GET["name"]);
@@ -176,9 +201,16 @@ else if($str == "delete"){
         $sql="delete from users where id=$id";
         $result=mysqli_query($conn,$sql);
                    	if(!$result)
-			         die("delete query faild");
+			         die("delete user query faild");
+                   else
+                   {
+                    $sql="delete from turnon where userid='$id'";
+                     $result=mysqli_query($conn,$sql);
+                   	if(!$result)
+			         die("delete Schdules query faild");
                    else
                      echo ("user is deleted!");
+                   }
 }
 else if($str == "boiler_data"){
         $uid=htmlspecialchars($_GET["uid"]); //every system will have its own uid.

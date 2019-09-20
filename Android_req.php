@@ -145,7 +145,7 @@ else if($str == "status"){
 $myfile = fopen("boilerStatus.txt", "r") or die("Unable to open status file!");
 $status=fgets($myfile);
 fclose($myfile);
-echo "boiler status: ".$status;
+echo $status;
         
 }
 else if($str == "recover"){

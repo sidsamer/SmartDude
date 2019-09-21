@@ -1,4 +1,5 @@
 <?php
+//this is the settings in the Ui,you can see and update data boiler, also can delete user.
 include_once 'includes/connection.php';
 session_start();
 ?>
@@ -29,6 +30,7 @@ session_start();
 <button type="submit" name="deleteUser">Delete User</button><br><br>
 </form>
 <?php
+//insert new boiler information
 if(isset($_POST['define']))
 {
   	$vol=$_POST['Volume'];
@@ -42,7 +44,7 @@ if(isset($_POST['define']))
         echo "cant make http req";
         header('Location: Settings.php'); 
 }
-
+//delete user
 else if(isset($_POST['deleteUser'])) 
 {
     $userid=$_SESSION['Id'];
@@ -53,6 +55,7 @@ else if(isset($_POST['deleteUser']))
 			die("query faild");
 	header('Location: index.php');
 }
+//watch boiler information like users count,volume,mail.
 else if(isset($_POST['data'])) 
 {
     
@@ -71,6 +74,7 @@ else if(isset($_POST['data']))
     else
         echo "cant make http req, cant get number of users";
 }
+//go back to the menu page
 else if(isset($_POST['back'])) 
 {
 	header('Location: menu.php');

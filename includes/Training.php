@@ -1,6 +1,8 @@
 <?php
-//require_once "weights.txt";
-//require_once "data.txt";
+/*
+in this module we have our regression and all the functions we need in order to
+learn the user system behaves the best way we can.
+*/
 include_once 'includes/connection.php';
 class LinearRegression{
 	
@@ -8,6 +10,7 @@ class LinearRegression{
 	var $OutsideTemp;
     var $BoilerTemp;
     
+    //constructor
 	public function __construct($Otemp,$Btemp){
 		$this->OutsideTemp=$Otemp;
 		$this->BoilerTemp=$Btemp;
@@ -27,6 +30,7 @@ class LinearRegression{
 	{
 		return $this->BoilerTemp;
 	}
+    //this func is used for calculation of the duration we need the boiler to be turn on.
     function CalcDuration($currTemp,$wantedTemp,$volume)
     {
         $HeaterElementRating=2.5; //heater element rating in kW.
@@ -38,6 +42,7 @@ class LinearRegression{
         $time=($pt/$HeaterElementRating)*60*60; //the heating time in seconds.
         return $time;
     }
+    //this function used when we want to know what will be the future temp inside the boiler.
     function PredictTemp()
     {
        return $this->w1*($this->OutsideTemp-$this->BoilerTemp)+$this->BoilerTemp; 
@@ -45,11 +50,11 @@ class LinearRegression{
 }
 class LinearRegressionInput{
     
-    var $ErrorThershold; 
+    var $ErrorThershold; //
     var $LearningRate;
-    var $ExceptedSucssesRate;  ##a succses rate we want to achive.
+    var $ExceptedSucssesRate;  //a succses rate we want to achive.
     var $actualSucceseRate;
-    var $avgdistance;  ## we want avg distance to be as low as possbile with that succses rate.
+    var $avgdistance;  // we want avg distance to be as low as possbile with that succses rate.
     var $actualAvgDistance; ##the actual avg distnace of the learning.
     var $Data; //array
     var $ExpectedOutputs; //array

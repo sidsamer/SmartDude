@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+/*
+this page is the signup page, the user fills the right fields and if everyting wents well
+he will have a new user to login with into the system.
+*/
+?>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
@@ -35,7 +41,7 @@ include_once 'includes/connection.php';
 <?php
 if(isset($_POST['page']))
 {
-	if($_POST['Password']==$_POST['Repassword'])
+	if($_POST['Password']==$_POST['Repassword'])//checks if match
 	{
          $name=$_POST['User'];
          $temp=$_POST['Temp'];
@@ -46,12 +52,12 @@ if(isset($_POST['page']))
          $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");//check uid valid
         $uid2=fgets($myfile);
         fclose($myfile);
-        if((int)$uid == (int)$uid2)
+        if((int)$uid == (int)$uid2) //check if user inserted valid Unique id of a real system.
         { 
          $sql = "select * from users where name='$name';";
 	     $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
-         if($resultCheck==0)
+         if($resultCheck==0) //checks if user name is not used yet
        {
            $sql = "INSERT INTO users(name,temp,password,phone) 
            VALUES ('$name','$temp','$pass','$phone');";
@@ -60,7 +66,7 @@ if(isset($_POST['page']))
 			die("query faild");
         else
         {
-        $myfile = fopen("numOfUsers.txt", "r") or die("Unable to open boiler data file!");
+        $myfile = fopen("numOfUsers.txt", "r") or die("Unable to open boiler data file!"); //adding one to the user counter
         $num=fgets($myfile);
         fclose($myfile);
         $num=(int)$num+1;
@@ -72,13 +78,13 @@ if(isset($_POST['page']))
         }
        }
        else
-           echo ("user allready exist");
+           echo ("user allready exist"); // if name is not available
         }
         else
-            echo ("cant find uid, cant create a new user!");
+            echo ("cant find uid, cant create a new user!"); //unique id dont mach the one the system use.
     }
 else
-  echo "Passwords didnt match!";  
+  echo "Passwords didnt match!";  //passowrds should mach
 
 }
 ?>

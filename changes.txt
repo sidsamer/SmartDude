@@ -24,3 +24,9 @@ version 15
 version 17
 -edit android_req
 -discription
+version 19
+-settings in user interface
+-turn on/off from use interface
+-edit android_req and unit test.
+version 20
+-finish code discription.

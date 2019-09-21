@@ -1,5 +1,5 @@
 <?php
-//this script handle the microconroller http requests.
+//this module shows the temps inserted into the Database.
 include_once 'connection.php';
 
     $sql='SELECT * FROM measurements;';

@@ -1,5 +1,5 @@
 <?php
-//this script checks if theres a turn on that need to be done.
+//this script checks if theres a turn on that need to be done,automation invoking him every 10 minutes.
 include_once 'includes/connection.php';
 include_once 'boilerStatus.txt';
 
@@ -8,10 +8,10 @@ $myfile = fopen("boilerStatus.txt", "r") or die("Unable to open status file!");
 $status=fgets($myfile);
 fclose($myfile);
   
-//since heroku scheduler limit you to run the sceduler only for 10 minutes margins, we will check 5 minutes before and after to give us 5 minutes error top!  
+//since heroku scheduler limit you to run the sceduler only for 10 minutes margins or more, we will check 5 minutes before and after to give us 5 minutes error top!  
 $day=strtolower(date("l"));
 $nowTime=date("H:i:s");
-$nowTime=date('H:i:s',strtotime("".$nowTime." +10800 seconds")); //current time in israel(server +3 hours).
+$nowTime=date('H:i:s',strtotime("".$nowTime." +10800 seconds")); //current time in israel,Karmiel(server +3 hours).
 $pastTime=date('H:i:s',strtotime("".$nowTime." -300 seconds")); //minus 5 minutes.
 $futureTime=date('H:i:s',strtotime("".$nowTime." +300 seconds"));//plus 5 minutes.
 
@@ -58,7 +58,7 @@ $futureTime=date('H:i:s',strtotime("".$nowTime." +300 seconds"));//plus 5 minute
               {
               while($row=mysqli_fetch_assoc($result))
                {
-                   if($row['regular']==0)
+                   if($row['regular']==0) //zero means not regular,a one time off.
                    {
                        $id=$row['id'];
                       $sql="delete from turnon where id=$id";
@@ -72,6 +72,6 @@ $futureTime=date('H:i:s',strtotime("".$nowTime." +300 seconds"));//plus 5 minute
               }
                
                        
-echo "boiler status: ".$status."<br>";
+echo "boiler status: ".$status."<br>"; //for testing
 
 ?>

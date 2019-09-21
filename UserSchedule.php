@@ -1,4 +1,6 @@
 <?php
+// this is the page where thr end user can watch all the Scheduled showers,also can create
+// and delete.
 include_once 'includes/connection.php';
 session_start();
 ?>
@@ -32,8 +34,8 @@ color:white;
 </form>
 <CENTER>
 <table>
-<td style='padding:30px;'><button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button></td>
-<td style='padding:30px;'><button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button></td>
+<td style='padding:30px; border: 0px solid black;' ><button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button></td>
+<td style='padding:30px; border: 0px solid black;'><button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button></td>
 </table>
 <br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
@@ -141,9 +143,9 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
 		   $day=$row['dayButton'];
            $showerTime=$row['showerTime'];
            if((int)$row['regular']==1)
-               $regular="regular";
+               $regular="yes";
            else
-               $regular="";
+               $regular="no";
 		   echo "<tr>";
 		    echo "<td style='color:Chartreuse;'>".$name."</td><td style='color:Chartreuse;'>".$showerTime.
             "</td>"."</td><td style='color:Chartreuse;'>".$regular."</td>";

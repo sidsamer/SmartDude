@@ -1,4 +1,9 @@
-
+<?php
+/*
+this page is the login page,from here you can go to Sign up if you dont have user yet
+or insert user and pass and enter into menu of the 'app'. 
+*/
+?>
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,11 +50,11 @@ else
 <a href="SignUp.php">press to sign up</a><br>
 
 <?php
-if(isset($_POST['page']))
+if(isset($_POST['page'])) //this flow checks if user and pass are valid.
 {
         $name=$_POST['User'];
         $pass=$_POST['Password'];
-        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");//check uid valid
+        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");//take Unique id, for future use.
         $uid=fgets($myfile);
         fclose($myfile);
         $sql ="select id from users where name='$name' and password='$pass'";

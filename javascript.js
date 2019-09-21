@@ -1,3 +1,4 @@
+//this function gets an id of a form (Create or Remove forms) and then toggle between the display states.
 function NoteBody(id) {
     var x = document.getElementById(id);
     if (x.style.display === 'none') {
@@ -6,6 +7,7 @@ function NoteBody(id) {
         x.style.display = 'none';
     }
 }
+// this func is not for use at the moment.
 function ButtonOnFunc(obj){
 	
 

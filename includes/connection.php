@@ -1,5 +1,6 @@
 <?php
-
+//this is the module that deals with the connection
+//to the Database.
 $host="eu-cdbr-west-02.cleardb.net";
 $dbuser="b930876c351ee7";
 $pass="0f8d4cc8";

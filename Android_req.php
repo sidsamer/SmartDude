@@ -14,7 +14,7 @@ $str=htmlspecialchars($_GET["order"]);
         else
             echo ("boiler turn on");
         $status="on";
-        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!"); //saving boiler status
+        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!"); //saving boiler status inside file
         fwrite($myfile,$status);
         fclose($myfile);
 	 }
@@ -27,7 +27,7 @@ $str=htmlspecialchars($_GET["order"]);
         else
             echo ("boiler turn off");
         $status="off";
-        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!"); //saving boiler status
+        $myfile = fopen("boilerStatus.txt", "w") or die("Unable to open status file!"); //saving boiler status inside file
         fwrite($myfile,$status);
         fclose($myfile);
 	 }
@@ -38,7 +38,7 @@ $str=htmlspecialchars($_GET["order"]);
          $pass=htmlspecialchars($_GET["password"]);
          $phone=htmlspecialchars($_GET["phone"]);
          $uid=htmlspecialchars($_GET["uid"]);
-        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");//check uid valid
+        $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");//check uid match
         $uid2=fgets($myfile);
         $mail=fgets($myfile);
         $vol=fgets($myfile);
@@ -48,7 +48,7 @@ $str=htmlspecialchars($_GET["order"]);
          $sql = "select * from users where name='$name';";
 	     $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
-         if($resultCheck==0)
+         if($resultCheck==0) //if username is valid, new user will be created
        {
            $sql = "INSERT INTO users(name,temp,password,phone) 
            VALUES ('$name','$temp','$pass','$phone');";
@@ -73,21 +73,21 @@ $str=htmlspecialchars($_GET["order"]);
         else
             echo ("cant find uid, cant create a new user!");
      }
- //enter schduled turn on
+//enter schduled turn on
      else if($str == "newSchdule"){
          //$reg=new LinearRegression(30,50);
          $userId=htmlspecialchars($_GET["userId"]);
-         $day=htmlspecialchars($_GET["day"]); //day in string exe: 'sunday'.
+         $day=htmlspecialchars($_GET["day"]); //day in string exe: 'sunday'
          $day=strtolower($day); //change day to lower case.
          $showerTime=htmlspecialchars($_GET["showerTime"]);//time in string exe: '6:30 pm'
-         $duration=7200; // two hours max.
+         $duration=7200; // two hours auto,then automation will recalculate it using the intelligence.
          $showerTime=date('H:i:s', strtotime($showerTime));
          $turnOnTime=date('H:i:s',strtotime("".$showerTime." -$duration seconds")); //turn on time calculation
          $regular=htmlspecialchars($_GET["regular"]); //if its a regular shower or a one time of. 
          $sql="SELECT * FROM turnon where day='$day' and showerTime='$showerTime'";
 	     $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
-         if($resultCheck==0)
+         if($resultCheck==0) //only if this exect time is free.
          {
          $sql = "INSERT INTO turnon(userId,day,turnOnTime,duration,showerTime,regular) VALUES ($userId,'$day','$turnOnTime',$duration,'$showerTime',$regular);";
         $result=mysqli_query($conn,$sql);
@@ -99,9 +99,9 @@ $str=htmlspecialchars($_GET["order"]);
          else
              echo "schdule allready set in this hour!";
      }
-// get all the schdule 
+// get all the schdules from the db. 
 else if($str == "getAllSchdules"){
-	$sql="select id,name from users";
+	$sql="select id,name from users"; //getting users name.
 	     $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
          if($resultCheck>0)
@@ -111,7 +111,7 @@ else if($str == "getAllSchdules"){
               $users[$row['id']]=$row['name'];
 	   }
        }
-         $sql = "select * from turnon;";
+         $sql = "select * from turnon;"; //getting all the turnons.
 	     $result=mysqli_query($conn,$sql);
 	     $resultCheck=mysqli_num_rows($result); 
          if($resultCheck>0)
@@ -169,6 +169,7 @@ else if($str == "login"){
        else
            echo "no";
 }
+// get boiler status from file.
 else if($str == "status"){
 $myfile = fopen("boilerStatus.txt", "r") or die("Unable to open status file!");
 $status=fgets($myfile);
@@ -176,6 +177,7 @@ fclose($myfile);
 echo $status;
         
 }
+// recover user pass using name,Unique system id and phone.
 else if($str == "recover"){
         $name=htmlspecialchars($_GET["name"]);
         $phone=htmlspecialchars($_GET["phone"]);
@@ -199,6 +201,7 @@ else if($str == "recover"){
        else
         echo "cant find uid, cant read boiler data!";           
 }
+// delete the user,user will press button and Android app will send his id
 else if($str == "delete"){
         $id=htmlspecialchars($_GET["id"]);
         $sql="delete from users where id=$id";
@@ -215,6 +218,7 @@ else if($str == "delete"){
                      echo ("user is deleted!");
                    }
 }
+// writing to file boiler data: volume,Unique id,mail to recover Unique id
 else if($str == "boiler_data"){
         $uid=htmlspecialchars($_GET["uid"]); //every system will have its own uid.
         $vol=htmlspecialchars($_GET["volume"]); //size of the boiler.
@@ -236,7 +240,7 @@ else if($str == "boiler_data"){
             echo "cant find uid, cant create/update boiler data!";
         }
 }
-//checks uniqe-id amd then returns volume and mail.
+//checks uniqe-id and then returns volume and mail.
 else if($str == "get_boiler_data"){
         $uid=htmlspecialchars($_GET["uid"]); //every system will have its own uid.
         $myfile = fopen("boilerData.txt", "r") or die("Unable to open boiler data file!");
@@ -253,7 +257,7 @@ else if($str == "get_boiler_data"){
             echo "cant find uid, cant read boiler data!";
         }
 }
-//delete certine turn on from schdule.
+//delete specific turn on from schdule.
 else if($str == "delete_schdule"){
         $id=htmlspecialchars($_GET["id"]);
         $sql="delete from turnon where id=$id";

@@ -1,4 +1,5 @@
 <?php
+//this is the menu page,from here you turn on/off system go to settings,about,Schedule
 include_once 'includes/connection.php';
 session_start();
 ?>
@@ -40,24 +41,28 @@ color:white;
 <button type="submit" name="About">About</button><br><br>
 </form>
 <?php
+//go to Schedule
 if(isset($_POST['Schedule']))
 {
   header('Location: UserSchedule.php'); 
 }
-
+//go to settings
 else if(isset($_POST['Settings']))
 {
    header('Location: Settings.php');
 }
+//show about
 else if(isset($_POST['About']))
 {
 	echo "this is the about secttion";
 }
+//exit the app back to login
 else if(isset($_POST['exit'])) 
 {
     setcookie('Id',$Id,time()-10);
 	header('Location: index.php');
 }
+//show system status
 else if(isset($_POST['Status'])) 
 {
     echo "status:".$_POST['Status']."<br>";

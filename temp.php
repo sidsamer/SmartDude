@@ -1,8 +1,11 @@
 <?php
 //this script handle the microconroller http requests.
+// if the microconroller gets task named "temp", he sends get request with the current boiler temp.
+//then this script use openweathermap api to get current outside temp and insert both temp inside db as mesurament.
+//this process is critical for the learning phase.
 include_once 'includes/connection.php';
 
-	$weater_url='http://api.openweathermap.org/data/2.5/weather?id=294577&appid=4d77a0bba1a709b9b52103f6981d7ac3'; //need to change to be by city(id)
+	$weater_url='http://api.openweathermap.org/data/2.5/weather?id=294577&appid=4d77a0bba1a709b9b52103f6981d7ac3'; //at the moment hard coded to Karmiel
 	$weaterinfoJson = file_get_contents($weater_url);
     $tempviaday_array = json_decode($weaterinfoJson,true);
 		

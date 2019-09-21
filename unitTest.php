@@ -1,4 +1,8 @@
-
+<?php
+// this module is the the unit-test of the system.
+// here,we can check all the functionality of the system however we want
+// in order to make sure everyting work the way we want it to work and we can manage the system.
+?>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="style.css">
@@ -6,7 +10,6 @@
 
 <body>
 <?php
-//this script is a simple user interface for the system.
 include_once 'includes/connection.php';
 require_once "includes/Training.php";
 ?>
@@ -21,6 +24,7 @@ require_once "includes/Training.php";
 <button type="submit" value="temp" name="Temp">temp</button>
 <button type="submit" value="ShowSchedule" name="ShowSchedule">Show Schedule</button>
 <button type="submit" value="train" name="train">train</button><br><br>
+<button type="submit" value="Mesuraments" name="Mesuraments">Show Mesuraments</button><br><br>
 <input type="text" placeholder="Name" name="Name"><br>
 <input type="text" placeholder="Favorite Temp" name="FavTemp"><br>
 <input type="text" placeholder="Pass" name="Pass"><br>
@@ -56,6 +60,7 @@ require_once "includes/Training.php";
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
 <?php
+//turn off, using the connection module
 if(isset($_POST['Off']))
 {
     $sql = "INSERT INTO tasks(task) VALUES ('off');";
@@ -69,6 +74,7 @@ if(isset($_POST['Off']))
         fwrite($myfile,$status);
         fclose($myfile);
 }
+//turn on, using the connection module
 else if(isset($_POST['On']))
 {
     $sql = "INSERT INTO tasks(task) VALUES ('on');";
@@ -82,6 +88,7 @@ else if(isset($_POST['On']))
         fwrite($myfile,$status);
         fclose($myfile);
 }
+//check temp, using the connection module
 else if(isset($_POST['Temp']))
 {
     $sql = "INSERT INTO tasks(task) VALUES ('temp');";
@@ -91,6 +98,7 @@ else if(isset($_POST['Temp']))
         else
             echo ("boiler check temp");
 }
+//inserting new user, using Android_req module
 else if(isset($_POST['newUser']))
 {
          $name=$_POST['Name'];
@@ -105,6 +113,7 @@ else if(isset($_POST['newUser']))
     else
         echo "cant make http req";
 }
+//login,checks login order inside Android_req module
 else if(isset($_POST['login']))
 {
          $name=$_POST['UserName'];
@@ -116,11 +125,13 @@ else if(isset($_POST['login']))
     else
         echo "cant make http req";
 }
+//check our prediction abilities
 else if(isset($_POST['regression']))
 {
     $reg=new LinearRegression(intval($_POST['TempIn']),intval($_POST['TempOut']));
     echo "out:".$reg->getOut().", boiler:".$reg->getBoiler().", text:".$reg->PredictTemp();
 }
+//check the train function to see if it works
 else if(isset($_POST['train']))
 {
     $trainer=new LinearRegressionTrainer(30,50);
@@ -128,6 +139,7 @@ else if(isset($_POST['train']))
     $trainer->Test();
     echo "weight after training:".$trainer->getW1();
 }
+//insert a new Schedule turn on the way the users do in the app,checks newSchdule order inside Android_req module
 else if(isset($_POST['ScheduleTurnOn'])) 
 {
     $userid=$_POST['userId'];
@@ -141,6 +153,7 @@ else if(isset($_POST['ScheduleTurnOn']))
     else
         echo "cant make http req";
 }
+//checks getlAllSchdules order inside Android_req module 
 else if(isset($_POST['ShowSchedule'])) 
 {
     $url="http://smart-dude.herokuapp.com/Android_req.php/?order=getAllSchdules";
@@ -150,6 +163,7 @@ else if(isset($_POST['ShowSchedule']))
     else
         echo "cant make http req";
 }
+//check if the status of the boiler is right
 else if(isset($_POST['Status'])) 
 {
     $url="http://smart-dude.herokuapp.com/Android_req.php/?order=status";
@@ -159,6 +173,7 @@ else if(isset($_POST['Status']))
     else
         echo "cant make http req";
 }
+//checks recover order inside Android_req module 
 else if(isset($_POST['recover'])) 
 {
          $name=$_POST['RecoverUserName'];
@@ -171,6 +186,7 @@ else if(isset($_POST['recover']))
     else
         echo "cant make http req";
 }
+//checks deleteUser order inside Android_req module 
 else if(isset($_POST['delete'])) 
 {
     $id=$_POST['ID'];
@@ -181,6 +197,7 @@ else if(isset($_POST['delete']))
     else
         echo "cant make http req";
 }
+//checks get_boiler order inside Android_req module 
 else if(isset($_POST['boiler_data'])) 
 {
     $uid=$_POST['UID'];
@@ -191,6 +208,7 @@ else if(isset($_POST['boiler_data']))
     else
         echo "cant make http req";
 }
+//checks delete_schdule order inside Android_req module 
 else if(isset($_POST['deleteSchedule'])) 
 {
     $id=$_POST['Schedule_ID'];
@@ -201,6 +219,7 @@ else if(isset($_POST['deleteSchedule']))
     else
         echo "cant make http req";
 }
+//checks num_users order inside Android_req module 
 else if(isset($_POST['NumOfUsers'])) 
 {
     $id=$_POST['UIDusers'];
@@ -211,6 +230,7 @@ else if(isset($_POST['NumOfUsers']))
     else
         echo "cant make http req";
 }
+//checks day_schdule order inside Android_req module 
 else if(isset($_POST['Day_Schedule'])) 
 {
     $day=$_POST['Day_sch'];
@@ -221,6 +241,27 @@ else if(isset($_POST['Day_Schedule']))
     else
         echo "cant make http req";
 }
+else if(isset($_POST['Mesuraments'])) 
+{
+    $sql='SELECT * FROM measurements;';
+    $result=mysqli_query($conn,$sql);
+    $resultCheck=mysqli_num_rows($result);
+    if($resultCheck>0)
+     {
+         $i=0;
+         while($i<$resultCheck)
+         {
+             	    $row=mysqli_fetch_assoc($result);
+             echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
+             $i++;
+         }
+	 }
+     else
+     {
+         echo("resultCheck:".$resultCheck);
+     }
+}
+//exit unit-test into the app login page
 else if(isset($_POST['exit'])) 
 {
     setcookie('Id',$Id,time()-10);

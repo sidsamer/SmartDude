@@ -341,7 +341,7 @@ else if(isset($_POST['User_schedule']))
 	   }
 	   }
        else
-           echo "this user dont have turn on's at the moment!"
+           echo "this user dont have turn on's at the moment!";
 }
 //exit unit-test into the app login page
 else if(isset($_POST['exit'])) 

@@ -337,7 +337,7 @@ else if(isset($_POST['User_schedule']))
        {
 	     while($row=mysqli_fetch_assoc($result))
 	   {
-		  echo "id:"$row["id"].' day:'.$row["day"].' turn on time:'.$row["turnOnTime"].' shower time:'.$row["showerTime"]."<br>";
+		  echo "id:".$row["id"].' day:'.$row["day"].' turn on time:'.$row["turnOnTime"].' shower time:'.$row["showerTime"]."<br>";
 	   }
 	   }
        else

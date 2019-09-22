@@ -27,6 +27,7 @@ require_once "includes/Training.php";
 <button type="submit" value="Mesuraments" name="Mesuraments">All Mesuraments</button>
 <button type="submit" value="Users" name="Users">All Users</button>
 <button type="submit" value="Tasks" name="Tasks">All Tasks</button><br><br>
+<button type="submit" value="DelTasks" name="DelTasks">Delete All Tasks</button><br><br>
 <input type="text" placeholder="Name" name="Name"><br>
 <input type="text" placeholder="Favorite Temp" name="FavTemp"><br>
 <input type="text" placeholder="Pass" name="Pass"><br>
@@ -58,6 +59,8 @@ require_once "includes/Training.php";
 <button type="submit" value="NumOfUsers" name="NumOfUsers">Number of users</button><br><br>
 <input type="text" placeholder="Day" name="Day_sch"><br>
 <button type="submit" value="Day_Schedule" name="Day_Schedule">Day Schedule</button><br><br>
+<input type="text" placeholder="ID" name="User_sch_id"><br>
+<button type="submit" value="User_schedule" name="User_schedule">User Schedule</button><br><br>
 </form><br><br>
 <a href="SignUp.php" style="color:white;">press to sign up</a><br>
 
@@ -209,6 +212,13 @@ else if(isset($_POST['boiler_data']))
         echo $contents;
     else
         echo "cant make http req";
+    
+    $url="http://smart-dude.herokuapp.com/Android_req.php/?order=num_users&id=$uid";
+          $contents = file_get_contents($url);
+         if($contents !== false)
+        echo "users:".$contents;
+    else
+        echo "cant make http req, cant get number of users";
 }
 //checks delete_schdule order inside Android_req module 
 else if(isset($_POST['deleteSchedule'])) 
@@ -251,12 +261,12 @@ else if(isset($_POST['Mesuraments']))
     $resultCheck=mysqli_num_rows($result);
     if($resultCheck>0)
      {
-         //$i=0;
+         $i=0;
          while($i<$resultCheck)
          {
              	    $row=mysqli_fetch_assoc($result);
              echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
-             //$i++;
+             $i++;
          }
 	 }
      else
@@ -272,12 +282,12 @@ else if(isset($_POST['Tasks']))
     $resultCheck=mysqli_num_rows($result);
     if($resultCheck>0)
      {
-         //$i=0;
+         $i=0;
          while($i<$resultCheck)
          {
              	    $row=mysqli_fetch_assoc($result);
              echo "<br> id:".$row['id']." task:".$row['task'];
-             //$i++;
+             $i++;
          }
 	 }
      else
@@ -293,18 +303,39 @@ else if(isset($_POST['Users']))
     $resultCheck=mysqli_num_rows($result);
     if($resultCheck>0)
      {
-         //$i=0;
+         $i=0;
          while($i<$resultCheck)
          {
              	    $row=mysqli_fetch_assoc($result);
-             echo "<br> id:".$row['id']." task:".$row['task'];
-             //$i++;
+             echo "<br> id:".$row['id']." name:".$row['name']." temp:".$row['temp']." phone:".$row['phone'];
+             $i++;
          }
 	 }
      else
      {
          echo("resultCheck:".$resultCheck);
      }
+}
+//delete all tasks from the Database
+else if(isset($_POST['DelTasks'])) 
+{
+        $sql="delete from tasks where id>0";
+        $result=mysqli_query($conn,$sql);
+                   	if(!$result)
+			         die("delete query faild");
+                   else
+                     echo ("all tasks are deleted!");  
+}
+//get all Schedule of a spesific user
+else if(isset($_POST['User_schedule'])) 
+{
+        $id=$_POST['User_sch_id'];
+        $sql="delete from tasks where id>0";
+        $result=mysqli_query($conn,$sql);
+                   	if(!$result)
+			         die("delete query faild");
+                   else
+                     echo ("all tasks are deleted!");  
 }
 //exit unit-test into the app login page
 else if(isset($_POST['exit'])) 

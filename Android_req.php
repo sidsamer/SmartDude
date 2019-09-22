@@ -201,7 +201,7 @@ else if($str == "recover"){
        else
         echo "cant find uid, cant read boiler data!";           
 }
-// delete the user,user will press button and Android app will send his id
+// delete the user,user will press button and Android app will send his id.
 else if($str == "delete"){
         $id=htmlspecialchars($_GET["id"]);
         $sql="delete from users where id=$id";

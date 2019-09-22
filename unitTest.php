@@ -22,9 +22,11 @@ require_once "includes/Training.php";
 <button type="submit" value="On" name="On">On</button>
 <button type="submit" value="Status" name="Status">status</button>
 <button type="submit" value="temp" name="Temp">temp</button>
-<button type="submit" value="ShowSchedule" name="ShowSchedule">Show Schedule</button>
 <button type="submit" value="train" name="train">train</button><br><br>
-<button type="submit" value="Mesuraments" name="Mesuraments">Show Mesuraments</button><br><br>
+<button type="submit" value="ShowSchedule" name="ShowSchedule">All Schedule</button>
+<button type="submit" value="Mesuraments" name="Mesuraments">All Mesuraments</button>
+<button type="submit" value="Users" name="Users">All Users</button>
+<button type="submit" value="Tasks" name="Tasks">All Tasks</button><br><br>
 <input type="text" placeholder="Name" name="Name"><br>
 <input type="text" placeholder="Favorite Temp" name="FavTemp"><br>
 <input type="text" placeholder="Pass" name="Pass"><br>
@@ -241,6 +243,7 @@ else if(isset($_POST['Day_Schedule']))
     else
         echo "cant make http req";
 }
+//gets all the mesuraments inside the Database
 else if(isset($_POST['Mesuraments'])) 
 {
     $sql='SELECT * FROM measurements;';
@@ -248,12 +251,54 @@ else if(isset($_POST['Mesuraments']))
     $resultCheck=mysqli_num_rows($result);
     if($resultCheck>0)
      {
-         $i=0;
+         //$i=0;
          while($i<$resultCheck)
          {
              	    $row=mysqli_fetch_assoc($result);
              echo "<br> boiler:".$row['boilerTemp']." outside:".$row['outsideTemp'];
-             $i++;
+             //$i++;
+         }
+	 }
+     else
+     {
+         echo("resultCheck:".$resultCheck);
+     }
+}
+//gets all the tasks inside the Database
+else if(isset($_POST['Tasks'])) 
+{
+    $sql='SELECT * FROM tasks;';
+    $result=mysqli_query($conn,$sql);
+    $resultCheck=mysqli_num_rows($result);
+    if($resultCheck>0)
+     {
+         //$i=0;
+         while($i<$resultCheck)
+         {
+             	    $row=mysqli_fetch_assoc($result);
+             echo "<br> id:".$row['id']." task:".$row['task'];
+             //$i++;
+         }
+	 }
+     else
+     {
+         echo("resultCheck:".$resultCheck);
+     }
+}
+//gets all the users inside the Database
+else if(isset($_POST['Users'])) 
+{
+    $sql='SELECT * FROM users;';
+    $result=mysqli_query($conn,$sql);
+    $resultCheck=mysqli_num_rows($result);
+    if($resultCheck>0)
+     {
+         //$i=0;
+         while($i<$resultCheck)
+         {
+             	    $row=mysqli_fetch_assoc($result);
+             echo "<br> id:".$row['id']." task:".$row['task'];
+             //$i++;
          }
 	 }
      else

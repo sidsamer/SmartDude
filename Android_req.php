@@ -215,7 +215,16 @@ else if($str == "delete"){
                    	if(!$result)
 			         die("delete Schdules query faild");
                    else
+                   {
+                     $myfile = fopen("numOfUsers.txt", "r") or die("Unable to open boiler data file!");
+                     $num=fgets($myfile);
+                     fclose($myfile);
+                     $num=(int)$num-1;
+                     $myfile = fopen("numOfUsers.txt", "w") or die("Unable to open boiler data file!");
+                     fwrite($myfile,$num.PHP_EOL);
+                     fclose($myfile);
                      echo ("user is deleted!");
+                   }
                    }
 }
 // writing to file boiler data: volume,Unique id,mail to recover Unique id

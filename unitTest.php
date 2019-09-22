@@ -330,12 +330,18 @@ else if(isset($_POST['DelTasks']))
 else if(isset($_POST['User_schedule'])) 
 {
         $id=$_POST['User_sch_id'];
-        $sql="delete from tasks where id>0";
+        $sql="select userId,id,showerTime,day from turnon where userId='$id';";
         $result=mysqli_query($conn,$sql);
-                   	if(!$result)
-			         die("delete query faild");
-                   else
-                     echo ("all tasks are deleted!");  
+        $resultCheck=mysqli_num_rows($result);
+        if($resultCheck>0)
+       {
+	     while($row=mysqli_fetch_assoc($result))
+	   {
+		  echo "id:"$row["id"].' day:'.$row["day"].' turn on time:'.$row["turnOnTime"].' shower time:'.$row["showerTime"]."<br>";
+	   }
+	   }
+       else
+           echo "this user dont have turn on's at the moment!"
 }
 //exit unit-test into the app login page
 else if(isset($_POST['exit'])) 

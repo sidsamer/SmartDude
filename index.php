@@ -49,7 +49,7 @@ if(isset($_COOKIE['Id']))
 <input type="password" name="Password" placeholder="Password"><br>
 <button type="submit" value="Login" name="page">Login</button>
 </form><br><br>
-<a href="SignUp.php">press to sign up</a><br>
+<a href="SignUp.php" style="color:white">SignUp</a><br>
 
 <?php
 if(isset($_POST['page'])) //this flow checks if user and pass are valid.

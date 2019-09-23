@@ -8,6 +8,12 @@ session_start();
 <script src="javascript.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+body {
+color:white;
+background-image: url("page2.png");
+background-repeat: no-repeat;
+background-size:100%;
+}
  button{
  background-color:transparent;
  border-radius:50%;

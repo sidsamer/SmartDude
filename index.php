@@ -10,6 +10,9 @@ or insert user and pass and enter into menu of the 'app'.
 <style>
 body {
 color:white;
+background-image: url("page1.png");
+background-repeat: no-repeat;
+background-size:100%;
 }
  button{
  background-color:transparent;

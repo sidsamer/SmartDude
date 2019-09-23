@@ -14,6 +14,9 @@ table, th, td {
 }
 body {
 color:white;
+background-image: url("page2.png");
+background-repeat: no-repeat;
+background-size:100%;
 }
 .container {
  height:100%;

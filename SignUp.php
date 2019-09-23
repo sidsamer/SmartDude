@@ -10,6 +10,9 @@ he will have a new user to login with into the system.
 <style>
 body {
 color:white;
+background-image: url("page1.png");
+background-repeat: no-repeat;
+background-size:100%;
 }
  button{
  background-color:transparent;

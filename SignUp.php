@@ -12,7 +12,8 @@ body {
 color:white;
 background-image: url("page1.png");
 background-repeat: no-repeat;
-  background-size: cover;
+  background-position: center;
+  background-size:100% 300%;
 }
  button{
  background-color:transparent;

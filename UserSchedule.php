@@ -16,7 +16,8 @@ body {
 color:white;
 background-image: url("page2.png");
 background-repeat: no-repeat;
-  background-size: cover;
+  background-position: center;
+  background-size:100% 300%;
 }
 .container {
  height:100%;

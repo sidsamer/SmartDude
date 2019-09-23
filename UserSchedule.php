@@ -49,7 +49,7 @@ background-repeat: no-repeat;
 <option value='0'>Not Regular</option>
 <option value='1'>Regular</option>
 </select><br><br>
-<button type="submit" value="SignUp" name="CreateSubmit">submit</button>
+<button type="submit" value="SignUp" name="CreateSubmit" onclick="NoteBody('ScheduleForm');">submit</button>
 </form>
 </div>
 
@@ -74,7 +74,7 @@ background-repeat: no-repeat;
 
   </select>
   <br><br>
-<button type="submit" value="Submit" name="RemoveSubmit">Remove</button>
+<button type="submit" value="Submit" name="RemoveSubmit" onclick="NoteBody('RemoveForm')";>Remove</button>
 </form>
 </div>
 <br><br>
@@ -131,7 +131,7 @@ if(isset($_POST['Day']) || isset($_POST['dayButton']))
         if($resultCheck>0)
        {
            echo "<table bgcolor='blue'>";
-           echo "<tr><th>User</th><th>time</th><th>regular</th></tr>";
+           echo "<tr><th>User</th><th>Time</th><th>Regular</th></tr>";
 	     while($row=mysqli_fetch_assoc($result))
 	   {
           $name="unknown";

@@ -38,8 +38,8 @@ background-repeat: no-repeat;
 </form>
 <CENTER>
 <table>
-<td style='padding:30px; border: 0px solid black;' ><button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button></td>
-<td style='padding:30px; border: 0px solid black;'><button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button></td>
+<td style='padding:30px; border: 0px solid blue;' ><button class="NewButton" onclick="NoteBody('ScheduleForm');">Create</button></td>
+<td style='padding:30px; border: 0px solid blue;'><button class="RemoveButton" onclick="NoteBody('RemoveForm');">Remove</button></td>
 </table>
 <br>
 <div class="ScheduleForm"; id="ScheduleForm"; style="display:none;">
@@ -118,7 +118,7 @@ for($i=0;$i<7;$i++)
 ?>
   </select>
   <br><br>
-  <button type="submit" value="Submit" name="Day">Day</button>
+  <button type="submit" value="Submit" name="Day">Day</button><br>
 </form>
 <?php
 if(isset($_POST['Day']) || isset($_POST['dayButton']))

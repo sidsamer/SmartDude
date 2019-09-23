@@ -39,8 +39,7 @@ if(isset($_COOKIE['Id']))
 		 $_SESSION['Id']=$_COOKIE['Id'];
          header('Location: menu.php');
 }
-else
-    echo "cokie was not found<br>";
+
 ?>
 
 <h1><CENTER>Smart Dude</CENTER></h1><br><br>

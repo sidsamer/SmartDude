@@ -16,7 +16,7 @@ background-size:100%;
 }
  button{
  background-color:transparent;
-  border-radius:50%;
+ border-radius:20%;
  color:white;
  font-size:15px;
  padding: 10px 15px;

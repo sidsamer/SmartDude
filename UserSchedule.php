@@ -16,7 +16,7 @@ body {
 color:white;
 background-image: url("page2.png");
 background-repeat: no-repeat;
-background-size:100%;
+background-size:cover;
 }
 .container {
  height:100%;
@@ -25,15 +25,15 @@ background-size:100%;
  }
  button{
  background-color:transparent;
- border-radius:20%;
- color:LightGray;
+ border-radius:30%;
+ color:white;
  font-size:15px;
  padding: 10px 15px;
  }
 </style>
 <body style="background-color:blue;">
 <form  action="UserSchedule.php" method="POST">
-<button type="submit" name="back">Back</button>
+<button type="submit" name="back">Back</button><br><br>
 </form>
 <CENTER>
 <table>

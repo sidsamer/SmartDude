@@ -12,11 +12,11 @@ body {
 color:white;
 background-image: url("page1.png");
 background-repeat: no-repeat;
-background-size:100%;
+background-size:cover;
 }
  button{
  background-color:transparent;
- border-radius:20%;
+ border-radius:30%;
  color:white;
  font-size:15px;
  padding: 10px 15px;

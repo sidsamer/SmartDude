@@ -12,12 +12,12 @@ body {
 color:white;
 background-image: url("page2.png");
 background-repeat: no-repeat;
-background-size:100%;
+background-size:cover;
 }
  button{
  background-color:transparent;
- border-radius:20%;
- color:LightGray;
+ border-radius:30%;
+ color:white;
  font-size:15px;
  padding: 10px 15px;
  }
@@ -30,7 +30,7 @@ background-size:100%;
 <br><br><br>
 <form  action="Settings.php" method="POST">
 <input type="text" name="Volume" placeholder="Volume"><br>
-<input type="email" name="Email" placeholder="Email"><br>
+<input type="email" name="Email" placeholder="Email"><br><br>
 <button type="submit" name="define">Define System</button><br><br>
 <button type="submit" name="data">System Data</button><br><br>
 <button type="submit" name="deleteUser">Delete User</button><br><br>

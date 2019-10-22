@@ -1,5 +1,5 @@
 <?php
-// this is the page where thr end user can watch all the Scheduled showers,also can create
+// this is the page where the end user can watch all the Scheduled showers,also can create
 // and delete.
 include_once 'includes/connection.php';
 session_start();

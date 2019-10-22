@@ -259,8 +259,7 @@ else if($str == "get_boiler_data"){
         fclose($myfile);
         if((int)$uid == (int)$uid2)
         {
-        echo "Volume:".$vol." ";
-        echo "Mail:".$mail;
+        echo $vol." ".$mail;;
         }
         else{
             echo "cant find uid, cant read boiler data!";

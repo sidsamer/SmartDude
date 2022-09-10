@@ -1,2 +1,7 @@
 # SmartDude
-College project, Boiler control system with machine learning and server mangment.
+College project,Boiler control system
+Inculdes:
+light machine learning module in order to learn the water Heater.
+Server side implemented in Arduino.
+Clines side imlemented in Java/Android.
+RLDB, MYSQL.
